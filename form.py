@@ -39,23 +39,21 @@ def form_page(current_user_email):
         responses[category] = uses_category
 
         aantal_category = np.nan  # Initialize as NaN
-    prijs_per_category = np.nan  # Initialize as NaN
+        prijs_per_category = np.nan  # Initialize as NaN
 
-    if uses_category == "Ja":
-        aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=1)
-        prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
-        responses[f"aantal_{category}"] = aantal_category
-        responses[f"prijs_per_{category}"] = prijs_per_category
-            
-    if uses_category == "Nee":
-        chosen_alternative = st.selectbox("Voor welk alternatief heb je gekozen?", ("Weglaten", "Herbruikbaar", "Afbreekbaar"), key=f"{category}_alternative_{i}")
-        responses[f"chosen_alternative_{category}"] = chosen_alternative
-        if chosen_alternative != "Weglaten":
+        if uses_category == "Ja":
             aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=1)
             prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
-    
-    responses[f"aantal_{category}"] = aantal_category  # Assign to responses
-    responses[f"prijs_per_{category}"] = prijs_per_category  # Assign to responses
+        
+        if uses_category == "Nee":
+            chosen_alternative = st.selectbox("Voor welk alternatief heb je gekozen?", ("Weglaten", "Herbruikbaar", "Afbreekbaar"), key=f"{category}_alternative_{i}")
+            responses[f"chosen_alternative_{category}"] = chosen_alternative
+            if chosen_alternative != "Weglaten":
+                aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=1)
+                prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
+        
+        responses[f"aantal_{category}"] = aantal_category  # Assign to responses
+        responses[f"prijs_per_{category}"] = prijs_per_category  # Assign to responses
 
         if (i + 1) % 3 == 0 or i == len(categories) - 1:
             st.markdown('</div>', unsafe_allow_html=True)
@@ -76,4 +74,3 @@ def form_page(current_user_email):
         else:
             # Save the DataFrame as a new CSV file
             df.to_csv("form_responses.csv", index=False)
-
