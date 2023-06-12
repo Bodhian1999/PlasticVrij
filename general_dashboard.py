@@ -1,5 +1,6 @@
 # general_dashboard.py
 import streamlit as st
+from streamlit_folium import st_folium
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
