@@ -13,31 +13,31 @@ def general_dashboard_page():
         address = f"{postal_code}, Netherlands"
         geolocator = Nominatim(user_agent="my_geocoder")
 
-    try:
-        location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
-    except GeocoderTimedOut:
-        return address_to_coordinates(postal_code)  # Retry on timeout
+        try:
+            location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
+        except GeocoderTimedOut:
+            return address_to_coordinates(postal_code)  # Retry on timeout
 
-    if location is None:
-        return None
+        if location is None:
+            return None
 
-    latitude = location.latitude
-    longitude = location.longitude
-    return latitude, longitude
+        latitude = location.latitude
+        longitude = location.longitude
+        return latitude, longitude
 
     data = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA']})
 
     data_list = []
 
     for _, row in data.iterrows():
-    postal_code = row['postal_code']
-    coordinates = address_to_coordinates(postal_code)
+        postal_code = row['postal_code']
+        coordinates = address_to_coordinates(postal_code)
 
         if coordinates is not None:
-        latitude, longitude = coordinates
-        data_list.append({'postal_code': postal_code, 'latitude': latitude, 'longitude': longitude})
+            latitude, longitude = coordinates
+            data_list.append({'postal_code': postal_code, 'latitude': latitude, 'longitude': longitude})
         else:
-        data_list.append({'postal_code': postal_code, 'latitude': None, 'longitude': None})
+            data_list.append({'postal_code': postal_code, 'latitude': None, 'longitude': None})
 
     df = pd.DataFrame(data_list)
 
