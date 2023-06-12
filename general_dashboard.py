@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
-import plotly.express as px
 import folium
 
 def general_dashboard_page():
