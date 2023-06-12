@@ -12,50 +12,49 @@ def general_dashboard_page():
 
     # Example: Display general data
     st.write("General data goes here")
+    
+    def address_to_coordinates(postal_code):
+    address = f"{postal_code}, Netherlands"
+    geolocator = Nominatim(user_agent="my_geocoder")
 
+    try:
+        location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
+    except GeocoderTimedOut:
+        return address_to_coordinates(postal_code)  # Retry on timeout
 
-# def address_to_coordinates(postal_code):
-#     address = f"{postal_code}, Netherlands"
-#     geolocator = Nominatim(user_agent="my_geocoder")
+    if location is None:
+        return None
 
-#     try:
-#         location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
-#     except GeocoderTimedOut:
-#         return address_to_coordinates(postal_code)  # Retry on timeout
+    latitude = location.latitude
+    longitude = location.longitude
+    return latitude, longitude
 
-#     if location is None:
-#         return None
+    data = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA']})
 
-#     latitude = location.latitude
-#     longitude = location.longitude
-#     return latitude, longitude
+    data_list = []
 
-# data = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA']})
+    for _, row in data.iterrows():
+    postal_code = row['postal_code']
+    coordinates = address_to_coordinates(postal_code)
 
-# data_list = []
+        if coordinates is not None:
+        latitude, longitude = coordinates
+        data_list.append({'postal_code': postal_code, 'latitude': latitude, 'longitude': longitude})
+        else:
+        data_list.append({'postal_code': postal_code, 'latitude': None, 'longitude': None})
 
-# for _, row in data.iterrows():
-#     postal_code = row['postal_code']
-#     coordinates = address_to_coordinates(postal_code)
+    df = pd.DataFrame(data_list)
 
-#     if coordinates is not None:
-#         latitude, longitude = coordinates
-#         data_list.append({'postal_code': postal_code, 'latitude': latitude, 'longitude': longitude})
-#     else:
-#         data_list.append({'postal_code': postal_code, 'latitude': None, 'longitude': None})
+    m = folium.Map(location=[52.377956, 4.897070], zoom_start=11)
 
-# df = pd.DataFrame(data_list)
+    pin_icon = folium.Icon(icon='glyphicon glyphicon-pushpin', prefix='glyphicon')
 
-# m = folium.Map(location=[52.377956, 4.897070], zoom_start=11)
+    for index, row in df.iterrows():
+        lat = row['latitude']
+        lon = row['longitude']
+        postal_code = row['postal_code']
+        label = f"Postal Code: {postal_code}"
+        folium.Marker(location=[lat, lon], tooltip=label, icon=folium.Icon(color='red', icon='map-pin', prefix='fa')).add_to(m)
 
-# pin_icon = folium.Icon(icon='glyphicon glyphicon-pushpin', prefix='glyphicon')
-
-# for index, row in df.iterrows():
-#     lat = row['latitude']
-#     lon = row['longitude']
-#     postal_code = row['postal_code']
-#     label = f"Postal Code: {postal_code}"
-#     folium.Marker(location=[lat, lon], tooltip=label, icon=folium.Icon(color='red', icon='map-pin', prefix='fa')).add_to(m)
-
-# st.markdown('**Kaart**')
-# st_data = st_folium(map)
+    st.markdown('**Kaart**')
+    st_data = st_folium(map)
