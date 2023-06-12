@@ -10,8 +10,8 @@ def general_dashboard_page():
     st.header("General Dashboard")
     # Add content and functionality specific to the general dashboard
     def address_to_coordinates(postal_code):
-    address = f"{postal_code}, Netherlands"
-    geolocator = Nominatim(user_agent="my_geocoder")
+        address = f"{postal_code}, Netherlands"
+        geolocator = Nominatim(user_agent="my_geocoder")
 
     try:
         location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
