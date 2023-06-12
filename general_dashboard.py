@@ -56,4 +56,4 @@ for index, row in df.iterrows():
     label = f"Postal Code: {postal_code}"
     folium.Marker(location=[lat, lon], tooltip=label, icon=folium.Icon(color='red', icon='map-pin', prefix='fa')).add_to(m)
 
-folium_static(m)
+st_data = st_folium(map)
