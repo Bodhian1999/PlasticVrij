@@ -9,10 +9,6 @@ import folium
 def general_dashboard_page():
     st.header("General Dashboard")
     # Add content and functionality specific to the general dashboard
-
-    # Example: Display general data
-    st.write("General data goes here")
-    
     def address_to_coordinates(postal_code):
     address = f"{postal_code}, Netherlands"
     geolocator = Nominatim(user_agent="my_geocoder")
@@ -58,3 +54,8 @@ def general_dashboard_page():
 
     st.markdown('**Kaart**')
     st_data = st_folium(map)
+    
+    # Example: Display general data
+    st.write("General data goes here")
+    
+
