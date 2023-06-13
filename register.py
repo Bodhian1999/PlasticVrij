@@ -1,5 +1,6 @@
 import streamlit as st
-from utils import create_user_account
+import utils
+import streamlit.secrets as secrets
 
 def register_page():
     st.header("Create an Account")
@@ -15,5 +16,8 @@ def register_page():
             st.error("Passwords do not match.")
             return
 
-        create_user_account(username, email, password)
+        utils.create_user_account(username, email, password)
         st.success("Account created successfully! You can now log in.")
+
+if __name__ == "__main__":
+    register_page()

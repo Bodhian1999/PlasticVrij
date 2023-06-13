@@ -1,7 +1,6 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import os
+import numpy as np  # Add this line to import numpy
+import utils
 
 def form_page(current_user_email):
     st.header("Formulier Pagina")
@@ -33,7 +32,7 @@ def form_page(current_user_email):
     ]
     
     responses = {"Email": current_user_email}  # Add current user's email to responses
-
+    
     for i, (category, question) in enumerate(categories):
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
@@ -62,15 +61,5 @@ def form_page(current_user_email):
 
     # Form submission handling
     if submit_button:
+        utils.insert_form_responses(responses)
         st.success("Formulier succesvol verzonden!")
-
-        # Create a DataFrame from the form responses
-        df = pd.DataFrame(responses, index=[0])
-
-        # Check if the CSV file already exists
-        if os.path.isfile("form_responses.csv"):
-            # Append the DataFrame to the existing CSV file
-            df.to_csv("form_responses.csv", mode="a", header=False, index=False)
-        else:
-            # Save the DataFrame as a new CSV file
-            df.to_csv("form_responses.csv", index=False)
