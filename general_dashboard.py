@@ -53,7 +53,7 @@ def general_dashboard_page():
         folium.Marker(location=[lat, lon], tooltip=label, icon=folium.Icon(color='red', icon='map-pin', prefix='fa')).add_to(m)
 
     st.markdown('**Kaart**')
-    st_data = st_folium(map)
+    folium_static(m)
     
     # Example: Display general data
     st.write("General data goes here")
