@@ -13,20 +13,13 @@ def calculate_non_plastics_percentage(df):
     return non_plastics_percentage
 
 def personal_dashboard_page(current_user_email):
-    st.header("Peroonlijk dashboard")
+    st.header("Peroonlijk Dashboard")
 
     # Display the active user's email
     st.write(f"Huidige gebruiker: {current_user_email}")
 
-    if not email:
-        st.write("User not found.")
-        return
-
     # Load form responses from the database
     df = pd.read_csv('form_responses.csv')
-
-    st.header("Persoonlijk Dashboard")
-    st.write(f"Welkom, {username}!")
 
     # Calculate non-plastics percentage
     non_plastics_percentage = calculate_non_plastics_percentage(df)
