@@ -10,25 +10,25 @@ def form_page(current_user_email):
 
     # Form inputs
     inputs = [
-        ("rietje", "Gebruik je plastic 'rietjes'?"),
-        ("honingstaafje", "Gebruik je plastic 'honingstaafjes'?"),
-        ("melkcupje", "Gebruik je plastic 'melkcupjes'?"),
-        ("suikerzakje", "Gebruik je plastic 'suikerzakjes'?"),
-        ("koekjeswrapper", "Gebruik je koekjes verpakt in plastic'?"),
-        ("plastic_theezakje", "Gebruik je 'theezakjes in plastic verpakking'?"),
-        ("botercupje", "Gebruik je boter in plastic verpakking?"),
-        ("jam_pindakaas_chocoladepasta", "Gebruik je 'jam, pindakaas, chocoladepasta' en dergelijke in plastic verpakking?"),
-        ("mayonaise_bakje", "Gebruik je 'mayonaise' geserveerd in plastic bakjes?"),
-        ("ketchup_bakje", "Gebruik je 'ketchup' geserveerd in plastic bakjes?"),
-        ("mosterd_bakje", "Gebruik je 'mosterd' geserveerd in plastic bakjes?"),
-        ("soya_saus_bakje", "Gebruik je 'soya saus' geserveerd in plastic bakjes?"),
-        ("pepermunt_wrapper", "Gebruik je 'pepermunt in plastic verpakking' (bij aanbieden rekening)?"),
-        ("snoep_wrapper", "Gebruik je 'snoepjes in plastic verpakking' (bij aanbieden rekening)?"),
-        ("tandenstoker_wrapper", "Gebruik je 'tandenstokers in plastic verpakking'?"),
-        ("stamper", "Gebruik je plastic 'stampers'?"),
-        ("wegwerpbeker", "Gebruik je plastic 'wegwerpbekers (feesten en evenementen)'?"),
-        ("ijs_wrapper", "Gebruik je 'ijsjes met plastic verpakking'?"),
-        ("alcohol_schoonmaak_doekje", "Gebruik je 'alcohol/schoonmaak doekjes in plastic verpakking' (na garnalen/spare-ribs)?")
+        ("rietjes", "Gebruik je 'rietjes'?"),
+        ("honingstaafjes", "Gebruik je 'honingstaafjes'?"),
+        ("melkcupjes", "Gebruik je 'melkcupjes'?"),
+        ("suikerzakjes", "Gebruik je 'suikerzakjes (met plastic coating)'?"),
+        ("koekjeswrappers", "Gebruik je 'koekjeswrappers'?"),
+        ("theezakjes_verpakking", "Gebruik je 'theezakjes + verpakking'?"),
+        ("ontbijt_boter", "Gebruik je 'ontbijt (boter)'?"),
+        ("ontbijt_jam_pindakaas_chocoladepasta", "Gebruik je 'ontbijt (jam, pindakaas, chocoladepasta)'?"),
+        ("saus_mayonaise", "Gebruik je 'saus (mayonaise)'?"),
+        ("saus_ketchup", "Gebruik je 'saus (ketchup)'?"),
+        ("saus_mosterd", "Gebruik je 'saus (mosterd)'?"),
+        ("saus_soya_saus", "Gebruik je 'saus (soya-saus)'?"),
+        ("pepermuntverpakking", "Gebruik je 'pepermuntverpakking (plastic)'?"),
+        ("snoepjes_rekening", "Gebruik je 'snoepjes (bij aanbieden rekening)'?"),
+        ("tandenstokerverpakking", "Gebruik je 'tandenstokerverpakking (plastic)'?"),
+        ("stampers", "Gebruik je 'stampers'?"),
+        ("wegwerpbekers_feesten_partijen", "Gebruik je 'wegwerpbekers (feesten en partijen)'?"),
+        ("ijsjes_plastic_verpakking", "Gebruik je 'ijsjes (met plastic verpakking)'?"),
+        ("natte_doekjes_garnalen_spareribs", "Gebruik je 'natte doekjes (na garnalen/spare-ribs)'?")
     ]
 
     responses = {"Email": current_user_email}  # Add current user's email to responses
