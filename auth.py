@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import verify_user, create_user_account, create_user_account
+from utils import verify_user, create_user_account
 
 def auth_page(is_logged_in):
     tabs = st.sidebar.radio("Selecteer Tab", ["Login", "Register"])
@@ -58,5 +58,5 @@ def register_page():
             st.error("Passwords do not match.")
             return
 
-        utils.create_user_account(username, email, password, postal_code, company_name)
+        create_user_account(username, email, password, postal_code, company_name)
         st.success("Account created successfully! You can now log in.")
