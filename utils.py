@@ -4,14 +4,11 @@ import psycopg2
 from configparser import ConfigParser
 from decimal import Decimal
 
-# Read the configuration file
-config = ConfigParser()
-config.read("config.ini")
 
 def create_connection():
     # Read the database configuration from a file
     config = ConfigParser()
-    config.read('database.ini')
+    config.read("config.ini")
 
     # Create a connection to the database
     conn = psycopg2.connect(
