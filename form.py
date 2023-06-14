@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+from decimal import Decimal
 import utils
 
 def form_page(current_user_email):
