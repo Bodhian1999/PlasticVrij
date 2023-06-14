@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import verify_user, create_user_account, hash_password
+import utils
 
 def register_page():
     st.header("Create an Account")
