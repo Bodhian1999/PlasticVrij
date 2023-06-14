@@ -46,11 +46,11 @@ def register_page():
     st.header("Create an Account")
 
     username = st.text_input("Username")
+    company_name = st.text_input("Company Name")
     email = st.text_input("Email")
+    postal_code = st.text_input("Postal Code")
     password = st.text_input("Password", type="password")
     confirm_password = st.text_input("Confirm Password", type="password")
-    postal_code = st.text_input("Postal Code")
-    company_name = st.text_input("Company Name")
     register_button = st.button("Register")
 
     if register_button:
