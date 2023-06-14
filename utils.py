@@ -4,13 +4,9 @@ import psycopg2
 from configparser import ConfigParser
 from decimal import Decimal
 
-
 # Read the configuration file
 config = ConfigParser()
 config.read("config.ini")
-
-import psycopg2
-from utils import hash_password
 
 def create_user_account(username, email, password, postal_code, company_name):
     conn = psycopg2.connect(
