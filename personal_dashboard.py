@@ -22,9 +22,6 @@ def personal_dashboard_page(current_user_email):
     else:
         st.write("Er zijn geen recente formuliern reacties gevonden voor deze gebruiker.")
 
-# Get the current user's email
-current_user_email = get_user_email()
-
 # Display the personal dashboard page
 personal_dashboard_page(current_user_email)
 
