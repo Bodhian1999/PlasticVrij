@@ -48,7 +48,7 @@ def register_page():
     username = st.text_input("Username")
     company_name = st.text_input("Company Name")
     email = st.text_input("Email")
-    postal_code = st.text_input("Postal Code")
+    postal_code = st.text_input("Postal Code", placeholder="1234 AB", value="")
     password = st.text_input("Password", type="password")
     confirm_password = st.text_input("Confirm Password", type="password")
     register_button = st.button("Register")
