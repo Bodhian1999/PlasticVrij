@@ -9,11 +9,7 @@ def form_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     # Form inputs
-<<<<<<< Updated upstream
-    inputs = [
-=======
     categories = [
->>>>>>> Stashed changes
         ("rietjes", "Gebruik je 'rietjes'?"),
         ("honingstaafjes", "Gebruik je 'honingstaafjes'?"),
         ("melkcupjes", "Gebruik je 'melkcupjes'?"),
@@ -42,7 +38,7 @@ def form_page(current_user_email):
         responses[category] = uses_category
 
         if uses_category == "Ja":
-            aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=1)
+            aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=100)
             prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
             responses[f"aantal_{category}"] = aantal_category
             responses[f"prijs_per_{category}"] = prijs_per_category
@@ -51,7 +47,7 @@ def form_page(current_user_email):
             chosen_alternative = st.selectbox("Voor welk alternatief heb je gekozen?", ("Weglaten", "Herbruikbaar", "Afbreekbaar"), key=f"{category}_alternative_{i}")
             responses[f"chosen_alternative_{category}"] = chosen_alternative
             if chosen_alternative != "Weglaten":
-                aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=1)
+                aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=100)
                 prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
                 responses[f"aantal_{category}"] = aantal_category
                 responses[f"prijs_per_{category}"] = prijs_per_category
@@ -60,6 +56,7 @@ def form_page(current_user_email):
             st.markdown('</div>', unsafe_allow_html=True)
 
     submit_button = st.button("Verzenden")
+
     
     # Form submission handling
     if submit_button:
