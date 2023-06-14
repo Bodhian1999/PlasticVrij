@@ -104,13 +104,7 @@ def insert_form_responses(responses):
     cursor.close()
     conn.close()
     
-def get_user_score(username, non_plastics_percentage):
-    # Get the user's email based on their username
-    email = get_user_email(username)
-
-    if not email:
-        return None, None
-
+def get_user_score(email, non_plastics_percentage):
     # Create a database connection
     conn = create_connection()
     cursor = conn.cursor()
