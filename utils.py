@@ -8,7 +8,12 @@ from decimal import Decimal
 config = ConfigParser()
 config.read("config.ini")
 
-def create_user_account(username, email, password, postal_code, company_name):
+def create_connection():
+    # Read the database configuration from a file
+    config = ConfigParser()
+    config.read('database.ini')
+
+    # Create a connection to the database
     conn = psycopg2.connect(
         host=config.get("postgresql", "host"),
         port=config.get("postgresql", "port"),
@@ -16,6 +21,13 @@ def create_user_account(username, email, password, postal_code, company_name):
         user=config.get("postgresql", "user"),
         password=config.get("postgresql", "password")
     )
+
+    return conn
+
+
+def create_user_account(username, email, password, postal_code, company_name):
+    # Create a database connection
+    conn = create_connection()
     cursor = conn.cursor()
 
     hashed_password = hash_password(password)
@@ -33,13 +45,8 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 def verify_user(email, password):
-    conn = psycopg2.connect(
-        host=config.get("postgresql", "host"),
-        port=config.get("postgresql", "port"),
-        database=config.get("postgresql", "database"),
-        user=config.get("postgresql", "user"),
-        password=config.get("postgresql", "password")
-    )
+    # Create a database connection
+    conn = create_connection()
     cursor = conn.cursor()
 
     hashed_password = hash_password(password)
@@ -60,13 +67,8 @@ def verify_user(email, password):
         return False
 
 def get_user_email(username):
-    conn = psycopg2.connect(
-        host=config.get("postgresql", "host"),
-        port=config.get("postgresql", "port"),
-        database=config.get("postgresql", "database"),
-        user=config.get("postgresql", "user"),
-        password=config.get("postgresql", "password")
-    )
+    # Create a database connection
+    conn = create_connection()
     cursor = conn.cursor()
 
     cursor.execute(
@@ -85,13 +87,8 @@ def get_user_email(username):
         return None
     
 def insert_form_responses(responses):
-    conn = psycopg2.connect(
-        host=config.get("postgresql", "host"),
-        port=config.get("postgresql", "port"),
-        database=config.get("postgresql", "database"),
-        user=config.get("postgresql", "user"),
-        password=config.get("postgresql", "password")
-    )
+    # Create a database connection
+    conn = create_connection()
     cursor = conn.cursor()
 
     placeholders = ', '.join(['%s'] * len(responses))
@@ -109,3 +106,45 @@ def insert_form_responses(responses):
     conn.commit()
     cursor.close()
     conn.close()
+    
+def get_user_score(username, non_plastics_percentage):
+    # Get the user's email based on their username
+    email = get_user_email(username)
+
+    if not email:
+        return None, None
+
+    # Create a database connection
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    # Query the database to get the user's form responses
+    cursor.execute("SELECT * FROM form_responses WHERE Email = %s", (email,))
+    user_data = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if user_data:
+        # Extract the form response data from the query result
+        ja_count = user_data[1]
+        nee_count = user_data[2]
+        total_count = user_data[3]
+        avg_score_total = user_data[4]
+        count_total = user_data[5]
+
+        # Calculate the user's score based on the form responses
+        if total_count > 0:
+            user_score = (ja_count / total_count) * 100
+            avg_score = avg_score_total / count_total
+        else:
+            user_score = 0
+            avg_score = 0
+
+        # Adjust user score based on non-plastics percentage
+        non_plastics_score = non_plastics_percentage * 10
+        user_score_adjusted = max(user_score, non_plastics_score)
+
+        return user_score_adjusted, avg_score
+    else:
+        return None, None
