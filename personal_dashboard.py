@@ -12,9 +12,11 @@ def calculate_non_plastics_percentage(df):
 
     return non_plastics_percentage
 
-def personal_dashboard_page(username):
-    # Get the user's email based on their username
-    email = get_user_email(username)
+def personal_dashboard_page(current_user_email):
+    st.header("Peroonlijk dashboard")
+
+    # Display the active user's email
+    st.write(f"Huidige gebruiker: {current_user_email}")
 
     if not email:
         st.write("User not found.")
