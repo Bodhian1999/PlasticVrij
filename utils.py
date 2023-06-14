@@ -9,7 +9,10 @@ from decimal import Decimal
 config = ConfigParser()
 config.read("config.ini")
 
-def create_user_account(username, email, password):
+import psycopg2
+from utils import hash_password
+
+def create_user_account(username, email, password, postal_code, company_name):
     conn = psycopg2.connect(
         host=config.get("postgresql", "host"),
         port=config.get("postgresql", "port"),
@@ -22,8 +25,8 @@ def create_user_account(username, email, password):
     hashed_password = hash_password(password)
 
     cursor.execute(
-        "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)",
-        (username, email, hashed_password)
+        "INSERT INTO users (username, email, password, postal_code, company_name) VALUES (%s, %s, %s, %s, %s)",
+        (username, email, hashed_password, postal_code, company_name)
     )
 
     conn.commit()
