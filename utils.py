@@ -4,7 +4,6 @@ import psycopg2
 from configparser import ConfigParser
 from decimal import Decimal
 
-
 def create_connection():
     # Read the database configuration from a file
     config = ConfigParser()
@@ -20,7 +19,6 @@ def create_connection():
     )
 
     return conn
-
 
 def create_user_account(username, email, password, postal_code, company_name):
     # Create a database connection
@@ -82,8 +80,9 @@ def get_user_email(username):
         return result[0]
     else:
         return None
-    
+
 def insert_form_responses(responses):
+
     # Create a database connection
     conn = create_connection()
     cursor = conn.cursor()
@@ -103,7 +102,7 @@ def insert_form_responses(responses):
     conn.commit()
     cursor.close()
     conn.close()
-    
+
 def get_recent_form_response(email):
     # Create a database connection
     conn = create_connection()
@@ -125,7 +124,27 @@ def get_recent_form_response(email):
     conn.close()
 
     return recent_response
-    
+
+def calculate_non_plastics_percentage(email):
+    # Create a database connection
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    # Query the database to get the user's form responses
+    cursor.execute("SELECT * FROM form_responses WHERE Email = %s", (email,))
+    data = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if data:
+        # Calculate the percentage of 'Non-Plastics' in the fourth visual
+        non_plastics_count = get_recent_form_response(email).iloc[:, 1:].eq('Non-Plastics').sum().sum()
+        total_count = get_recent_form_response(email).iloc[:, 1:].notnull().sum().sum()
+        non_plastics_percentage = non_plastics_count / total_count
+
+        return non_plastics_percentage
+
 def get_user_score(email, non_plastics_percentage):
     # Create a database connection
     conn = create_connection()
@@ -148,7 +167,7 @@ def get_user_score(email, non_plastics_percentage):
 
         # Calculate the user's score based on the form responses
         if total_count > 0:
-            user_score = (ja_count / total_count) * 100
+            user_score = (nee_count / total_count) * 10
             avg_score = avg_score_total / count_total
         else:
             user_score = 0
