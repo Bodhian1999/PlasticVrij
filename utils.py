@@ -96,7 +96,7 @@ def insert_form_responses(responses):
         if isinstance(value, int):
             values[i] = Decimal(value)
 
-    sql = f"INSERT INTO form_responses ({columns}) VALUES ({placeholders})"
+    sql = f"INSERT INTO form_responses_n ({columns}) VALUES ({placeholders})"
     cursor.execute(sql, values)
 
     conn.commit()
