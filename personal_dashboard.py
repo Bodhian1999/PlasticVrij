@@ -154,11 +154,10 @@ def personal_dashboard_page(current_user_email):
         st.plotly_chart(fig)
         
 
-        import plotly.graph_objects as go
-
         def plot_sustainability_score(score, average_score):
             score_range = 10  # Set the desired score range
 
+            # Create the bar chart
             fig = go.Figure()
 
             fig.add_shape(
@@ -181,11 +180,12 @@ def personal_dashboard_page(current_user_email):
                 name="Average Score"
             )
 
+            # Add scatter traces for the legend
             fig.add_trace(go.Scatter(
                 x=[None],
                 y=[None],
                 mode='markers',
-                marker=dict(color='blue', size=10, symbol='triangle-up'),
+                marker=dict(color='blue', size=1),
                 name='User Score'
             ))
 
@@ -193,7 +193,7 @@ def personal_dashboard_page(current_user_email):
                 x=[None],
                 y=[None],
                 mode='markers',
-                marker=dict(color='red', size=10, symbol='circle'),
+                marker=dict(color='red', size=1),
                 name='Average Score'
             ))
 
@@ -209,8 +209,7 @@ def personal_dashboard_page(current_user_email):
                     y=1,
                     bgcolor='rgba(255, 255, 255, 0.5)',
                     bordercolor='black',
-                    borderwidth=1,
-                    font=dict(size=12)
+                    borderwidth=0
                 ),
                 xaxis=dict(
                     showgrid=True,
@@ -225,17 +224,16 @@ def personal_dashboard_page(current_user_email):
                     showgrid=False,
                     showticklabels=False,
                     zeroline=False
-                ),
-                plot_bgcolor='white'
+                )
             )
 
-            fig.show()
-
-        user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)
+            # Display the chart
+            st.plotly_chart(fig)
+            
+        user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
         avg_score = calculate_sustainability_score(avg_sustainability_percentage, avg_sustainability_percentage)
         st.write(user_score)
         plot_sustainability_score(user_score, avg_score)
-
 
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
