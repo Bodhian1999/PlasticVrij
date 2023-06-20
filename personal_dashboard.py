@@ -158,7 +158,8 @@ def personal_dashboard_page(current_user_email):
 
             # Create the bar chart
             fig = go.Figure(data=[
-                go.Bar(x=[0, score_range], y=[1, 1], width=[score, 0], marker_color='blue')
+                go.Bar(x=[0, score_range], y=[1, 1], width=[score_range, 0], marker_color='lightgray'),
+                go.Bar(x=[0, score], y=[1, 1], width=[score, 0], marker_color='blue')
             ])
 
             # Customize the layout
