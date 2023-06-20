@@ -131,7 +131,7 @@ def calculate_non_plastics_percentage(email):
     cursor = conn.cursor()
 
     # Query the database to get the user's form responses
-    cursor.execute("SELECT * FROM form_responses WHERE Email = %s", (email,))
+    cursor.execute("SELECT * FROM form_responses_n WHERE Email = %s", (email,))
     data = cursor.fetchone()
 
     cursor.close()
@@ -151,7 +151,7 @@ def get_user_score(email, non_plastics_percentage):
     cursor = conn.cursor()
 
     # Query the database to get the user's form responses
-    cursor.execute("SELECT * FROM form_responses WHERE Email = %s", (email,))
+    cursor.execute("SELECT * FROM form_responses_n WHERE Email = %s", (email,))
     user_data = cursor.fetchone()
 
     cursor.close()
