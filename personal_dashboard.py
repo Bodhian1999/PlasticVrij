@@ -47,8 +47,9 @@ def personal_dashboard_page(current_user_email):
         
         # Assuming you have the DataFrame `form_responses_df`
 
+        st.write("Column Indexes:")
         for idx, column in enumerate(form_responses_df.columns):
-            print(f"Index: {idx}, Column: {column}")
+            st.write(f"Index: {idx}, Column: {column}")
 
     else:
         st.write("No form responses found.")
