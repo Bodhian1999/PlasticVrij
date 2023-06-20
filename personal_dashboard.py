@@ -16,8 +16,8 @@ def personal_dashboard_page(current_user_email):
     
     if recent_form_responses_df is not None:
         st.dataframe(recent_form_responses_df)
-        avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
-        st.write(f"Average Sustainability Percentage: {avg_sustainability_percentage:.2f}%")
+        #avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
+        #st.write(f"Average Sustainability Percentage: {avg_sustainability_percentage:.2f}%")
     else:
         st.write("No recent form responses found.")
     
@@ -133,6 +133,25 @@ def personal_dashboard_page(current_user_email):
 
         # Display the chart
         st.plotly_chart(fig)
+        
+      
+        # Calculate average sustainability percentage
+        avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
+        
+        # Create the bar chart
+        fig = go.Figure(data=[
+            go.Bar(name='User', x=['User'], y=[sustainability_percentage]),
+            go.Bar(name='Average', x=['Average'], y=[avg_sustainability_percentage])
+        ])
+
+        # Customize the layout
+        fig.update_layout(title='Sustainability Percentage Comparison',
+                          xaxis_title='Category',
+                          yaxis_title='Percentage',
+                          barmode='group')
+
+        # Show the chart
+        fig.show()
 
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
