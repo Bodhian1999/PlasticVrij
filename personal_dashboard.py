@@ -175,18 +175,26 @@ def personal_dashboard_page(current_user_email):
                 x0=average_score,
                 y0=0,
                 x1=average_score,
-                y1=1,
+                y1=2,
                 line=dict(color="red", width=3),
                 name="Average Score"
             )
 
-            # Add a scatter trace for the legend
+            # Add scatter traces for the legend
             fig.add_trace(go.Scatter(
                 x=[None],
                 y=[None],
                 mode='markers',
-                marker=dict(color='rgba(0, 0, 0, 0)', size=0),
-                name='Legend'
+                marker=dict(color='blue', size=0),
+                name='User Score'
+            ))
+
+            fig.add_trace(go.Scatter(
+                x=[None],
+                y=[None],
+                mode='markers',
+                marker=dict(color='red', size=0),
+                name='Average Score'
             ))
 
             fig.update_layout(
