@@ -43,7 +43,7 @@ def form_page(current_user_email):
         responses[f"product_category_{category}"] = product_category
 
         if product_category != "n.v.t. (product uit assortiment gehaald)":
-            aantal_category = st.number_input(f"Hoeveel {category}s gebruik je per jaar?", min_value=0, step=1)
+            aantal_category = st.number_input(f"Hoeveel {category} gebruik je per jaar?", min_value=0, step=100)
             prijs_per_category = st.number_input(f"Wat is de prijs per {category}?", min_value=0.0, step=0.01)
             responses[f"aantal_{category}"] = aantal_category
             responses[f"prijs_per_{category}"] = prijs_per_category
