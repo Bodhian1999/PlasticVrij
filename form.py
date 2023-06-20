@@ -51,25 +51,21 @@ def form_page(current_user_email):
                 key=f"{category}_alternative_{i}",
             )
             responses[f"product_category_{category}"] = product_category
-
-            if product_category != "n.v.t. (product uit assortiment gehaald)":
-                aantal_category = st.number_input(
-                    f"Hoeveel {category} gebruikt u per jaar?",
-                    min_value=0,
-                    step=100,
-                    key=f"{category}_amount_{i}",
-                )
-                prijs_per_category = st.number_input(
-                    f"Wat is de prijs per {category}?",
-                    min_value=0.0,
-                    step=0.01,
-                    key=f"{category}_price_{i}",
-                )
-                responses[f"aantal_{category}"] = aantal_category
-                responses[f"prijs_per_{category}"] = prijs_per_category
-            else:
-                responses[f"aantal_{category}"] = np.nan
-                responses[f"prijs_per_{category}"] = np.nan
+            
+            aantal_category = st.number_input(
+                f"Hoeveel {category} gebruikt u per jaar?",
+                min_value=0,
+                step=100,
+                key=f"{category}_amount_{i}",
+            )
+            prijs_per_category = st.number_input(
+                f"Wat is de prijs per {category}?",
+                min_value=0.0,
+                step=0.01,
+                key=f"{category}_price_{i}",
+            )
+            responses[f"aantal_{category}"] = aantal_category
+            responses[f"prijs_per_{category}"] = prijs_per_category
         else:
             responses[f"product_category_{category}"] = "n.v.t. (product uit assortiment gehaald)"
             responses[f"aantal_{category}"] = np.nan
