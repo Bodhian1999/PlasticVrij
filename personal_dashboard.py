@@ -165,8 +165,9 @@ def personal_dashboard_page(current_user_email):
                 x0=score,
                 y0=0,
                 x1=score,
-                y1=1,
+                y1=2,
                 line=dict(color="blue", width=3)
+                name="User Score"
             )
 
             fig.add_shape(
@@ -176,6 +177,7 @@ def personal_dashboard_page(current_user_email):
                 x1=average_score,
                 y1=2,
                 line=dict(color="red", width=3)
+                name="Average Score"
             )
 
             fig.update_layout(
@@ -183,8 +185,15 @@ def personal_dashboard_page(current_user_email):
                 xaxis_title='Score',
                 yaxis_title='',
                 xaxis_range=[0, score_range],
-                yaxis_range=[0, 1.5],
-                showlegend=False,
+                yaxis_range=[0, 2],
+                showlegend=True,
+                legend=dict(
+                    x=1,
+                    y=1,
+                    bgcolor='rgba(255, 255, 255, 0.5)',  # Set background color of the legend
+                    bordercolor='black',  # Set border color of the legend
+                    borderwidth=1,  # Set border width of the legend
+                ),
                 xaxis=dict(
                     showgrid=True,
                     gridcolor='lightgray',
