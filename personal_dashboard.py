@@ -153,7 +153,8 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
-        def plot_sustainability_score(score):
+
+        def plot_sustainability_score(score, average_score):
             score_range = 10  # Set the desired score range
 
             # Create the bar chart
@@ -166,6 +167,15 @@ def personal_dashboard_page(current_user_email):
                 x1=score,
                 y1=1,
                 line=dict(color="blue", width=3)
+            )
+
+            fig.add_shape(
+                type="line",
+                x0=average_score,
+                y0=0,
+                x1=average_score,
+                y1=1,
+                line=dict(color="red", width=3)
             )
 
             fig.update_layout(
@@ -193,9 +203,10 @@ def personal_dashboard_page(current_user_email):
 
             # Display the chart
             st.plotly_chart(fig)
-        
+
             
         user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
+        avg_score = calculate_sustainability_score(avg_sustainability_percentage, avg_sustainability_percentage)
         st.write(user_score)
         plot_sustainability_score(user_score)
 
