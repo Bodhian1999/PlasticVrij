@@ -131,14 +131,7 @@ def calculate_non_plastics_percentage(email):
     cursor = conn.cursor()
 
     # Query the database to get the user's form responses
-    cursor.execute("""
-        SELECT *
-        FROM form_responses_n
-        WHERE email = %s
-        ORDER BY id DESC
-        LIMIT 1
-    """, (email,))
-
+    cursor.execute("SELECT * FROM form_responses WHERE email = %s", (email,))
     data = cursor.fetchone()
 
     cursor.close()
