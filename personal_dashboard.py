@@ -15,7 +15,7 @@ def personal_dashboard_page(current_user_email):
 
     if recent_response:
         # Calculate non-plastics percentage
-        non_plastics_percentage = calculate_non_plastics_percentage(recent_response)
+        non_plastics_percentage = 10 #calculate_non_plastics_percentage(recent_response)
 
         # Calculate user score and average score
         user_score, avg_score = get_user_score(current_user_email, non_plastics_percentage)
