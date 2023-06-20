@@ -173,8 +173,9 @@ def personal_dashboard_page(current_user_email):
             fig.update_xaxes(showgrid=False, showticklabels=False, zeroline=False)
             fig.update_yaxes(showgrid=False, showticklabels=False, zeroline=False)
 
-            # Show the chart
-            fig.show()
+            # Display the chart
+            st.plotly_chart(fig)
+        
             
         user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
         plot_sustainability_score(user_score)
