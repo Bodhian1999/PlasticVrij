@@ -51,6 +51,59 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
+        # Initialize the counts
+        multi_use_non_plastics_count = 0
+        single_use_non_plastics_count = 0
+        multi_use_plastics_count = 0
+        single_use_plastics_count = 0
+        not_applicable_count = 0
+
+        # Loop over the columns between index 22 and 40
+        for column in selected_row.columns[22:41]:
+            value = selected_row[column].values[0]
+            if value == "Multi-Use Non-Plastics":
+                multi_use_non_plastics_count += 1
+            elif value == "Single-Use Non-Plastics":
+                single_use_non_plastics_count += 1
+            elif value == "Multi-Use plastics":
+                multi_use_plastics_count += 1
+            elif value == "Single-Use Plastics":
+                single_use_plastics_count += 1
+            elif value == "n.v.t. (product uit assortiment gehaald)":
+                not_applicable_count += 1
+
+        # Create a bar chart using Plotly
+        fig = go.Figure(data=[
+            go.Bar(
+                x=[
+                    "Multi-Use Non-Plastics",
+                    "Single-Use Non-Plastics",
+                    "Multi-Use plastics",
+                    "Single-Use Plastics",
+                    "n.v.t. (product uit assortiment gehaald)"
+                ],
+                y=[
+                    multi_use_non_plastics_count,
+                    single_use_non_plastics_count,
+                    multi_use_plastics_count,
+                    single_use_plastics_count,
+                    not_applicable_count
+                ],
+                marker_color=['green', 'blue', 'orange', 'red', 'gray']
+            )
+        ])
+
+        # Customize the layout
+        fig.update_layout(
+            title='Count of Categories for Selected Row',
+            xaxis_title='Category',
+            yaxis_title='Count',
+            showlegend=False
+        )
+
+        # Display the chart
+        st.plotly_chart(fig)
+
         st.write("Column Names and Indices:")
         for i, col in enumerate(form_responses_df.columns):
             st.write(f"Index: {i}, Column: {col}")
