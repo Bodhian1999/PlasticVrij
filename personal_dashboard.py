@@ -186,13 +186,13 @@ def personal_dashboard_page(current_user_email):
                 yaxis_title='',
                 xaxis_range=[0, score_range],
                 yaxis_range=[0, 2],
-                showlegend=True,
+                showlegend=True,  # Set showlegend to True to display the legend
                 legend=dict(
                     x=1,
                     y=1,
                     bgcolor='rgba(255, 255, 255, 0.5)',  # Set background color of the legend
                     bordercolor='black',  # Set border color of the legend
-                    borderwidth=1,  # Set border width of the legend
+                    borderwidth=1  # Set border width of the legend
                 ),
                 xaxis=dict(
                     showgrid=True,
