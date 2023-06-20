@@ -30,15 +30,15 @@ def personal_dashboard_page(current_user_email):
                             'stampers', 'wegwerpbekers_feesten_partijen', 'ijsjes_plastic_verpakking',
                             'natte_doekjes_garnalen_spareribs']
 
-        # Count the "Yes" and "No" answers for each category in the selected row
-        counts = selected_row[category_columns].apply(pd.value_counts)
+        # Count the "Ja" and "Nee" answers for each category in the selected row
+        counts = selected_row[category_columns].apply(pd.value_counts).loc[['Ja', 'Nee']].sum()
 
         # Plot the bar chart
         fig, ax = plt.subplots()
         counts.plot(kind='bar', ax=ax)
-        ax.set_xlabel('Category')
+        ax.set_xlabel('Answer')
         ax.set_ylabel('Count')
-        ax.set_title('Count of Yes vs No Answers for Each Category (Selected Row)')
+        ax.set_title('Total Count of Ja vs Nee for All Categories (Selected Row)')
         st.pyplot(fig)
     else:
         st.write("No form responses found.")
