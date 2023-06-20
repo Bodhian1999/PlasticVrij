@@ -37,12 +37,11 @@ def form_page(current_user_email):
     responses = {"Email": current_user_email}  # Add current user's email to responses
 
     for i, category in enumerate(inputs):
-        st.subheader(f"{category}")
 
-        uses_category = st.selectbox("Do you use this category?", ("No", "Yes"), key=f"{category}_selectbox_{i}")
+        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
 
-        if uses_category == "Yes":
+        if uses_category == "Ja":
             product_category = st.selectbox(
                 "Under which category does this product belong?",
                 (
