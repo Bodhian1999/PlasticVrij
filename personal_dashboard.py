@@ -28,7 +28,7 @@ def personal_dashboard_page(current_user_email):
         nee_count = 0
 
         # Loop over the columns between index 2 and 23
-        for column in selected_row.columns[2:24]:
+        for column in selected_row.columns[3:22]:
             if selected_row[column].values[0] == 'Ja':
                 ja_count += 1
             elif selected_row[column].values[0] == 'Nee':
