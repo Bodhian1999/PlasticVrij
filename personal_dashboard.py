@@ -150,8 +150,9 @@ def personal_dashboard_page(current_user_email):
                           yaxis_title='Percentage',
                           barmode='group')
 
-        # Show the chart
-        fig.show()
+        # Display the chart
+        st.plotly_chart(fig)
+        
 
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
