@@ -258,10 +258,9 @@ def calculate_sustainability_percentage(selected_row):
     total_count = 0
     single_use_plastics_count = 0
     sustainable_count = 0 
-    
-    for column in selected_row.index:
+
+    for value in selected_row.values:
         total_count += 1
-        value = selected_row[column]
         if value == "Single-Use Plastics":
             single_use_plastics_count += 1
         else:
@@ -275,7 +274,7 @@ def calculate_avg_sustainability_percentage(df):
     total_percentage = 0
     num_responses = len(df)
 
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         selected_row = row[df.columns[22:41]].dropna()  # Select the relevant columns and remove NaN values
         sustainability_percentage = calculate_sustainability_percentage(selected_row)
         total_percentage += sustainability_percentage
