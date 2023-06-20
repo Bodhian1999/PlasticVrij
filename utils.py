@@ -275,8 +275,8 @@ def calculate_sustainability_percentage(selected_row):
 def calculate_avg_sustainability_percentage(df):
     total_percentage = 0
     for index, row in df.iterrows():
-        selected_row = row
-        sustainability_percentage = calculate_sustainability_percentage(selected_row[selected_row.columns[22:41]])
+        selected_row = pd.DataFrame(row[row.index[22:41]]).T
+        sustainability_percentage = calculate_sustainability_percentage(selected_row)
         
         total_percentage += sustainability_percentage
     
