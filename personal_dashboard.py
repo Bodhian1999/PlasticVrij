@@ -13,7 +13,15 @@ def personal_dashboard_page(current_user_email):
     
     if form_responses_df is not None:
         st.dataframe(form_responses_df)
-        
+        # Get unique values from the 'created_at' column
+        created_at_values = form_responses_df['created_at'].unique()
+
+        # Select the row based on the user's choice of 'created_at'
+        selected_created_at = st.selectbox('Select a date:', created_at_values)
+
+        # Filter the DataFrame to get the selected row
+        selected_row = form_responses_df[form_responses_df['created_at'] == selected_created_at]
+
         # Select the columns representing the categories
         category_columns = ['rietjes', 'honingstaafjes', 'melkcupjes', 'suikerzakjes', 'koekjeswrappers',
                             'theezakjes_verpakking', 'ontbijt_boter', 'ontbijt_jam_pindakaas_chocoladepasta',
@@ -22,15 +30,15 @@ def personal_dashboard_page(current_user_email):
                             'stampers', 'wegwerpbekers_feesten_partijen', 'ijsjes_plastic_verpakking',
                             'natte_doekjes_garnalen_spareribs']
 
-        # Count the "Yes" and "No" answers for each category
-        counts = form_responses_df[category_columns].apply(pd.value_counts)
+        # Count the "Yes" and "No" answers for each category in the selected row
+        counts = selected_row[category_columns].apply(pd.value_counts)
 
         # Plot the bar chart
         fig, ax = plt.subplots()
         counts.plot(kind='bar', ax=ax)
         ax.set_xlabel('Category')
         ax.set_ylabel('Count')
-        ax.set_title('Count of Yes vs No Answers for Each Category')
+        ax.set_title('Count of Yes vs No Answers for Each Category (Selected Row)')
         st.pyplot(fig)
     else:
         st.write("No form responses found.")
