@@ -111,7 +111,7 @@ def get_recent_form_response(email):
     # Query the database to get the most recent form response for the email
     cursor.execute("""
         SELECT *
-        FROM form_responses
+        FROM form_responses_n
         WHERE email = %s
         ORDER BY created_at DESC
         LIMIT 1
