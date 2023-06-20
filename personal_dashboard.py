@@ -180,19 +180,28 @@ def personal_dashboard_page(current_user_email):
                 name="Average Score"
             )
 
+            # Add a scatter trace for the legend
+            fig.add_trace(go.Scatter(
+                x=[None],
+                y=[None],
+                mode='markers',
+                marker=dict(color='rgba(0, 0, 0, 0)', size=0),
+                name='Legend'
+            ))
+
             fig.update_layout(
                 title='Sustainability Score',
                 xaxis_title='Score',
                 yaxis_title='',
                 xaxis_range=[0, score_range],
                 yaxis_range=[0, 2],
-                showlegend=True,  # Set showlegend to True to display the legend
+                showlegend=True,
                 legend=dict(
                     x=1,
                     y=1,
-                    bgcolor='rgba(255, 255, 255, 0.5)',  # Set background color of the legend
-                    bordercolor='black',  # Set border color of the legend
-                    borderwidth=1  # Set border width of the legend
+                    bgcolor='rgba(255, 255, 255, 0.5)',
+                    bordercolor='black',
+                    borderwidth=1
                 ),
                 xaxis=dict(
                     showgrid=True,
