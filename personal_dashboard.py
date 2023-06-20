@@ -19,7 +19,7 @@ def personal_dashboard_page(current_user_email):
         created_at_values = form_responses_df['created_at'].unique()
 
         # Select the row based on the user's choice of 'created_at'
-        selected_created_at = st.selectbox('Select a date:', created_at_values)
+        selected_created_at = st.selectbox('Selecteer een datum:', created_at_values)
 
         # Filter the DataFrame to get the selected row
         selected_row = form_responses_df[form_responses_df['created_at'] == selected_created_at]
@@ -28,7 +28,7 @@ def personal_dashboard_page(current_user_email):
         ja_count = 0
         nee_count = 0
 
-        # Loop over the columns between i
+        # Loop over the columns between index 3 and 22
         for column in selected_row.columns[3:22]:
             if selected_row[column].values[0] == 'Ja':
                 ja_count += 1
@@ -42,9 +42,9 @@ def personal_dashboard_page(current_user_email):
 
         # Customize the layout
         fig.update_layout(
-            title='Total Count of Ja vs Nee for All Categories (Selected Row)',
-            xaxis_title='Answer',
-            yaxis_title='Count',
+            title='Totaal Aantal Ja vs Nee voor Alle Categorieën (Geselecteerde Rij)',
+            xaxis_title='Antwoord',
+            yaxis_title='Aantal',
             showlegend=False
         )
         
@@ -95,20 +95,17 @@ def personal_dashboard_page(current_user_email):
 
         # Customize the layout
         fig.update_layout(
-            title='Count of Categories for Selected Row',
-            xaxis_title='Category',
-            yaxis_title='Count',
+            title='Aantal Categorieën voor Geselecteerde Rij',
+            xaxis_title='Categorie',
+            yaxis_title='Aantal',
             showlegend=False
         )
 
         # Display the chart
         st.plotly_chart(fig)
 
-        st.write("Column Names and Indices:")
+        st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
-            st.write(f"Index: {i}, Column: {col}")
+            st.write(f"Index: {i}, Kolom: {col}")
     else:
-        st.write("No form responses found.")
-        
-        
-
+        st.write("Geen formulierreacties gevonden.")
