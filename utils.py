@@ -103,27 +103,25 @@ def insert_form_responses(responses):
     cursor.close()
     conn.close()
 
-def get_recent_form_response(email):
-    # Create a database connection
+def get_recent_form_response(current_user_email):
+    # Retrieve the recent form response for the current user email
     conn = create_connection()
     cursor = conn.cursor()
 
-    # Query the database to get the most recent form response for the email
-    cursor.execute("""
-        SELECT *
-        FROM form_responses_n
-        WHERE email = %s
-        ORDER BY created_at DESC
-        LIMIT 1
-    """, (email,))
-    
-    # Fetch the row
-    recent_response = cursor.fetchone()
+    query = "SELECT * FROM form_responses_n WHERE email = %s ORDER BY created_at DESC LIMIT 1"
+    cursor.execute(query, (current_user_email,))
+    response = cursor.fetchone()
 
     cursor.close()
     conn.close()
 
-    return recent_response
+    if response:
+        # Convert the response tuple to a dictionary
+        columns = [column[0] for column in cursor.description]
+        response_dict = dict(zip(columns, response))
+        return response_dict
+    else:
+        return None
 
 def calculate_non_plastics_percentage(recent_response):
     total_items = 0
