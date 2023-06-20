@@ -103,27 +103,22 @@ def insert_form_responses(responses):
     cursor.close()
     conn.close()
 
-def get_recent_form_response(email):
-    # Create a database connection
-    conn = create_connection()
-    cursor = conn.cursor()
+    
+def calculate_non_plastics_percentage(recent_response):
+    if recent_response:
+        # Calculate the percentage of 'Non-Plastics' in the form response
+        non_plastics_count = sum(
+            field == 'Non-Plastics'
+            for field in recent_response[2:-50]  # Exclude 'id' and 'email' fields from count
+        )
+        total_count = len(recent_response[2:-50])  # Exclude 'id' and 'email' fields from count
 
-    # Query the database to get the most recent form response for the email
-    cursor.execute("""
-        SELECT *
-        FROM form_responses_n
-        WHERE email = %s
-        ORDER BY id DESC
-        LIMIT 1
-    """, (email,))
+        non_plastics_percentage = non_plastics_count / total_count
 
-    # Fetch the row
-    recent_response = cursor.fetchone()
+        return non_plastics_percentage
+    else:
+        return None
 
-    cursor.close()
-    conn.close()
-
-    return recent_response
 
 def calculate_non_plastics_percentage(email):
     # Create a database connection

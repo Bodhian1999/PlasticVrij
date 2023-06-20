@@ -11,10 +11,14 @@ def personal_dashboard_page(current_user_email):
 
     # Load the most recent form response from the database
     recent_response = get_recent_form_response(current_user_email)
+    
+    # Print the recent response
+    st.write("Recente respons:")
+    st.write(recent_response)
 
     if recent_response:
         # Calculate non-plastics percentage
-        non_plastics_percentage = non_plastics_percentage = calculate_non_plastics_percentage(recent_response[1])
+        non_plastics_percentage = non_plastics_percentage = calculate_non_plastics_percentage(recent_response)
 
         # Calculate user score and average score
         user_score, avg_score = get_user_score(current_user_email, non_plastics_percentage)
