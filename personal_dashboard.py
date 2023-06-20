@@ -157,18 +157,23 @@ def personal_dashboard_page(current_user_email):
             score_range = 10  # Set the desired score range
 
             # Create the bar chart
-            fig = go.Figure(data=[
-                go.Bar(x=[0, score_range], y=[1, 1], width=[score_range, 0], marker_color='lightgray'),
-                go.Bar(x=[0, score], y=[1, 1], width=[score, 0], marker_color='blue')
-            ])
+            fig = go.Figure()
 
-            # Customize the layout
+            fig.add_shape(
+                type="line",
+                x0=score,
+                y0=0,
+                x1=score,
+                y1=1,
+                line=dict(color="blue", width=3)
+            )
+
             fig.update_layout(
                 title='Sustainability Score',
                 xaxis_title='Score',
                 yaxis_title='',
                 xaxis_range=[0, score_range],
-                yaxis_range=[0, 2],
+                yaxis_range=[0, 1.5],
                 showlegend=False,
                 xaxis=dict(
                     showgrid=True,
