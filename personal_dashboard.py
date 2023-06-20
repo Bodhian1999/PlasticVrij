@@ -14,9 +14,11 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {recent_response}")
 
     if recent_response:
-        # Calculate non-plastics percentage
-        non_plastics_percentage = calculate_non_plastics_percentage(recent_response)
+        # Access the DataFrame object within the dictionary
+        recent_response_df = recent_response['data']
 
+        # Calculate non-plastics percentage
+        non_plastics_percentage = calculate_non_plastics_percentage(recent_response_df)
 
         # Calculate user score and average score
         user_score, avg_score = get_user_score(current_user_email, non_plastics_percentage)
@@ -67,7 +69,7 @@ def personal_dashboard_page(current_user_email):
         email_address = current_user_email
 
         # Get the unique product categories from the latest input
-        categories = recent_response.filter(regex=r'^product_category_').columns
+        categories = recent_response_df.filter(regex=r'^product_category_').columns
 
         # Create a new DataFrame to store the calculated sums
         sums_df = pd.DataFrame(columns=['Product Category', 'Total Amount'])
@@ -75,7 +77,7 @@ def personal_dashboard_page(current_user_email):
         # Iterate over the categories and calculate the sums
         for category in categories:
             amount_column = category.replace('product_category_', 'aantal_') + 's'
-            category_sum = recent_response.groupby(category)[amount_column].sum().reset_index()
+            category_sum = recent_response_df.groupby(category)[amount_column].sum().reset_index()
             category_sum.columns = ['Product Category', 'Total Amount']
             sums_df = pd.concat([sums_df, category_sum], ignore_index=True)
 
