@@ -13,8 +13,8 @@ def personal_dashboard_page(current_user_email):
     recent_response = get_recent_form_response(current_user_email)
     
     # Print the recent response
-    st.write("Recente respons:")
-    st.write(recent_response)
+    #st.write("Recente respons:")
+    #st.write(recent_response)
 
     if recent_response:
         # Calculate non-plastics percentage
