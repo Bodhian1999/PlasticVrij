@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
-from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage
+from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses
 
 def personal_dashboard_page(current_user_email):
 
@@ -11,6 +11,15 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
+    
+    recent_form_responses_df = get_recent_form_responses()
+    
+    if recent_form_responses_df is not None:
+        st.dataframe(form_responses_df)
+        avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
+        st.write(f"Average Sustainability Percentage: {avg_sustainability_percentage:.2f}%")
+    else:
+        st.write("No recent form responses found.")
     
     if form_responses_df is not None:
         st.dataframe(form_responses_df)

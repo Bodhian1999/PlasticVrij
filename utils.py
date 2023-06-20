@@ -144,6 +144,27 @@ def get_recent_form_response(current_user_email):
         return response_dict
     else:
         return None
+    
+def get_recent_form_responses():
+    # Retrieve the most recent form response for each user email
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    query = "SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY email ORDER BY created_at DESC) AS rn FROM form_responses_n) AS subquery WHERE rn = 1"
+    cursor.execute(query)
+    responses = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    if responses:
+        # Convert the responses to a dataframe
+        columns = [column[0] for column in cursor.description]
+        response_data = [dict(zip(columns, response)) for response in responses]
+        response_df = pd.DataFrame(response_data)
+        return response_df
+    else:
+        return None
 
 import math
 
