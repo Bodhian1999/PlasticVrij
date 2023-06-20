@@ -10,4 +10,9 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
+    
+    if form_responses_df is not None:
+        st.dataframe(form_responses_df)
+    else:
+        st.write("No form responses found.")
 
