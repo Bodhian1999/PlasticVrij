@@ -1,6 +1,7 @@
 import hashlib
 import os
 import psycopg2
+import pandas as pd
 from configparser import ConfigParser
 from decimal import Decimal
 
