@@ -190,8 +190,12 @@ def get_user_score(email, non_plastics_percentage):
         ja_counts = user_data[-48:-24]  # Get counts of 'ja' responses for each field
         total_counts = user_data[-24:]  # Get total counts for each field
 
+        # Convert any 'NaN' values to 0
+        ja_counts = [count if count == count else 0 for count in ja_counts]
+        total_counts = [count if count == count else 0 for count in total_counts]
+
         # Calculate the user's score based on the form responses
-        if any(total_counts):
+        if sum(total_counts) > 0:
             user_score = (sum(ja_counts) / sum(total_counts)) * 10
             avg_score = sum(user_data[-24:]) / sum(total_counts)
         else:
