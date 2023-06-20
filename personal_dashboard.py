@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import plotly as px
+!pip install plotly
+import plotly.expres as px
 from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses
 
 def personal_dashboard_page(current_user_email):
