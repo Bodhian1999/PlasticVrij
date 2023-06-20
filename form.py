@@ -76,7 +76,7 @@ def form_page(current_user_email):
             responses[f"aantal_{category}"] = np.nan
             responses[f"prijs_per_{category}"] = np.nan
 
-        if (i + 1) % 3 == 0 or i == len(categories) - 1:
+        if (i + 1) % 3 == 0 or i == len(inputs) - 1:
             st.markdown("</div>", unsafe_allow_html=True)
 
     submit_button = st.button("Submit")
