@@ -111,12 +111,12 @@ def get_recent_form_response(email):
     # Query the database to get the most recent form response for the email
     cursor.execute("""
         SELECT *
-        FROM form_responses
+        FROM form_responses_n
         WHERE email = %s
-        ORDER BY created_at DESC
+        ORDER BY id DESC
         LIMIT 1
     """, (email,))
-    
+
     # Fetch the row
     recent_response = cursor.fetchone()
 
@@ -124,6 +124,7 @@ def get_recent_form_response(email):
     conn.close()
 
     return recent_response
+
 
 def calculate_non_plastics_percentage(email):
     # Create a database connection
@@ -138,12 +139,19 @@ def calculate_non_plastics_percentage(email):
     conn.close()
 
     if data:
-        # Calculate the percentage of 'Non-Plastics' in the fourth visual
-        non_plastics_count = get_recent_form_response(email).iloc[:, 1:].eq('Non-Plastics').sum().sum()
-        total_count = get_recent_form_response(email).iloc[:, 1:].notnull().sum().sum()
+        # Calculate the percentage of 'Non-Plastics' in the form responses
+        non_plastics_count = sum(
+            field == 'Non-Plastics'
+            for field in data[2:-48]  # Exclude 'id' and 'email' fields from count
+        )
+        total_count = len(data[2:-48])  # Exclude 'id' and 'email' fields from count
+
         non_plastics_percentage = non_plastics_count / total_count
 
         return non_plastics_percentage
+    else:
+        return None
+
 
 def get_user_score(email, non_plastics_percentage):
     # Create a database connection
@@ -159,16 +167,13 @@ def get_user_score(email, non_plastics_percentage):
 
     if user_data:
         # Extract the form response data from the query result
-        ja_count = user_data[1]
-        nee_count = user_data[2]
-        total_count = user_data[3]
-        avg_score_total = user_data[4]
-        count_total = user_data[5]
+        ja_counts = user_data[-48:-24]  # Get counts of 'ja' responses for each field
+        total_counts = user_data[-24:]  # Get total counts for each field
 
         # Calculate the user's score based on the form responses
-        if total_count > 0:
-            user_score = (nee_count / total_count) * 10
-            avg_score = avg_score_total / count_total
+        if any(total_counts):
+            user_score = (sum(ja_counts) / sum(total_counts)) * 10
+            avg_score = sum(user_data[-24:]) / sum(total_counts)
         else:
             user_score = 0
             avg_score = 0
