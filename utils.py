@@ -125,47 +125,46 @@ def get_recent_form_response(email):
 
     return recent_response
 
-def calculate_non_plastics_percentage(recent_response):
-    if recent_response:
-        # Calculate the percentage of 'Non-Plastics' in the form response
-        non_plastics_count = sum(
-            field == 'Non-Plastics'
-            for field in recent_response[2:-50]  # Exclude 'id' and 'email' fields from count
-        )
-        total_count = len(recent_response[2:-50])  # Exclude 'id' and 'email' fields from count
+def calculate_non_plastic_percentage(recent_response):
+    total_items = 0
+    non_plastic_items = 0
 
-        non_plastics_percentage = non_plastics_count / total_count
+    # Loop over the categories and calculate the percentage
+    categories = [
+        'rietjes',
+        'honingstaafjes',
+        'melkcupjes',
+        'suikerzakjes',
+        'koekjeswrappers',
+        'theezakjes_verpakking',
+        'ontbijt_boter',
+        'ontbijt_jam_pindakaas_chocoladepasta',
+        'saus_mayonaise',
+        'saus_ketchup',
+        'saus_mosterd',
+        'saus_soya_saus',
+        'pepermuntverpakking',
+        'snoepjes_rekening',
+        'tandenstokerverpakking',
+        'stampers',
+        'wegwerpbekers_feesten_partijen',
+        'ijsjes_plastic_verpakking',
+        'natte_doekjes_garnalen_spareribs'
+    ]
 
-        return non_plastics_percentage
+    for category in categories:
+        product_category = recent_response['product_category_' + category]
+        if product_category != 'Single-Use Plastics':
+            non_plastic_items += int(recent_response['aantal_' + category])
+        total_items += int(recent_response['aantal_' + category])
+
+    # Calculate the percentage
+    if total_items > 0:
+        non_plastic_percentage = (non_plastic_items / total_items) * 100
     else:
-        return None
+        non_plastic_percentage = 0
 
-
-def calculate_non_plastics_percentage(email):
-    # Create a database connection
-    conn = create_connection()
-    cursor = conn.cursor()
-
-    # Query the database to get the user's form responses
-    cursor.execute("SELECT * FROM form_responses_n WHERE email = %s", (email,))
-    data = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
-
-    if data:
-        # Calculate the percentage of 'Non-Plastics' in the form responses
-        non_plastics_count = sum(
-            field == 'Non-Plastics'
-            for field in data[2:-50]  # Exclude 'id' and 'email' fields from count
-        )
-        total_count = len(data[2:-50])  # Exclude 'id' and 'email' fields from count
-
-        non_plastics_percentage = non_plastics_count / total_count
-
-        return non_plastics_percentage
-    else:
-        return None
+    return non_plastic_percentage
 
 
 def get_user_score(email, non_plastics_percentage):
