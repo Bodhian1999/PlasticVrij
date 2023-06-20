@@ -125,7 +125,7 @@ def get_recent_form_response(email):
 
     return recent_response
 
-def calculate_non_plastic_percentage(recent_response):
+def calculate_non_plastics_percentage(recent_response):
     total_items = 0
     non_plastic_items = 0
 
