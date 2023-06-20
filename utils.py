@@ -258,9 +258,10 @@ def calculate_sustainability_percentage(selected_row):
     total_count = 0
     single_use_plastics_count = 0
     sustainable_count = 0 
-
-    for value in selected_row.values:
+    
+    for column in selected_row:
         total_count += 1
+        value = selected_row[column].values[0]
         if value == "Single-Use Plastics":
             single_use_plastics_count += 1
         else:
@@ -269,6 +270,7 @@ def calculate_sustainability_percentage(selected_row):
     sustainability_percentage = (sustainable_count / total_count) * 100
 
     return sustainability_percentage
+
 
 def calculate_avg_sustainability_percentage(df):
     total_percentage = 0

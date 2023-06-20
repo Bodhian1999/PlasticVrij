@@ -16,8 +16,8 @@ def personal_dashboard_page(current_user_email):
     
     if recent_form_responses_df is not None:
         st.dataframe(recent_form_responses_df)
-        avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
-        st.write(f"Average Sustainability Percentage: {avg_sustainability_percentage:.2f}%")
+        #avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
+        #st.write(f"Average Sustainability Percentage: {avg_sustainability_percentage:.2f}%")
     else:
         st.write("No recent form responses found.")
     
