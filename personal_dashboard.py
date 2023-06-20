@@ -114,7 +114,7 @@ def personal_dashboard_page(current_user_email):
         st.plotly_chart(fig)
         
         # Calculate the sustainability percentage
-        sustainability_percentage = calculate_sustainability_percentage(selected_row.iloc[:, 22:42].dropna())
+        sustainability_percentage = calculate_sustainability_percentage(selected_row[selected_row.columns[22:41]])
 
         # Create a pie chart using Plotly
         fig = go.Figure(data=[
