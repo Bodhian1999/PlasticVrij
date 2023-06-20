@@ -123,6 +123,7 @@ def get_recent_form_response(current_user_email):
     else:
         return None
 
+import math
 
 def calculate_non_plastics_percentage(recent_response):
     total_items = 0
@@ -153,9 +154,15 @@ def calculate_non_plastics_percentage(recent_response):
 
     for category in categories:
         product_category = recent_response['product_category_' + category]
-        if product_category != 'Single-Use Plastics' and product_category != 'n.v.t. (product uit assortiment gehaald)':
+        if (
+            product_category != 'Single-Use Plastics' and
+            product_category != 'n.v.t. (product uit assortiment gehaald)'
+        ):
+            # Convert NaN values to 0
+            if math.isnan(recent_response.get('aantal_' + category)):
+                recent_response['aantal_' + category] = 0
             non_plastic_items += int(recent_response['aantal_' + category])
-        total_items += int(recent_response['aantal_' + category])
+            total_items += int(recent_response['aantal_' + category])
 
     # Calculate the percentage
     if total_items > 0:
