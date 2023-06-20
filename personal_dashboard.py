@@ -50,6 +50,9 @@ def personal_dashboard_page(current_user_email):
         
         # Display the chart
         st.plotly_chart(fig)
+        
+        st.write("Column Names and Indices:")
+            for i, col in enumerate(df.columns):
     else:
         st.write("No form responses found.")
         
