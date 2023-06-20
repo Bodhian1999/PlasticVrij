@@ -176,7 +176,7 @@ def personal_dashboard_page(current_user_email):
             # Show the chart
             fig.show()
             
-        user_score = calculate_sustainability_score(avg_percentage, user_percentage)  # Calculate the user's sustainability score
+        user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
         plot_sustainability_score(user_score)
 
         st.write("Kolomnamen en Indices:")
