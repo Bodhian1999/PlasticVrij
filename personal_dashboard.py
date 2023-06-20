@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-!pip install plotly
-import plotly.expres as px
+import plotly.graph_objects as go
 from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses
 
 def personal_dashboard_page(current_user_email):
@@ -29,26 +28,26 @@ def personal_dashboard_page(current_user_email):
         ja_count = 0
         nee_count = 0
 
-        # Loop over the columns between index 2 and 23
+        # Loop over the columns between i
         for column in selected_row.columns[3:22]:
             if selected_row[column].values[0] == 'Ja':
                 ja_count += 1
             elif selected_row[column].values[0] == 'Nee':
                 nee_count += 1
 
-        # Create a DataFrame with the counts
-        counts_df = pd.DataFrame({'Answer': ['Ja', 'Nee'], 'Count': [ja_count, nee_count]})
-
         # Create a bar chart using Plotly
-        fig = px.bar(counts_df, x='Answer', y='Count', color='Answer')
+        fig = go.Figure(data=[
+            go.Bar(x=['Ja', 'Nee'], y=[ja_count, nee_count], marker_color=['green', 'red'])
+        ])
 
         # Customize the layout
         fig.update_layout(
             title='Total Count of Ja vs Nee for All Categories (Selected Row)',
             xaxis_title='Answer',
-            yaxis_title='Count'
+            yaxis_title='Count',
+            showlegend=False
         )
-
+        
         # Display the chart
         st.plotly_chart(fig)
     else:
