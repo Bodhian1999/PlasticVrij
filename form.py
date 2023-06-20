@@ -46,6 +46,7 @@ def form_page(current_user_email):
                 (
                     "Multi-Use Non-Plastics",
                     "Single-Use Non-Plastics",
+                    "Multi-Use plastics",
                     "Single-Use Plastics",
                 ),
                 key=f"{category}_alternative_{i}",
