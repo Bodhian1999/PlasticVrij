@@ -36,7 +36,7 @@ def form_page(current_user_email):
 
     responses = {"Email": current_user_email}  # Add current user's email to responses
 
-    for i, category in enumerate(inputs):
+    for i, (category, question) in enumerate(inputs):
 
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
