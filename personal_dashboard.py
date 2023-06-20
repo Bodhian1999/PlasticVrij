@@ -172,9 +172,9 @@ def personal_dashboard_page(current_user_email):
             fig.add_shape(
                 type="line",
                 x0=average_score,
-                y0=0,
+                y0=1,
                 x1=average_score,
-                y1=1,
+                y1=2,
                 line=dict(color="red", width=3)
             )
 
