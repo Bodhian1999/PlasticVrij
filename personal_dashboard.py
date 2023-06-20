@@ -208,7 +208,7 @@ def personal_dashboard_page(current_user_email):
         user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
         avg_score = calculate_sustainability_score(avg_sustainability_percentage, avg_sustainability_percentage)
         st.write(user_score)
-        plot_sustainability_score(user_score)
+        plot_sustainability_score(user_score, avg_score)
 
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
