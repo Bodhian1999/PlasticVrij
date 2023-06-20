@@ -44,6 +44,12 @@ def personal_dashboard_page(current_user_email):
         ax.set_ylabel('Count')
         ax.set_title('Total Count of Ja vs Nee for All Categories (Selected Row)')
         st.pyplot(fig)
+        
+        # Assuming you have the DataFrame `form_responses_df`
+
+        for idx, column in enumerate(form_responses_df.columns):
+            print(f"Index: {idx}, Column: {column}")
+
     else:
         st.write("No form responses found.")
         
