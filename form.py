@@ -46,7 +46,7 @@ def form_page(current_user_email):
                 (
                     "Multi-Use Non-Plastics",
                     "Single-Use Non-Plastics",
-                    "Single-Use Plastics (alleen kiezen wanneer 'Ja' is geantwoord)",
+                    "Single-Use Plastics",
                 ),
                 key=f"{category}_alternative_{i}",
             )
