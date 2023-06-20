@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
-from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses
+from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage
 
 def personal_dashboard_page(current_user_email):
 
@@ -99,6 +99,27 @@ def personal_dashboard_page(current_user_email):
             xaxis_title='Categorie',
             yaxis_title='Aantal',
             showlegend=False
+        )
+
+        # Display the chart
+        st.plotly_chart(fig)
+        
+        # Calculate the sustainability percentage
+        sustainability_percentage = calculate_sustainability_percentage(selected_row[selected_row.columns[22:41]])
+
+        # Create a pie chart using Plotly
+        fig = go.Figure(data=[
+            go.Pie(
+                labels=['Duurzaam', 'Niet Duurzaam'],
+                values=[sustainability_percentage, 100 - sustainability_percentage],
+                marker_colors=['green', 'red']
+            )
+        ])
+
+        # Customize the layout
+        fig.update_layout(
+            title='Percentage Duurzame Opties',
+            showlegend=True
         )
 
         # Display the chart

@@ -231,3 +231,14 @@ def get_user_score(email, non_plastics_percentage):
         return user_score_adjusted, avg_score
     else:
         return None, None
+    
+def calculate_sustainability_percentage(selected_row):
+    total_count = len(selected_row)
+
+    single_use_plastics_count = len(selected_row[selected_row == 'Single-Use Plastics'])
+
+    sustainable_count = total_count - single_use_plastics_count
+
+    sustainability_percentage = (sustainable_count / total_count) * 100
+
+    return sustainability_percentage
