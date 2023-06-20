@@ -166,17 +166,17 @@ def personal_dashboard_page(current_user_email):
                 y0=0,
                 x1=score,
                 y1=2,
-                line=dict(color="blue", width=3)
+                line=dict(color="blue", width=3),
                 name="User Score"
             )
 
             fig.add_shape(
                 type="line",
                 x0=average_score,
-                y0=1,
+                y0=0,
                 x1=average_score,
-                y1=2,
-                line=dict(color="red", width=3)
+                y1=1,
+                line=dict(color="red", width=3),
                 name="Average Score"
             )
 
@@ -212,7 +212,6 @@ def personal_dashboard_page(current_user_email):
 
             # Display the chart
             st.plotly_chart(fig)
-
             
         user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)  # Calculate the user's sustainability score
         avg_score = calculate_sustainability_score(avg_sustainability_percentage, avg_sustainability_percentage)
