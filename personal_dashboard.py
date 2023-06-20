@@ -10,7 +10,7 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     # Load the most recent form response from the database
-    recent_response = get_recent_form_response(current_user_email)
+    recent_response = pd.DataFrame(get_recent_form_response(current_user_email))
     st.write(f"Huidige gebruiker: {recent_response}")
 
     if recent_response:
