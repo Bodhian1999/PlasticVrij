@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
-from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses
+from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage
 
 def personal_dashboard_page(current_user_email):
 
