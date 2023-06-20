@@ -162,16 +162,28 @@ def personal_dashboard_page(current_user_email):
             ])
 
             # Customize the layout
-            fig.update_layout(title='Sustainability Score',
-                              xaxis_title='Score',
-                              yaxis_title='',
-                              xaxis_range=[0, score_range],
-                              yaxis_range=[0, 2],
-                              showlegend=False)
-
-            # Hide gridlines and ticks
-            fig.update_xaxes(showgrid=False, showticklabels=False, zeroline=False)
-            fig.update_yaxes(showgrid=False, showticklabels=False, zeroline=False)
+            fig.update_layout(
+                title='Sustainability Score',
+                xaxis_title='Score',
+                yaxis_title='',
+                xaxis_range=[0, score_range],
+                yaxis_range=[0, 2],
+                showlegend=False,
+                xaxis=dict(
+                    showgrid=True,
+                    gridcolor='lightgray',
+                    showticklabels=True,
+                    tickfont=dict(size=12),
+                    tickmode='linear',
+                    tick0=0,
+                    dtick=1
+                ),
+                yaxis=dict(
+                    showgrid=False,
+                    showticklabels=False,
+                    zeroline=False
+                )
+            )
 
             # Display the chart
             st.plotly_chart(fig)
