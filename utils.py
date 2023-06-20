@@ -270,3 +270,14 @@ def calculate_sustainability_percentage(selected_row):
     sustainability_percentage = (sustainable_count / total_count) * 100
 
     return sustainability_percentage
+
+def calculate_avg_sustainability_percentage(df):
+    total_percentage = 0
+    num_responses = len(df)
+
+    for _, row in df.iterrows():
+        sustainability_percentage = calculate_sustainability_percentage(row)
+        total_percentage += sustainability_percentage
+
+    avg_sustainability_percentage = total_percentage / num_responses
+    return avg_sustainability_percentage
