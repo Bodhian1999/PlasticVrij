@@ -274,12 +274,11 @@ def calculate_sustainability_percentage(selected_row):
 
 def calculate_avg_sustainability_percentage(df):
     total_percentage = 0
-    num_responses = len(df)
-
-    for _, row in df.iterrows():
-        selected_row = row[df.columns[22:41]].dropna()  # Select the relevant columns and remove NaN values
-        sustainability_percentage = calculate_sustainability_percentage(selected_row)
+    for index, row in df.iterrows():
+        selected_row = row
+        sustainability_percentage = calculate_sustainability_percentage(selected_row[selected_row.columns[22:41]])
+        
         total_percentage += sustainability_percentage
-
-    avg_sustainability_percentage = total_percentage / num_responses
-    return avg_sustainability_percentage
+    
+    average_percentage = total_percentage / len(df)
+    return average_percentage
