@@ -13,6 +13,7 @@ def personal_dashboard_page(current_user_email):
     
     if form_responses_df is not None:
         st.dataframe(form_responses_df)
+        
         # Get unique values from the 'created_at' column
         created_at_values = form_responses_df['created_at'].unique()
 
@@ -22,20 +23,23 @@ def personal_dashboard_page(current_user_email):
         # Filter the DataFrame to get the selected row
         selected_row = form_responses_df[form_responses_df['created_at'] == selected_created_at]
 
-        # Select the columns representing the categories
-        category_columns = ['rietjes', 'honingstaafjes', 'melkcupjes', 'suikerzakjes', 'koekjeswrappers',
-                            'theezakjes_verpakking', 'ontbijt_boter', 'ontbijt_jam_pindakaas_chocoladepasta',
-                            'saus_mayonaise', 'saus_ketchup', 'saus_mosterd', 'saus_soya_saus',
-                            'pepermuntverpakking', 'snoepjes_rekening', 'tandenstokerverpakking',
-                            'stampers', 'wegwerpbekers_feesten_partijen', 'ijsjes_plastic_verpakking',
-                            'natte_doekjes_garnalen_spareribs']
+        # Initialize the counts
+        ja_count = 0
+        nee_count = 0
 
-        # Count the "Ja" and "Nee" answers for each category in the selected row
-        counts = selected_row[category_columns].apply(pd.value_counts).loc[['Ja', 'Nee']].sum()
+        # Loop over the columns between index 2 and 23
+        for column in selected_row.columns[2:24]:
+            if selected_row[column].values[0] == 'Ja':
+                ja_count += 1
+            elif selected_row[column].values[0] == 'Nee':
+                nee_count += 1
+
+        # Create a DataFrame with the counts
+        counts_df = pd.DataFrame({'Answer': ['Ja', 'Nee'], 'Count': [ja_count, nee_count]})
 
         # Plot the bar chart
         fig, ax = plt.subplots()
-        counts.plot(kind='bar', ax=ax)
+        counts_df.plot(x='Answer', y='Count', kind='bar', ax=ax)
         ax.set_xlabel('Answer')
         ax.set_ylabel('Count')
         ax.set_title('Total Count of Ja vs Nee for All Categories (Selected Row)')
