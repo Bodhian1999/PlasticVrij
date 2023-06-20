@@ -52,7 +52,7 @@ def personal_dashboard_page(current_user_email):
         st.plotly_chart(fig)
         
         st.write("Column Names and Indices:")
-        for i, col in enumerate(df.columns):
+        for i, col in enumerate(form_responses_df.columns):
             st.write(f"Index: {i}, Column: {col}")
     else:
         st.write("No form responses found.")
