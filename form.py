@@ -85,5 +85,5 @@ def form_page(current_user_email):
     # Form submission handling
     if submit_button:
         # Process the responses
-        # utils.insert_form_responses(responses)
+        utils.insert_form_responses(responses)
         st.success("Form successfully submitted!")
