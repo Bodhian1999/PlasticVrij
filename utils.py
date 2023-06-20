@@ -153,7 +153,7 @@ def calculate_non_plastics_percentage(recent_response):
 
     for category in categories:
         product_category = recent_response['product_category_' + category]
-        if product_category != 'Single-Use Plastics':
+        if product_category != 'Single-Use Plastics' and product_category != 'n.v.t. (product uit assortiment gehaald)':
             non_plastic_items += int(recent_response['aantal_' + category])
         total_items += int(recent_response['aantal_' + category])
 
