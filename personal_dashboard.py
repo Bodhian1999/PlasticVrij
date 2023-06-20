@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import plotly as px
 from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses
 
 def personal_dashboard_page(current_user_email):
@@ -37,20 +38,18 @@ def personal_dashboard_page(current_user_email):
         # Create a DataFrame with the counts
         counts_df = pd.DataFrame({'Answer': ['Ja', 'Nee'], 'Count': [ja_count, nee_count]})
 
-        # Plot the bar chart
-        fig, ax = plt.subplots()
-        counts_df.plot(x='Answer', y='Count', kind='bar', ax=ax)
-        ax.set_xlabel('Answer')
-        ax.set_ylabel('Count')
-        ax.set_title('Total Count of Ja vs Nee for All Categories (Selected Row)')
-        st.pyplot(fig)
-        
-        # Assuming you have the DataFrame `form_responses_df`
+        # Create a bar chart using Plotly
+        fig = px.bar(counts_df, x='Answer', y='Count', color='Answer')
 
-        st.write("Column Indexes:")
-        for idx, column in enumerate(form_responses_df.columns):
-            st.write(f"Index: {idx}, Column: {column}")
+        # Customize the layout
+        fig.update_layout(
+            title='Total Count of Ja vs Nee for All Categories (Selected Row)',
+            xaxis_title='Answer',
+            yaxis_title='Count'
+        )
 
+        # Display the chart
+        st.plotly_chart(fig)
     else:
         st.write("No form responses found.")
         
