@@ -102,6 +102,27 @@ def insert_form_responses(responses):
     conn.commit()
     cursor.close()
     conn.close()
+    
+def get_all_form_responses(current_user_email):
+    # Retrieve all form responses for the current user email
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    query = "SELECT * FROM form_responses_n WHERE email = %s ORDER BY created_at DESC"
+    cursor.execute(query, (current_user_email,))
+    responses = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    if responses:
+        # Convert the responses to a dataframe
+        columns = [column[0] for column in cursor.description]
+        response_data = [dict(zip(columns, response)) for response in responses]
+        response_df = pd.DataFrame(response_data)
+        return response_df
+    else:
+        return None
 
 def get_recent_form_response(current_user_email):
     # Retrieve the recent form response for the current user email
