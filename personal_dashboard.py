@@ -15,8 +15,12 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {recent_response}")
 
     if recent_response:
+        # Convert the recent_response tuple to a dictionary
+        columns = [column[0] for column in cursor.description]
+        recent_response_dict = dict(zip(columns, recent_response))
+
         # Calculate non-plastics percentage
-        non_plastics_percentage = calculate_non_plastics_percentage(recent_response)
+        non_plastics_percentage = calculate_non_plastics_percentage(recent_response_dict)
 
         # Calculate user score and average score
         user_score, avg_score = get_user_score(current_user_email, non_plastics_percentage)
