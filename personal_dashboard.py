@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response
+from utils import get_recent_form_response
 
 def personal_dashboard_page(current_user_email):
 
