@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
-from utils import calculate_non_plastics_percentage, get_user_score, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage
+from utils import calculate_non_plastics_percentage, get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 def personal_dashboard_page(current_user_email):
 
@@ -153,6 +153,31 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
+        def plot_sustainability_score(score):
+            score_range = 10  # Set the desired score range
+
+            # Create the bar chart
+            fig = go.Figure(data=[
+                go.Bar(x=[0, score_range], y=[1, 1], width=[score, 0], marker_color='blue')
+            ])
+
+            # Customize the layout
+            fig.update_layout(title='Sustainability Score',
+                              xaxis_title='Score',
+                              yaxis_title='',
+                              xaxis_range=[0, score_range],
+                              yaxis_range=[0, 2],
+                              showlegend=False)
+
+            # Hide gridlines and ticks
+            fig.update_xaxes(showgrid=False, showticklabels=False, zeroline=False)
+            fig.update_yaxes(showgrid=False, showticklabels=False, zeroline=False)
+
+            # Show the chart
+            fig.show()
+            
+        user_score = calculate_sustainability_score(avg_percentage, user_percentage)  # Calculate the user's sustainability score
+        plot_sustainability_score(user_score)
 
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):

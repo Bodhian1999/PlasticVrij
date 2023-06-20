@@ -217,42 +217,11 @@ def calculate_non_plastics_percentage(recent_response):
     return non_plastic_percentage
 
 
-def get_user_score(email, non_plastics_percentage):
-    # Create a database connection
-    conn = create_connection()
-    cursor = conn.cursor()
+def calculate_sustainability_score(avg_percentage, user_percentage):
+    score_range = 10  # Set the desired score range
+    score = (user_percentage / avg_percentage) * score_range
+    return score if score <= score_range else score_range
 
-    # Query the database to get the user's form responses
-    cursor.execute("SELECT * FROM form_responses_n WHERE email = %s", (email,))
-    user_data = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
-
-    if user_data:
-        # Extract the form response data from the query result
-        ja_counts = user_data[-48:-24]  # Get counts of 'ja' responses for each field
-        total_counts = user_data[-24:]  # Get total counts for each field
-
-        # Convert any 'NaN' values to 0
-        ja_counts = [count if count == count else 0 for count in ja_counts]
-        total_counts = [count if count == count else 0 for count in total_counts]
-
-        # Calculate the user's score based on the form responses
-        if sum(total_counts) > 0:
-            user_score = (sum(ja_counts) / sum(total_counts)) * 10
-            avg_score = sum(user_data[-24:]) / sum(total_counts)
-        else:
-            user_score = 0
-            avg_score = 0
-
-        # Adjust user score based on non-plastics percentage
-        non_plastics_score = non_plastics_percentage * 10
-        user_score_adjusted = max(user_score, non_plastics_score)
-
-        return user_score_adjusted, avg_score
-    else:
-        return None, None
     
 def calculate_sustainability_percentage(selected_row):
     total_count = 0
