@@ -146,11 +146,11 @@ def get_recent_form_response(current_user_email):
         return None
     
 def get_recent_form_responses():
-    # Retrieve the most recent form response for each user email
+    # Retrieve the most recent form response for each unique user email
     conn = create_connection()
     cursor = conn.cursor()
 
-    query = "SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY email ORDER BY created_at DESC) AS rn FROM form_responses_n) AS subquery WHERE rn = 1"
+    query = "SELECT DISTINCT ON (email) * FROM form_responses_n ORDER BY email, created_at DESC"
     cursor.execute(query)
     responses = cursor.fetchall()
 
@@ -165,6 +165,7 @@ def get_recent_form_responses():
         return response_df
     else:
         return None
+
 
 import math
 
