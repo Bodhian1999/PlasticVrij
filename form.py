@@ -35,19 +35,20 @@ def form_page(current_user_email):
     ]
 
     responses = {"Email": current_user_email}  # Add current user's email to responses
-
+    
     for i, (category, question) in enumerate(inputs):
+        st.subheader(category)
 
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
 
         if uses_category == "Ja":
             product_category = st.selectbox(
-                "Under which category does this product belong?",
+                "Onder welke categorie valt dit product?",
                 (
                     "Multi-Use Non-Plastics",
                     "Single-Use Non-Plastics",
-                    "Single-Use Plastics (only select if 'Yes' is answered)",
+                    "Single-Use Plastics (alleen kiezen wanneer 'Ja' is geantwoord)",
                 ),
                 key=f"{category}_alternative_{i}",
             )
@@ -55,13 +56,13 @@ def form_page(current_user_email):
 
             if product_category != "n.v.t. (product uit assortiment gehaald)":
                 aantal_category = st.number_input(
-                    f"How many {category} do you use per year?",
+                    f"Hoeveel {category} gebruikt u per jaar?",
                     min_value=0,
                     step=100,
                     key=f"{category}_amount_{i}",
                 )
                 prijs_per_category = st.number_input(
-                    f"What is the price per {category}?",
+                    f"Wat is de prijs per {category}?",
                     min_value=0.0,
                     step=0.01,
                     key=f"{category}_price_{i}",
@@ -79,10 +80,10 @@ def form_page(current_user_email):
         if (i + 1) % 3 == 0 or i == len(inputs) - 1:
             st.markdown("</div>", unsafe_allow_html=True)
 
-    submit_button = st.button("Submit")
+    submit_button = st.button("Verzenden")
 
     # Form submission handling
     if submit_button:
         # Process the responses
         utils.insert_form_responses(responses)
-        st.success("Form successfully submitted!")
+        st.success("Formulier succesvol verzonden!")
