@@ -160,7 +160,7 @@ def personal_dashboard_page(current_user_email):
                 y0=0,
                 x1=score,
                 y1=2,
-                line=dict(color="blue", width=3),
+                line=dict(color="blue", width=6),
                 name="User Score"
             )
 
@@ -170,7 +170,7 @@ def personal_dashboard_page(current_user_email):
                 y0=0,
                 x1=average_score,
                 y1=1,
-                line=dict(color="red", width=3),
+                line=dict(color="red", width=6),
                 name="Average Score"
             )
 
