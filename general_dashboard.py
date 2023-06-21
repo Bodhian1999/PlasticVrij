@@ -17,16 +17,18 @@ def general_dashboard_page(current_user_email):
     recent_form_responses_df = get_recent_form_responses()
 
     if recent_form_responses_df is not None:
-        # Calculate the sustainability percentage for each row
-        recent_form_responses_df['Sustainability Percentage'] = recent_form_responses_df.apply(
-            lambda row: calculate_sustainability_percentage(row[row.columns[22:41]]),
-            axis=1
-        )
+        # Create a new column to store the sustainability percentages
+        recent_form_responses_df['Sustainability Percentage'] = None
+
+        # Iterate over the rows and calculate the sustainability percentage
+        for index, row in recent_form_responses_df.iterrows():
+            sustainability_percentage = calculate_sustainability_percentage(row[row.columns[22:41]])
+            recent_form_responses_df.at[index, 'Sustainability Percentage'] = sustainability_percentage
+
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
-    
-                 
+
     
     def address_to_coordinates(postal_code):
         address = f"{postal_code}, Netherlands"
