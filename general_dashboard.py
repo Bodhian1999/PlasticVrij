@@ -5,6 +5,7 @@ from streamlit_folium import folium_static
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
+import numpy as np
 from utils import get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 import folium
@@ -38,7 +39,6 @@ def general_dashboard_page(current_user_email):
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
-
 
     
     def address_to_coordinates(postal_code):
