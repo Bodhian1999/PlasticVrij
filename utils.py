@@ -81,6 +81,7 @@ def get_user_email(username):
         return result[0]
     else:
         return None
+    
 
 def insert_form_responses(responses):
 

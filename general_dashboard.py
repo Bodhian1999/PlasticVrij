@@ -5,11 +5,24 @@ from streamlit_folium import folium_static
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
+from utils import get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
+
 import folium
 
-def general_dashboard_page():
+def general_dashboard_page(current_user_email):
     st.header("General Dashboard")
     # Add content and functionality specific to the general dashboard
+    
+    st.write(f"Huidige gebruiker: {current_user_email}")
+    recent_form_responses_df = get_recent_form_responses()
+    
+    if form_responses_df is not None:
+        st.dataframe(form_responses_df)
+    else:
+        st.write("Er zijn geen ingevulde formulieren gevonden)
+    
+                 
+    
     def address_to_coordinates(postal_code):
         address = f"{postal_code}, Netherlands"
         geolocator = Nominatim(user_agent="my_geocoder")

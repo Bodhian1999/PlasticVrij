@@ -27,7 +27,7 @@ def main():
         if page == "Persoonlijk Dashboard":
             personal_dashboard_page(current_user_email)
         elif page == "Algemeen Dashboard":
-            general_dashboard_page()
+            general_dashboard_page(current_user_email)
         elif page == "Formulier Pagina":
             form_page(current_user_email)
 
