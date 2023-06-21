@@ -17,8 +17,19 @@ def personal_dashboard_page(current_user_email):
     
     if form_responses_df is not None:
         st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
-
+        
+        # Create a new column to store the sustainability percentages
+        form_responses_df['Sustainability Percentage'] = None
+        
+        # Iterate over the rows and calculate the sustainability percentage and user score
+        for _, row in form_responses_df.iterrows():
+            row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
+            sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
+            form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
+        
+        
         st.dataframe(form_responses_df)
+        
         
         # Get unique values from the 'created_at' column
         created_at_values = form_responses_df['created_at'].unique()
@@ -138,6 +149,8 @@ def personal_dashboard_page(current_user_email):
 
         # Display the chart
         st.plotly_chart(fig)
+        
+        
         
       
         # Calculate average sustainability percentage
