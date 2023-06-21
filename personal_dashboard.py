@@ -11,10 +11,13 @@ def personal_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
-    sustainability_percentages = form_responses_df.apply(calculate_sustainability_percentage, axis=1)
-
+    
+    recent_form_responses_df = get_recent_form_responses()
+    
+    
     if form_responses_df is not None:
         st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
+
         st.dataframe(form_responses_df)
         
         # Get unique values from the 'created_at' column
@@ -51,7 +54,6 @@ def personal_dashboard_page(current_user_email):
         )
         
         st.subheader("Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën")
-        st.write("Hieronder wordt weergegeven hoeveel van de categorieën die we behandelen door jou worden gebruikt.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -112,17 +114,122 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
-        # Create a line chart to visualize the sustainability percentages over time
-        fig = go.Figure(data=[
-            go.Scatter(x=form_responses_df['created_at'], y=sustainability_percentages, mode='lines+markers')
-        ])
-        fig.update_layout(
-            title='Duurzaamheidspercentage over tijd',
-            xaxis_title='Datum',
-            yaxis_title='Duurzaamheidspercentage'
-        )
-        st.subheader("Duurzaamheidspercentage over tijd")
-        st.plotly_chart(fig)
+        # Calculate the sustainability percentage
+        sustainability_percentage = calculate_sustainability_percentage(selected_row[selected_row.columns[22:41]])
 
+        # Create a pie chart using Plotly
+        fig = go.Figure(data=[
+            go.Pie(
+                labels=['Duurzaam', 'Niet Duurzaam'],
+                values=[sustainability_percentage, 100 - sustainability_percentage],
+                marker_colors=['green', 'red']
+            )
+        ])
+
+        # Customize the layout
+        fig.update_layout(
+            title='Percentage Duurzame Opties',
+            showlegend=True
+        )
+
+        st.subheader("Percentage Duurzame Opties")
+        st.write("Hieronder wordt het percentage duurzame opties weergegeven.")
+
+        # Display the chart
+        st.plotly_chart(fig)
+        
+      
+        # Calculate average sustainability percentage
+        avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
+        
+        # Create the bar chart
+        fig = go.Figure(data=[
+            go.Bar(name='Gebruiker', x=['Gebruiker'], y=[sustainability_percentage]),
+            go.Bar(name='Gemiddelde', x=['Gemiddelde'], y=[avg_sustainability_percentage])
+        ])
+
+        # Customize the layout
+        fig.update_layout(title='Vergelijking Duurzaamheidspercentage',
+                          xaxis_title='Categorie',
+                          yaxis_title='Percentage',
+                          barmode='group')
+
+        st.subheader("Vergelijking Duurzaamheidspercentage")
+        st.write("Hieronder wordt jouw duurzaamheidspercentage vergeleken met het gemiddelde percentage.")
+
+        # Display the chart
+        st.plotly_chart(fig)
+        
+        '''
+        def plot_sustainability_score(score, average_score):
+            score_range = 10  # Set the desired score range
+
+            # Create the bar chart
+            fig = go.Figure()
+
+            fig.add_shape(
+                type="line",
+                x0=score,
+                y0=0,
+                x1=score,
+                y1=2,
+                line=dict(color="blue", width=15),
+                name="Gebruiker Score"
+            )
+
+            fig.add_shape(
+                type="line",
+                x0=average_score,
+                y0=0,
+                x1=average_score,
+                y1=1,
+                line=dict(color="red", width=15),
+                name="Gemiddelde Score"
+            )
+
+            fig.add_trace(
+                go.Bar(
+                    x=[score],
+                    y=[1],
+                    orientation='h',
+                    marker_color='blue',
+                    name='Gebruiker Score'
+                )
+            )
+
+            fig.add_trace(
+                go.Bar(
+                    x=[average_score],
+                    y=[0],
+                    orientation='h',
+                    marker_color='red',
+                    name='Gemiddelde Score'
+                )
+            )
+
+            # Customize the layout
+            fig.update_layout(
+                title='Vergelijking Duurzaamheidsscore',
+                xaxis=dict(
+                    title='Score',
+                    tickvals=[i for i in range(score_range + 1)],
+                    ticktext=[str(i) for i in range(score_range + 1)]
+                ),
+                yaxis=dict(visible=False),
+                barmode='overlay',
+                showlegend=True
+            )
+
+            st.plotly_chart(fig)
+
+        sustainability_score = calculate_sustainability_score(selected_row[selected_row.columns[41:]])
+
+        avg_sustainability_score = calculate_avg_sustainability_score(recent_form_responses_df)
+
+        st.subheader("Vergelijking Duurzaamheidsscore")
+        st.write("Hieronder wordt de duurzaamheidsscore van de gebruiker vergeleken met het gemiddelde.")
+
+        plot_sustainability_score(sustainability_score, avg_sustainability_score)
+        '''
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
