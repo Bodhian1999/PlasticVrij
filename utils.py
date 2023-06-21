@@ -218,9 +218,9 @@ def calculate_non_plastics_percentage(recent_response):
     return non_plastic_percentage
 
 
-def calculate_sustainability_score(avg_percentage, user_percentage):
+def calculate_sustainability_score(user_percentage):
     score_range = 10  # Set the desired score range
-    score = (user_percentage / avg_percentage) * score_range
+    score = (user_percentage / 100) * score_range
     return score if score <= score_range else score_range
 
     
