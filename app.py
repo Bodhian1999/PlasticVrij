@@ -6,8 +6,6 @@ from personal_dashboard import personal_dashboard_page
 from general_dashboard import general_dashboard_page
 
 def main():
-    st.title("Gebruikersauthenticatie App")
-
     # Store login state and current user
     is_logged_in = st.session_state.get('is_logged_in', False)
     current_user_email = st.session_state.get('current_user_email', '')
