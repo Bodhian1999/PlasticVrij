@@ -174,8 +174,9 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
+        # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
-            go.Scatter(x=form_responses_df['created_at'], y=sustainability_percentages, mode='lines+markers')
+            go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['Sustainability Percentage'], mode='lines+markers')
         ])
         fig.update_layout(
             title='Duurzaamheidspercentage over tijd',
