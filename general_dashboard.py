@@ -15,8 +15,13 @@ def general_dashboard_page(current_user_email):
     
     st.write(f"Huidige gebruiker: {current_user_email}")
     recent_form_responses_df = get_recent_form_responses()
-    
+
     if recent_form_responses_df is not None:
+        # Calculate the sustainability percentage for each row
+        recent_form_responses_df['Sustainability Percentage'] = recent_form_responses_df.apply(
+            lambda row: calculate_sustainability_percentage(row[row.columns[22:41]]),
+            axis=1
+        )
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
