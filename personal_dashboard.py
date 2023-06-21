@@ -54,6 +54,7 @@ def personal_dashboard_page(current_user_email):
         )
         
         st.subheader("Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën")
+        st.write("Hieronder wordt weergegeven hoeveel van de cattegorien die we behandelen door jou worden gebruikt.")
 
         # Display the chart
         st.plotly_chart(fig)
