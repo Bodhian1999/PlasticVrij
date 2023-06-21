@@ -16,7 +16,7 @@ def general_dashboard_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
     recent_form_responses_df = get_recent_form_responses()
     
-    if form_responses_df is not None:
+    if recent_form_responses_df is not None:
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
