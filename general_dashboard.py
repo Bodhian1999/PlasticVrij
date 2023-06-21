@@ -19,6 +19,9 @@ def general_dashboard_page(current_user_email):
     if recent_form_responses_df is not None:
         # Create a new column to store the sustainability percentages
         recent_form_responses_df['Sustainability Percentage'] = None
+        
+        # Calculate average sustainability percentage
+        recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
         # Iterate over the rows and calculate the sustainability percentage
         for _, row in recent_form_responses_df.iterrows():
