@@ -29,12 +29,7 @@ def general_dashboard_page(current_user_email):
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
-
-            # Calculate the user's sustainability score
-            avg_sustainability_percentage = row['avg_sustainability_percentage']
-            user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)
-            recent_form_responses_df.at[_, 'User Score'] = user_score
-
+        
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
