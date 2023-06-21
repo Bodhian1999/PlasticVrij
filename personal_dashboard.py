@@ -212,7 +212,7 @@ def personal_dashboard_page(current_user_email):
                     tickfont=dict(size=12),
                     tickmode='linear',
                     tick0=0,
-                    dtick=10
+                    dtick=1
                 ),
                 yaxis=dict(
                     showgrid=False,
