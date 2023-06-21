@@ -21,13 +21,15 @@ def general_dashboard_page(current_user_email):
         recent_form_responses_df['Sustainability Percentage'] = None
 
         # Iterate over the rows and calculate the sustainability percentage
-        for index, row in recent_form_responses_df.iterrows():
-            sustainability_percentage = calculate_sustainability_percentage(row[row.columns[22:41]])
-            recent_form_responses_df.at[index, 'Sustainability Percentage'] = sustainability_percentage
+        for _, row in recent_form_responses_df.iterrows():
+            row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
+            sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
+            recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
 
         st.dataframe(recent_form_responses_df)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
+
 
     
     def address_to_coordinates(postal_code):
