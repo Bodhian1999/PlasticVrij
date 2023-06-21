@@ -19,7 +19,7 @@ def general_dashboard_page(current_user_email):
     if recent_form_responses_df is not None:
         # Create a new column to store the sustainability percentages
         recent_form_responses_df['Sustainability Percentage'] = None
-        
+
         # Calculate average sustainability percentage
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
@@ -28,6 +28,12 @@ def general_dashboard_page(current_user_email):
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
+
+        # Calculate the user's sustainability score
+        recent_form_responses_df['User Score'] = calculate_sustainability_score(
+            recent_form_responses_df['avg_sustainability_percentage'],
+            recent_form_responses_df['Sustainability Percentage']
+        )
 
         st.dataframe(recent_form_responses_df)
     else:
