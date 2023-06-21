@@ -1,5 +1,6 @@
 import streamlit as st
 from auth import auth_page
+from PIL import Image
 from form import form_page
 from personal_dashboard import personal_dashboard_page
 from general_dashboard import general_dashboard_page
@@ -22,6 +23,9 @@ def main():
 
     # Add sidebar to all pages except the login page
     if is_logged_in:
+        # Add the image to the sidebar
+        st.sidebar.image("path/to/your/image.png", use_column_width=True)
+
         page = st.sidebar.selectbox("Selecteer Pagina", ("Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard"))
 
         if page == "Persoonlijk Dashboard":
