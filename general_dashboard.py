@@ -19,7 +19,7 @@ def general_dashboard_page(current_user_email):
     if form_responses_df is not None:
         st.dataframe(form_responses_df)
     else:
-        st.write("Er zijn geen ingevulde formulieren gevonden)
+        st.write("Er zijn geen ingevulde formulieren gevonden")
     
                  
     
