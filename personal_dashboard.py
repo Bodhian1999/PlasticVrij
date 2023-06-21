@@ -174,6 +174,19 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
+        fig = go.Figure(data=[
+            go.Scatter(x=form_responses_df['created_at'], y=sustainability_percentages, mode='lines+markers')
+        ])
+        fig.update_layout(
+            title='Duurzaamheidspercentage over tijd',
+            xaxis_title='Datum',
+            yaxis_title='Duurzaamheidspercentage'
+        )
+        st.subheader("Duurzaamheidspercentage over tijd")
+        st.plotly_chart(fig)
+
+        
+        
         '''
         def plot_sustainability_score(score, average_score):
             score_range = 10  # Set the desired score range
