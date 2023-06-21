@@ -179,7 +179,6 @@ def personal_dashboard_page(current_user_email):
             go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['Sustainability Percentage'], mode='lines+markers')
         ])
         fig.update_layout(
-            title='Duurzaamheidspercentage over tijd',
             xaxis_title='Datum',
             yaxis_title='Duurzaamheidspercentage'
         )
