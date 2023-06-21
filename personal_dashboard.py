@@ -147,7 +147,7 @@ def personal_dashboard_page(current_user_email):
         # Display the chart
         st.plotly_chart(fig)
         
-'''
+        '''
         def plot_sustainability_score(score, average_score):
             score_range = 10  # Set the desired score range
 
@@ -228,7 +228,8 @@ def personal_dashboard_page(current_user_email):
         #avg_score = calculate_sustainability_score(avg_sustainability_percentage, avg_sustainability_percentage)
         st.write(user_score)
         plot_sustainability_score(user_score, avg_score)
-''''
+        '''
+        
         st.write("Kolomnamen en Indices:")
         for i, col in enumerate(form_responses_df.columns):
             st.write(f"Index: {i}, Kolom: {col}")
