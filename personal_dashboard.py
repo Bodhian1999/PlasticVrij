@@ -160,7 +160,7 @@ def personal_dashboard_page(current_user_email):
                 y0=0,
                 x1=score,
                 y1=2,
-                line=dict(color="blue", width=6),
+                line=dict(color="blue", width=15),
                 name="User Score"
             )
 
@@ -170,7 +170,7 @@ def personal_dashboard_page(current_user_email):
                 y0=0,
                 x1=average_score,
                 y1=1,
-                line=dict(color="red", width=6),
+                line=dict(color="red", width=15),
                 name="Average Score"
             )
 
@@ -179,7 +179,7 @@ def personal_dashboard_page(current_user_email):
                 x=[None],
                 y=[None],
                 mode='markers',
-                marker=dict(color='blue', size=1),
+                marker=dict(color='blue', size=5),
                 name='User Score'
             ))
 
@@ -187,7 +187,7 @@ def personal_dashboard_page(current_user_email):
                 x=[None],
                 y=[None],
                 mode='markers',
-                marker=dict(color='red', size=1),
+                marker=dict(color='red', size=5),
                 name='Average Score'
             ))
 
@@ -212,7 +212,7 @@ def personal_dashboard_page(current_user_email):
                     tickfont=dict(size=12),
                     tickmode='linear',
                     tick0=0,
-                    dtick=1
+                    dtick=10
                 ),
                 yaxis=dict(
                     showgrid=False,
