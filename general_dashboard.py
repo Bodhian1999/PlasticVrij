@@ -24,17 +24,16 @@ def general_dashboard_page(current_user_email):
         # Calculate average sustainability percentage
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
-        # Iterate over the rows and calculate the sustainability percentage
+        # Iterate over the rows and calculate the sustainability percentage and user score
         for _, row in recent_form_responses_df.iterrows():
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
 
-        # Calculate the user's sustainability score
-        recent_form_responses_df['User Score'] = calculate_sustainability_score(
-            recent_form_responses_df['avg_sustainability_percentage'],
-            recent_form_responses_df['Sustainability Percentage']
-        )
+            # Calculate the user's sustainability score
+            avg_sustainability_percentage = row['avg_sustainability_percentage']
+            user_score = calculate_sustainability_score(avg_sustainability_percentage, sustainability_percentage)
+            recent_form_responses_df.at[_, 'User Score'] = user_score
 
         st.dataframe(recent_form_responses_df)
     else:
