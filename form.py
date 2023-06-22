@@ -36,17 +36,11 @@ def form_page(current_user_email):
         ("ijsjes_plastic_verpakking", "verkoop je 'ijsjes met verpakking'?"),
         ("natte_doekjes_garnalen_spareribs", "bied je 'alcohol/schoonmaak doekjes' aan (na garnalen/spare-ribs)?")
     ]
-    
+
     responses = {"Email": current_user_email}  # Add current user's email to responses
     
     for i, (category, question) in enumerate(inputs):
-        if previous_response is not None:
-            previous_value = previous_response[category]
-            default_index = 1 if previous_value == "Ja" else 0
-        else:
-            default_index = 0
-
-        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=default_index)
+        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
 
         if uses_category == "Ja":
@@ -61,7 +55,6 @@ def form_page(current_user_email):
                 key=f"{category}_alternative_{i}",
             )
             responses[f"product_category_{category}"] = product_category
-
             
             aantal_category = st.number_input(
                 f"Hoeveel {category} gebruikt u per jaar?",
