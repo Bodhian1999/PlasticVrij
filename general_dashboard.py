@@ -31,6 +31,17 @@ def general_dashboard_page(current_user_email):
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
         
         st.dataframe(recent_form_responses_df)
+        
+        # Create a line chart to visualize the sustainability percentages over time
+        fig = go.Figure(data=[
+            go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['Sustainability Percentage'], mode='lines+markers')
+        ])
+        fig.update_layout(
+            xaxis_title='Datum',
+            yaxis_title='Duurzaamheidspercentage'
+        )
+        st.subheader("Duurzaamheidspercentage over tijd")
+        st.plotly_chart(fig)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
 
