@@ -107,7 +107,7 @@ def general_dashboard_page(current_user_email):
 
     # Create a DataFrame from the list
     coordinates_df = pd.DataFrame(data_list)
-
+    st.dataframe(coordinates_df)
     # Merge the original DataFrame with the coordinates DataFrame
     df = pd.merge(df, coordinates_df, on='postal_code', how='left')
 
