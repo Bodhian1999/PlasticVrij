@@ -252,3 +252,25 @@ def calculate_avg_sustainability_percentage(df):
     
     average_percentage = total_percentage / len(df)
     return average_percentage
+
+
+def get_all_user_data():
+    # Retrieve all data from "users"
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    query = "SELECT * FROM users"
+    cursor.execute(query)
+    user_data = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    if user_data:
+        # Convert the data to a dataframe
+        columns = [column[0] for column in cursor.description]
+        user_data = [dict(zip(columns, data)) for data in user_data]
+        user_df = pd.DataFrame(user_data)
+        return user_df
+    else:
+        return None
