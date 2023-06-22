@@ -63,6 +63,14 @@ def general_dashboard_page(current_user_email):
         st.write("Er zijn geen ingevulde formulieren gevonden")
 
     # Dataframe moet column met 'score', 'name' en 'postalcode' bevatten
+    user_df = get_all_user_data()
+
+    df2 = pd.DataFrame()
+    df2['postal_code'] = user_df['postal_code']
+    df2['name'] = user_df['company_name']
+    df2['score'] = (recent_form_responses_df['Sustainability Percentage']/10)
+    st.dataframe(df2)
+    
     df = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA', '1016AD']})
     df['score'] = [9,6,3,7]
     df['name'] = ['Pannenkoekenhuis','Thuis','UvA','Test']
@@ -105,8 +113,6 @@ def general_dashboard_page(current_user_email):
 
     # Sample data with scores and coordinates
     data = df
-
-    st.dataframe(df)
     
     # Define a function to determine the color based on the score
     def get_color(score):
@@ -144,9 +150,6 @@ def general_dashboard_page(current_user_email):
     # Display the map
     st.markdown('**Kaart**')
     folium_static(m)
-
-    user_df = get_all_user_data()
-    st.dataframe(user_df)
     
     # Example: Display general data
     st.write("General data goes here")
