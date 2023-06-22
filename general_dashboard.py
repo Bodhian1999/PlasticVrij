@@ -28,14 +28,20 @@ def general_dashboard_page(current_user_email):
         avg_sus_score_df = pd.DataFrame(columns=['Date', 'Average Sustainability Score'])
         prev_avg_sustainability_percentage = None
 
-        # Iterate over the rows and calculate the sustainability percentage
+       # Iterate over the rows and calculate the sustainability percentage
         for _, row in recent_form_responses_df.iterrows():
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
             
-            if sustainability_percentage != prev_avg_sustainability_percentage:
-                avg_sus_score_df = avg_sus_score_df.append({'Date': row['created_at'], 'Average Sustainability Score': sustainability_percentage}, ignore_index=True)
+            if sustainability_percentage is not None and prev_avg_sustainability_percentage is not None:
+                if sustainability_percentage != prev_avg_sustainability_percentage:
+                    new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [sustainability_percentage]})
+                    avg_sus_score_df = pd.concat([avg_sus_score_df, new_row], ignore_index=True)
+                    prev_avg_sustainability_percentage = sustainability_percentage
+            else:
+                new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [sustainability_percentage]})
+                avg_sus_score_df = pd.concat([avg_sus_score_df, new_row], ignore_index=True)
                 prev_avg_sustainability_percentage = sustainability_percentage
         
         st.dataframe(recent_form_responses_df)
