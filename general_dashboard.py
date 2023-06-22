@@ -68,8 +68,8 @@ def general_dashboard_page(current_user_email):
     df['name'] = ['Pannenkoekenhuis','Thuis','UvA','Test']
 
     def address_to_coordinates(postal_code):
-    address = f"{postal_code}, Netherlands"
-    geolocator = Nominatim(user_agent="my_geocoder")
+        address = f"{postal_code}, Netherlands"
+        geolocator = Nominatim(user_agent="my_geocoder")
 
         try:
             location = geolocator.geocode(address, exactly_one=True, country_codes="NL", timeout=10)
