@@ -142,10 +142,36 @@ def general_dashboard_page(current_user_email):
         ).add_to(m)
 
     # Display the map
-
     st.markdown('**Kaart**')
     folium_static(m)
 
+    
+
+
+    def get_all_user_data():
+    # Retrieve all data from the users
+        conn = create_connection()
+        cursor = conn.cursor()
+
+        query = "SELECT * FROM users"
+        cursor.execute(query)
+        user_data = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if user_data:
+        # Convert the data to a dataframe
+            columns = [column[0] for column in cursor.description]
+            user_data = [dict(zip(columns, data)) for data in user_data]
+            user_df = pd.DataFrame(user_data)
+            return user_df
+        else:
+            return None
+
+    st.dataframe(user_df)
+
+    
     # Example: Display general data
     st.write("General data goes here")
     
