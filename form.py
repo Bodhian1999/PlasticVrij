@@ -36,10 +36,10 @@ def form_page(current_user_email):
         ("ijsjes_plastic_verpakking", "verkoop je 'ijsjes met verpakking'?"),
         ("natte_doekjes_garnalen_spareribs", "bied je 'alcohol/schoonmaak doekjes' aan (na garnalen/spare-ribs)?")
     ]
-
-       responses = {"Email": current_user_email}  # Add current user's email to responses
-
-        for i, (category, question) in enumerate(inputs):
+    
+    responses = {"Email": current_user_email}  # Add current user's email to responses
+    
+    for i, (category, question) in enumerate(inputs):
             if previous_response is not None:
                 previous_value = previous_response[category]
                 default_index = 1 if previous_value == "Ja" else 0
