@@ -11,7 +11,7 @@ import plotly.express as px
 import folium
 import plotly.io as pio
 
-from utils import get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
+from utils import get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score, get_all_user_data
 
 
 def general_dashboard_page(current_user_email):
@@ -145,6 +145,8 @@ def general_dashboard_page(current_user_email):
     st.markdown('**Kaart**')
     folium_static(m)
 
+    user_df = get_all_user_data()
+    st.dataframe(user_df)
     
     # Example: Display general data
     st.write("General data goes here")
