@@ -70,7 +70,7 @@ def general_dashboard_page(current_user_email):
     df['name'] = user_df['company_name']
     df['score'] = (recent_form_responses_df['Sustainability Percentage']/10)
     df = df.iloc[1:]
-    st.dataframe(df)
+    # st.dataframe(df)
     
     # df = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA', '1016AD']})
     # df['score'] = [9,6,3,7]
@@ -108,7 +108,7 @@ def general_dashboard_page(current_user_email):
 
     # Create a DataFrame from the list
     coordinates_df = pd.DataFrame(data_list)
-    st.dataframe(coordinates_df)
+        # st.dataframe(coordinates_df)
     # Merge the original DataFrame with the coordinates DataFrame
     df = pd.merge(df, coordinates_df, on='postal_code', how='left')
 
