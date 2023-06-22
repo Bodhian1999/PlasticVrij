@@ -13,7 +13,6 @@ def form_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
     
     previous_response = get_recent_form_response(current_user_email)
-    st.write(previous_response.type)
     st.dataframe(previous_response)
 
     # Form inputs
