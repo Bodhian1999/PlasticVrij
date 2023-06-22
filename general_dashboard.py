@@ -34,7 +34,7 @@ def general_dashboard_page(current_user_email):
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
-            go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['avg_sustainability_percentage'], mode='lines+markers')
+            go.Scatter(x=recent_form_responses_df['created_at'], y=recent_form_responses_df['avg_sustainability_percentage'], mode='lines+markers')
         ])
         fig.update_layout(
             xaxis_title='Datum',
