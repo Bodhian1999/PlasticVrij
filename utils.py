@@ -139,11 +139,10 @@ def get_recent_form_response(current_user_email):
     conn.close()
 
     if response:
-       # Convert the responses to a dataframe
+        # Convert the response tuple to a dictionary
         columns = [column[0] for column in cursor.description]
-        response_data = [dict(zip(columns, response)) for response in responses]
-        response_df = pd.DataFrame(response_data)
-        return response_df
+        response_dict = dict(zip(columns, response))
+        return response_dict
     else:
         return None
     
