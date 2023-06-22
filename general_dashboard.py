@@ -24,7 +24,7 @@ def general_dashboard_page(current_user_email):
         # Calculate average sustainability percentage
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
-        # Iterate over the rows and calculate the sustainability percentage and user score
+        # Iterate over the rows and calculate the sustainability percentage
         for _, row in recent_form_responses_df.iterrows():
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
@@ -34,7 +34,7 @@ def general_dashboard_page(current_user_email):
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
-            go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['Sustainability Percentage'], mode='lines+markers')
+            go.Scatter(x=form_responses_df['created_at'], y=form_responses_df['avg_sustainability_percentage'], mode='lines+markers')
         ])
         fig.update_layout(
             xaxis_title='Datum',
