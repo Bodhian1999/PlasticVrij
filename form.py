@@ -4,12 +4,15 @@ import numpy as np
 import os
 import utils
 from decimal import Decimal
+from utils import get_recent_form_response
 
 def form_page(current_user_email):
     st.header("Formulier Pagina")
 
     # Display the active user's email
     st.write(f"Huidige gebruiker: {current_user_email}")
+    
+    previous_response = get_recent_form_response(current_user_email)
 
     # Form inputs
     inputs = [
@@ -34,24 +37,31 @@ def form_page(current_user_email):
         ("natte_doekjes_garnalen_spareribs", "bied je 'alcohol/schoonmaak doekjes' aan (na garnalen/spare-ribs)?")
     ]
 
-    responses = {"Email": current_user_email}  # Add current user's email to responses
-    
-    for i, (category, question) in enumerate(inputs):
-        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
-        responses[category] = uses_category
+       responses = {"Email": current_user_email}  # Add current user's email to responses
 
-        if uses_category == "Ja":
-            product_category = st.selectbox(
-                "Onder welke categorie valt dit product?",
-                (
-                    "Multi-Use Non-Plastics",
-                    "Single-Use Non-Plastics",
-                    "Multi-Use plastics",
-                    "Single-Use Plastics",
-                ),
-                key=f"{category}_alternative_{i}",
-            )
-            responses[f"product_category_{category}"] = product_category
+        for i, (category, question) in enumerate(inputs):
+            if previous_response is not None:
+                previous_value = previous_response[category]
+                default_index = 1 if previous_value == "Ja" else 0
+            else:
+                default_index = 0
+
+            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=default_index)
+            responses[category] = uses_category
+
+            if uses_category == "Ja":
+                product_category = st.selectbox(
+                    "Onder welke categorie valt dit product?",
+                    (
+                        "Multi-Use Non-Plastics",
+                        "Single-Use Non-Plastics",
+                        "Multi-Use plastics",
+                        "Single-Use Plastics",
+                    ),
+                    key=f"{category}_alternative_{i}",
+                )
+                responses[f"product_category_{category}"] = product_category
+
             
             aantal_category = st.number_input(
                 f"Hoeveel {category} gebruikt u per jaar?",
