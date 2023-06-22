@@ -118,7 +118,7 @@ def general_dashboard_page(current_user_email):
             return 'red'  
 
     # Create a Folium map centered on Amsterdam
-    m = folium.Map(location=[52.377956, 4.897070], zoom_start=11.5, width=800, height=600)
+    m = folium.Map(location=[52.359425, 4.893517], zoom_start=11.5, width=800, height=600)
 
     # Add markers to the map
     for index, row in data.iterrows():
