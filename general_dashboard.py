@@ -45,6 +45,7 @@ def general_dashboard_page(current_user_email):
                 prev_avg_sustainability_percentage = sustainability_percentage
         
         st.dataframe(recent_form_responses_df)
+        st.dataframe(avg_sus_score_df)
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
