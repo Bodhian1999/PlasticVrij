@@ -62,7 +62,7 @@ def general_dashboard_page(current_user_email):
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
 
-
+    # Dataframe moet column met 'score', 'name' en 'postalcode' bevatten
     df = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA', '1016AD']})
     df['score'] = [9,6,3,7]
     df['name'] = ['Pannenkoekenhuis','Thuis','UvA','Test']
@@ -106,6 +106,8 @@ def general_dashboard_page(current_user_email):
     # Sample data with scores and coordinates
     data = df
 
+    st.dataframe(df)
+    
     # Define a function to determine the color based on the score
     def get_color(score):
         if score >= (2/3)*10:
