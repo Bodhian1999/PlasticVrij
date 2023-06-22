@@ -14,7 +14,7 @@ import folium
 def general_dashboard_page(current_user_email):
     st.header("General Dashboard")
     # Add content and functionality specific to the general dashboard
-    
+
     st.write(f"Huidige gebruiker: {current_user_email}")
     recent_form_responses_df = get_recent_form_responses()
 
@@ -25,17 +25,25 @@ def general_dashboard_page(current_user_email):
         # Calculate average sustainability percentage
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
+        # Create a new DataFrame for tracking average sustainability scores over time
+        avg_sus_score_df = pd.DataFrame(columns=['Date', 'Average Sustainability Score'])
+        prev_avg_sustainability_percentage = None
+
         # Iterate over the rows and calculate the sustainability percentage
         for _, row in recent_form_responses_df.iterrows():
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
-        
+
+            if sustainability_percentage != prev_avg_sustainability_percentage:
+                avg_sus_score_df = avg_sus_score_df.append({'Date': row['created_at'], 'Average Sustainability Score': sustainability_percentage}, ignore_index=True)
+                prev_avg_sustainability_percentage = sustainability_percentage
+
         st.dataframe(recent_form_responses_df)
-        
+
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
-            go.Scatter(x=recent_form_responses_df['created_at'], y=recent_form_responses_df['avg_sustainability_percentage'], mode='lines+markers')
+            go.Scatter(x=avg_sus_score_df['Date'], y=avg_sus_score_df['Average Sustainability Score'], mode='lines+markers')
         ])
         fig.update_layout(
             xaxis_title='Datum',
@@ -45,7 +53,6 @@ def general_dashboard_page(current_user_email):
         st.plotly_chart(fig)
     else:
         st.write("Er zijn geen ingevulde formulieren gevonden")
-
     
     def address_to_coordinates(postal_code):
         address = f"{postal_code}, Netherlands"
