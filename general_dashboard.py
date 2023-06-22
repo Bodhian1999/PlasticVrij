@@ -26,7 +26,7 @@ def general_dashboard_page(current_user_email):
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
         # Create a new DataFrame for tracking average sustainability scores over time
-        avg_sus_score_df = pd.DataFrame(columns=['Date', 'Average Sustainability Score'])
+        avg_sus_score_df = avg_sus_score_df.append({'Date': row['created_at'], 'Average Sustainability Score': sustainability_percentage}, ignore_index=True)
         prev_avg_sustainability_percentage = None
 
         # Iterate over the rows and calculate the sustainability percentage
