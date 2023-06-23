@@ -281,6 +281,23 @@ def get_latest_avg_sustainability_score():
 
     return latest_avg_sustainability_score
 
+def get_avg_sustainability_scores():
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM avg_sus_score ORDER BY date")
+    rows = cursor.fetchall()
+    columns = [desc[0] for desc in cursor.description]
+
+    cursor.close()
+    conn.close()
+
+    if rows:
+        df = pd.DataFrame(rows, columns=columns)
+        return df
+    else:
+        return pd.DataFrame()
+
 def get_all_user_data():
     # Retrieve all data from "users"
     conn = create_connection()
