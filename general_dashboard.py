@@ -61,7 +61,7 @@ def general_dashboard_page(current_user_email):
                 if avg_sustainability_percentage != latest_avg_sustainability_score:
                     new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
                     avg_sus_score_rows.append(new_row)
-                    insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
+                    insert_avg_sustainability_score(avg_sustainability_percentage)
 
             prev_avg_sustainability_percentage = avg_sustainability_percentage
 
