@@ -28,7 +28,7 @@ def general_dashboard_page(current_user_email):
     recent_form_responses_df = get_recent_form_responses()
 
     if recent_form_responses_df is not None:
-       # Create a new column to store the sustainability percentages
+        # Create a new column to store the sustainability percentages
         recent_form_responses_df['Sustainability Percentage'] = None
 
         # Calculate average sustainability percentage
@@ -36,6 +36,8 @@ def general_dashboard_page(current_user_email):
 
         # Create a new DataFrame for tracking average sustainability scores over time
         avg_sus_score_df = pd.DataFrame(columns=['Date', 'Average Sustainability Score'])
+
+        # Initialize previous average sustainability percentage
         prev_avg_sustainability_percentage = None
 
         # Iterate over the rows and calculate the sustainability percentage
@@ -48,12 +50,13 @@ def general_dashboard_page(current_user_email):
             if avg_sustainability_percentage is not None and prev_avg_sustainability_percentage is not None:
                 if avg_sustainability_percentage != prev_avg_sustainability_percentage:
                     new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [avg_sustainability_percentage]})
-                    avg_sus_score_df = pd.concat([avg_sus_score_df, new_row], ignore_index=True)
-                    prev_avg_sustainability_percentage = avg_sustainability_percentage
+                    avg_sus_score_df = avg_sus_score_df.append(new_row, ignore_index=True)
             elif avg_sustainability_percentage is not None:
                 new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [avg_sustainability_percentage]})
-                avg_sus_score_df = pd.concat([avg_sus_score_df, new_row], ignore_index=True)
-                prev_avg_sustainability_percentage = avg_sustainability_percentage
+                avg_sus_score_df = avg_sus_score_df.append(new_row, ignore_index=True)
+
+            prev_avg_sustainability_percentage = avg_sustainability_percentage
+
 
         st.dataframe(recent_form_responses_df)
         st.dataframe(avg_sus_score_df)
