@@ -11,7 +11,14 @@ import plotly.express as px
 import folium
 import plotly.io as pio
 
-from utils import get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score, get_all_user_data
+from utils import (
+    get_all_form_responses,
+    calculate_sustainability_percentage,
+    get_recent_form_responses,
+    calculate_avg_sustainability_percentage,
+    calculate_sustainability_score,
+    get_all_user_data
+)
 
 
 def general_dashboard_page(current_user_email):
@@ -66,7 +73,7 @@ def general_dashboard_page(current_user_email):
     # Dataframe moet column met 'score', 'name' en 'postalcode' bevatten
     user_df = get_all_user_data()
 
-     df = pd.DataFrame()
+    df = pd.DataFrame()
     df['postal_code'] = user_df['postal_code']
     df['name'] = user_df['company_name']
     df['score'] = (recent_form_responses_df['Sustainability Percentage']/10)
@@ -152,5 +159,3 @@ def general_dashboard_page(current_user_email):
     # Display the map
     st.markdown('**Kaart**')
     folium_static(m)
-    
-
