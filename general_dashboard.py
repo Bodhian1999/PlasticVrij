@@ -70,7 +70,7 @@ def general_dashboard_page(current_user_email):
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
-            go.Scatter(x=avg_sus_score_df['Date'], y=avg_sus_score_df['Average Sustainability Score'], mode='lines+markers')
+            go.Scatter(x=avg_sus_score_df['date'], y=avg_sus_score_df['avg_sustainability_score'], mode='lines+markers')
         ])
         fig.update_layout(
             xaxis_title='Datum',
