@@ -51,15 +51,14 @@ def general_dashboard_page(current_user_email):
                 if avg_sustainability_percentage != prev_avg_sustainability_percentage:
                     new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
                     avg_sus_score_rows.append(new_row)
+                    insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
             elif avg_sustainability_percentage is not None:
                 new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
                 avg_sus_score_rows.append(new_row)
-
-            prev_avg_sustainability_percentage = avg_sustainability_percentage
+                insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
 
         # Create DataFrame from the list of rows
         avg_sus_score_df = pd.DataFrame(avg_sus_score_rows)
-
 
         st.dataframe(recent_form_responses_df)
         st.dataframe(avg_sus_score_df)

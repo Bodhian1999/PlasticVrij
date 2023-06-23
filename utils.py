@@ -2,6 +2,7 @@ import hashlib
 import os
 import psycopg2
 import pandas as pd
+import datetime
 from configparser import ConfigParser
 from decimal import Decimal
 
@@ -252,6 +253,18 @@ def calculate_avg_sustainability_percentage(df):
     
     average_percentage = total_percentage / len(df)
     return average_percentage
+
+def insert_avg_sustainability_score(date, avg_sustainability_score):
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    query = "INSERT INTO avg_sus_score (date, avg_sustainability_score) VALUES (%s, %s)"
+    values = (date, avg_sustainability_score)
+    cursor.execute(query, values)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 def get_all_user_data():
