@@ -254,12 +254,14 @@ def calculate_avg_sustainability_percentage(df):
     average_percentage = total_percentage / len(df)
     return average_percentage
 
-def insert_avg_sustainability_score(date, avg_sustainability_score):
+def insert_avg_sustainability_score(avg_sustainability_score):
     conn = create_connection()
     cursor = conn.cursor()
 
+    current_date = datetime.datetime.now()  # Get the current date and time
+
     query = "INSERT INTO avg_sus_score (date, avg_sustainability_score) VALUES (%s, %s)"
-    values = (date, avg_sustainability_score)
+    values = (current_date, avg_sustainability_score)
     cursor.execute(query, values)
 
     conn.commit()
