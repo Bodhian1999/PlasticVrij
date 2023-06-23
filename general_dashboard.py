@@ -86,7 +86,7 @@ def general_dashboard_page(current_user_email):
     df['postal_code'] = user_df['postal_code']
     df['name'] = user_df['company_name']
     df['score'] = (recent_form_responses_df['Sustainability Percentage']/10)
-    df = df.iloc[1:]
+    # df = df.iloc[1:]
     # st.dataframe(df)
     
     # df = pd.DataFrame({'postal_code': ['1102 TS', '1057 AS', '1016 AA', '1016AD']})
