@@ -63,7 +63,7 @@ def general_dashboard_page(current_user_email):
             prev_avg_sustainability_percentage = avg_sustainability_percentage
 
         # Create DataFrame from the list of rows
-        avg_sus_score_df = get_all_avg_sustainability_scores()
+        avg_sus_score_df = get_avg_sustainability_scores()
 
         st.dataframe(recent_form_responses_df)
         st.dataframe(avg_sus_score_df)
