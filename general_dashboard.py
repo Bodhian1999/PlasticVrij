@@ -45,12 +45,13 @@ def general_dashboard_page(current_user_email):
             recent_form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
 
             if sustainability_percentage is not None and sustainability_percentage != prev_avg_sustainability_percentage:
-                new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [sustainability_percentage]})
+                new_row = {'Date': row['created_at'], 'Average Sustainability Score': sustainability_percentage}
                 avg_sus_score_df = avg_sus_score_df.append(new_row, ignore_index=True)
                 prev_avg_sustainability_percentage = sustainability_percentage
 
         st.dataframe(recent_form_responses_df)
         st.dataframe(avg_sus_score_df)
+
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
