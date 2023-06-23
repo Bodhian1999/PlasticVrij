@@ -157,11 +157,14 @@ def general_dashboard_page(current_user_email):
     
         # Define the style for the score text
         score_style = f'color: {color}; font-weight: bold; white-space: nowrap;'
-    
+         
+        # Format the score to one decimal place
+        formatted_score = '{:.1f}'.format(score)
+        
         # Create the Folium marker and add it to the map
         folium.Marker(
             location=[latitude, longitude],
-            popup=f'<b>{name}</b><br><span style="{score_style}">Score: {score}</span>',
+            popup=f'<b>{name}</b><br><span style="{score_style}">Score: {formatted_score}</span>',
             icon=icon
         ).add_to(m)
 
