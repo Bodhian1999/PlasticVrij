@@ -17,7 +17,8 @@ from utils import (
     get_recent_form_responses,
     calculate_avg_sustainability_percentage,
     calculate_sustainability_score,
-    get_all_user_data
+    get_all_user_data,
+    insert_avg_sustainability_score 
 )
 
 
