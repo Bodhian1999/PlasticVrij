@@ -55,8 +55,8 @@ def general_dashboard_page(current_user_email):
                 avg_sus_score_df = pd.concat([avg_sus_score_df, new_row], ignore_index=True)
                 prev_avg_sustainability_percentage = avg_sustainability_percentage
 
-        print(recent_form_responses_df)
-        print(avg_sus_score_df)
+        st.dataframe(recent_form_responses_df)
+        st.dataframe(avg_sus_score_df)
 
         
         # Create a line chart to visualize the sustainability percentages over time
