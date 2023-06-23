@@ -18,7 +18,8 @@ from utils import (
     calculate_avg_sustainability_percentage,
     calculate_sustainability_score,
     get_all_user_data,
-    insert_avg_sustainability_score 
+    insert_avg_sustainability_score,
+    get_latest_avg_sustainability_score
 )
 
 
@@ -41,6 +42,9 @@ def general_dashboard_page(current_user_email):
         # Initialize previous average sustainability percentage
         prev_avg_sustainability_percentage = None
 
+        # Get the latest average sustainability score from the database
+        latest_avg_sustainability_score = get_latest_avg_sustainability_score()
+
         # Iterate over the rows and calculate the sustainability percentage
         for _, row in recent_form_responses_df.sort_values('created_at').iterrows():
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
@@ -49,21 +53,25 @@ def general_dashboard_page(current_user_email):
 
             avg_sustainability_percentage = row['avg_sustainability_percentage']
             if avg_sustainability_percentage is not None and prev_avg_sustainability_percentage is not None:
-                if avg_sustainability_percentage != prev_avg_sustainability_percentage:
+                if avg_sustainability_percentage != prev_avg_sustainability_percentage and avg_sustainability_percentage != latest_avg_sustainability_score:
                     new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
                     avg_sus_score_rows.append(new_row)
                     insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
             elif avg_sustainability_percentage is not None:
-                new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
-                avg_sus_score_rows.append(new_row)
-                insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
+                if avg_sustainability_percentage != latest_avg_sustainability_score:
+                    new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
+                    avg_sus_score_rows.append(new_row)
+                    insert_avg_sustainability_score(row['created_at'], avg_sustainability_percentage)
+
+            prev_avg_sustainability_percentage = avg_sustainability_percentage
 
         # Create DataFrame from the list of rows
         avg_sus_score_df = pd.DataFrame(avg_sus_score_rows)
 
+        # ... your existing code ...
+
         st.dataframe(recent_form_responses_df)
         st.dataframe(avg_sus_score_df)
-
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[

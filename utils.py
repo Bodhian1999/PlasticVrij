@@ -266,6 +266,18 @@ def insert_avg_sustainability_score(date, avg_sustainability_score):
     cursor.close()
     conn.close()
 
+def get_latest_avg_sustainability_score():
+    conn = create_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT avg_sustainability_score FROM avg_sus_score ORDER BY date DESC LIMIT 1")
+    result = cursor.fetchone()
+    latest_avg_sustainability_score = result[0] if result else None
+
+    cursor.close()
+    conn.close()
+
+    return latest_avg_sustainability_score
 
 def get_all_user_data():
     # Retrieve all data from "users"
