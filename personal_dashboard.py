@@ -28,6 +28,9 @@ def personal_dashboard_page(current_user_email):
             form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
         
         
+        st.dataframe(form_responses_df)
+        
+        
         # Get unique values from the 'created_at' column
         created_at_values = form_responses_df['created_at'].unique()
 
