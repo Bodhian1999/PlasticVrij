@@ -64,9 +64,6 @@ def general_dashboard_page(current_user_email):
 
         # Create DataFrame from the list of rows
         avg_sus_score_df = get_avg_sustainability_scores()
-
-        st.dataframe(recent_form_responses_df)
-        st.dataframe(avg_sus_score_df)
         
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
