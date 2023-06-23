@@ -34,8 +34,8 @@ def general_dashboard_page(current_user_email):
         # Calculate average sustainability percentage
         recent_form_responses_df['avg_sustainability_percentage'] = calculate_avg_sustainability_percentage(recent_form_responses_df)
 
-        # Create a new DataFrame for tracking average sustainability scores over time
-        avg_sus_score_df = pd.DataFrame(columns=['Date', 'Average Sustainability Score'])
+        # Create a list to store the rows for avg_sus_score_df
+        avg_sus_score_rows = []
 
         # Initialize previous average sustainability percentage
         prev_avg_sustainability_percentage = None
@@ -49,13 +49,16 @@ def general_dashboard_page(current_user_email):
             avg_sustainability_percentage = row['avg_sustainability_percentage']
             if avg_sustainability_percentage is not None and prev_avg_sustainability_percentage is not None:
                 if avg_sustainability_percentage != prev_avg_sustainability_percentage:
-                    new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [avg_sustainability_percentage]})
-                    avg_sus_score_df = avg_sus_score_df.append(new_row, ignore_index=True)
+                    new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
+                    avg_sus_score_rows.append(new_row)
             elif avg_sustainability_percentage is not None:
-                new_row = pd.DataFrame({'Date': [row['created_at']], 'Average Sustainability Score': [avg_sustainability_percentage]})
-                avg_sus_score_df = avg_sus_score_df.append(new_row, ignore_index=True)
+                new_row = {'Date': row['created_at'], 'Average Sustainability Score': avg_sustainability_percentage}
+                avg_sus_score_rows.append(new_row)
 
             prev_avg_sustainability_percentage = avg_sustainability_percentage
+
+        # Create DataFrame from the list of rows
+        avg_sus_score_df = pd.DataFrame(avg_sus_score_rows)
 
 
         st.dataframe(recent_form_responses_df)
