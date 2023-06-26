@@ -21,6 +21,7 @@ def form_page(current_user_email):
     #previous_response_df = pd.DataFrame.from_dict(previous_response)
     
     st.dataframe(previous_response)
+    st.write(previous_response)
 
     # Form inputs
     inputs = [
