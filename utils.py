@@ -143,7 +143,9 @@ def get_recent_form_response(current_user_email):
         # Convert the response tuple to a dictionary
         columns = [column[0] for column in cursor.description]
         response_dict = dict(zip(columns, response))
-        return response_dict
+        # Create a DataFrame from the response dictionary
+        df = pd.DataFrame(response_dict, index=[0])
+        return df
     else:
         return None
     
