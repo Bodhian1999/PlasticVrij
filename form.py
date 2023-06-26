@@ -6,6 +6,7 @@ import utils
 from decimal import Decimal
 from utils import get_recent_form_response
 
+
 def form_page(current_user_email):
     st.title("Duurzaamheidsformulier")
 
@@ -19,9 +20,6 @@ def form_page(current_user_email):
     previous_response = get_recent_form_response(current_user_email)
     # Convert dictionary to DataFrame
     #previous_response_df = pd.DataFrame.from_dict(previous_response)
-    
-    st.dataframe(previous_response)
-    st.write(previous_response)
 
     # Form inputs
     inputs = [
@@ -50,13 +48,6 @@ def form_page(current_user_email):
     
     for i, (category, question) in enumerate(inputs):
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
-
-        if previous_response is not None and category in previous_response.columns:
-            # Check if previous response exists and set placeholder value accordingly
-            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response[category].iloc[0]))
-        else:
-            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=0)
-
         responses[category] = uses_category
 
         if uses_category == "Ja":
@@ -70,37 +61,7 @@ def form_page(current_user_email):
                 ),
                 key=f"{category}_alternative_{i}",
             )
-
-            if previous_response is not None and f"product_category_{category}" in previous_response.columns:
-                # Check if previous response exists and set placeholder value accordingly
-                product_category = st.selectbox(
-                    "Onder welke categorie valt dit product?",
-                    (
-                        "Multi-Use Non-Plastics",
-                        "Single-Use Non-Plastics",
-                        "Multi-Use plastics",
-                        "Single-Use Plastics",
-                    ),
-                    key=f"{category}_alternative_{i}",
-                    index=int(previous_response[f"product_category_{category}"].iloc[0]),
-                )
-            else:
-                product_category = st.selectbox(
-                    "Onder welke categorie valt dit product?",
-                    (
-                        "Multi-Use Non-Plastics",
-                        "Single-Use Non-Plastics",
-                        "Multi-Use plastics",
-                        "Single-Use Plastics",
-                    ),
-                    key=f"{category}_alternative_{i}",
-                    index=0,
-                )
-
             responses[f"product_category_{category}"] = product_category
-
-            # Rest of the code...
-
             
             aantal_category = st.number_input(
                 f"Hoeveel {category} gebruikt u per jaar?",
