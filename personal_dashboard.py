@@ -17,7 +17,7 @@ def personal_dashboard_page(current_user_email):
     if form_responses_df is not None:
         st.write("---")
         st.subheader("Ingezonden formulierreacties") 
-        st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
+        st.write("Hieronder vindt je de door u ingezonden formulierreacties.")
         
         # Create a new column to store the sustainability percentages
         form_responses_df['Sustainability Percentage'] = None
