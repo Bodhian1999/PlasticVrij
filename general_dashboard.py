@@ -1,4 +1,3 @@
-# general_dashboard.py
 import streamlit as st
 from streamlit_folium import st_folium
 from streamlit_folium import folium_static
@@ -25,6 +24,10 @@ from utils import (
 
 
 def general_dashboard_page(current_user_email):
+    # Introduction
+    st.write("## Welkom op onze website!")
+    st.write("Op deze pagina bieden wij u een overzicht van uw prestaties en voortgang bij het verwijderen van plastic van uw terrassen. Hier vindt u twee visuals die u inzicht geven in uw inspanningen.")
+
     st.header("General Dashboard")
     
     st.write(f"Huidige gebruiker: {current_user_email}")
