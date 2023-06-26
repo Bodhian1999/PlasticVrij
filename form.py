@@ -12,7 +12,9 @@ def form_page(current_user_email):
     # Display the active user's email
     st.write(f"Huidige gebruiker: {current_user_email}")
 
-    st.write("Vul het onderstaande formulier in om uw duurzaamheidsgegevens in te voeren:")
+    st.write("Vul het onderstaande formulier in om uw duurzaamheidsgegevens in te voeren.")
+    st.write("U kunt het formulier zo vaak invullen als u wilt. Uw eerdere reacties zijn beschikbaar in uw persoonlijke dashboard.")
+
     
     previous_response = get_recent_form_response(current_user_email)
     # Convert dictionary to DataFrame
