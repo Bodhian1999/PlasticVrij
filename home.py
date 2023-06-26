@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 def home_page(current_user_email):
     st.header("Welkom!")
