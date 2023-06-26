@@ -88,14 +88,14 @@ def form_page(current_user_email):
                     min_value=0,
                     step=100,
                     key=f"{category}_amount_{i}",
-                    value=previous_aantal if not np.isnan(previous_aantal) else 0,
+                    value=previous_aantal if not pd.isnull(previous_aantal) else 0,
                 )
                 prijs_per_category = st.number_input(
                     f"Wat is de prijs per {category}?",
                     min_value=0.0,
                     step=0.01,
                     key=f"{category}_price_{i}",
-                    value=previous_prijs_per if not np.isnan(previous_prijs_per) else 0.0,
+                    value=previous_prijs_per if not pd.isnull(previous_prijs_per) else 0.0,
                 )
             else:
                 aantal_category = st.number_input(
