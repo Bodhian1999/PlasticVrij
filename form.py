@@ -51,7 +51,7 @@ def form_page(current_user_email):
             question,
             ("Nee", "Ja"),
             key=f"{category}_selectbox_{i}",
-            index=1 if previous_response_df is not None and previous_response_df[category].values[0] == "Ja" else 0,
+            index=1 if previous_response_df is not None and previous_response_df.at[0, category] == "Ja" else 0,
         )
         responses[category] = uses_category
 
