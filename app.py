@@ -24,9 +24,11 @@ def main():
         # Add the image to the sidebar
         st.sidebar.image("plasticvrij.png", use_column_width=True)
 
-        page = st.sidebar.selectbox("Selecteer Pagina", ("Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard"))
+        page = st.sidebar.selectbox("Selecteer Pagina", ("Home","Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard"))
 
-        if page == "Persoonlijk Dashboard":
+        if page == "Home":
+            home_page(current_user_email)
+        elif page == "Persoonlijk Dashboard":
             personal_dashboard_page(current_user_email)
         elif page == "Algemeen Dashboard":
             general_dashboard_page(current_user_email)
