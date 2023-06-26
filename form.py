@@ -46,7 +46,12 @@ def form_page(current_user_email):
     responses = {"Email": current_user_email}  # Add current user's email to responses
     
     for i, (category, question) in enumerate(inputs):
-        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
+        uses_category = st.selectbox(
+            question,
+            ("Nee", "Ja"),
+            key=f"{category}_selectbox_{i}",
+            index=1 if previous_response_df is not None and previous_response_df.at[0, category] == "Ja" else 0,
+        )
         responses[category] = uses_category
 
         if uses_category == "Ja":
