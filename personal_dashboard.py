@@ -7,7 +7,7 @@ from utils import get_recent_form_response, get_all_form_responses, calculate_su
 
 def personal_dashboard_page(current_user_email):
     st.header("Overzicht van uw Duurzaamheidsinspanningen")
-    st.write(f"Huidige gebruiker: {current_user_email}"
+    st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
     
