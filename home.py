@@ -8,7 +8,7 @@ def home_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     # Add an inviting image or logo
-    st.image("vogel.png", use_column_width=True)
+    #st.image("vogel.png", use_column_width=True)
 
     # Introduction
     st.write("Welkom bij ons plasticvrije terras-initiatief! Hier kun je jouw bijdrage aan het verminderen van plastic op terrassen volgen en delen. Ontdek je duurzaamheidsscore, vergelijk deze met andere ondernemers en zie de voortgang die we samen boeken!")
