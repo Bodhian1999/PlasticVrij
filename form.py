@@ -79,40 +79,40 @@ def form_page(current_user_email):
                 index=get_previous_product_category_index(category, previous_response_df) if previous_response_df is not None else 0,
             )
             responses[f"product_category_{category}"] = product_category
-            
-               if previous_response_df is not None:
-                    previous_aantal = previous_response_df[f"aantal_{category}"].values[0]
-                    previous_prijs_per = previous_response_df[f"prijs_per_{category}"].values[0]
-                    aantal_category = st.number_input(
-                        f"Hoeveel {category} gebruikt u per jaar?",
-                        min_value=0,
-                        step=100,
-                        key=f"{category}_amount_{i}",
-                        value=previous_aantal if not np.isnan(previous_aantal) else 0,
-                    )
-                    prijs_per_category = st.number_input(
-                        f"Wat is de prijs per {category}?",
-                        min_value=0.0,
-                        step=0.01,
-                        key=f"{category}_price_{i}",
-                        value=previous_prijs_per if not np.isnan(previous_prijs_per) else 0.0,
-                    )
-                else:
-                    aantal_category = st.number_input(
-                        f"Hoeveel {category} gebruikt u per jaar?",
-                        min_value=0,
-                        step=100,
-                        key=f"{category}_amount_{i}",
-                    )
-                    prijs_per_category = st.number_input(
-                        f"Wat is de prijs per {category}?",
-                        min_value=0.0,
-                        step=0.01,
-                        key=f"{category}_price_{i}",
-                    )
 
-                responses[f"aantal_{category}"] = aantal_category
-                responses[f"prijs_per_{category}"] = prijs_per_category
+            if previous_response_df is not None:
+                previous_aantal = previous_response_df[f"aantal_{category}"].values[0]
+                previous_prijs_per = previous_response_df[f"prijs_per_{category}"].values[0]
+                aantal_category = st.number_input(
+                    f"Hoeveel {category} gebruikt u per jaar?",
+                    min_value=0,
+                    step=100,
+                    key=f"{category}_amount_{i}",
+                    value=previous_aantal if not np.isnan(previous_aantal) else 0,
+                )
+                prijs_per_category = st.number_input(
+                    f"Wat is de prijs per {category}?",
+                    min_value=0.0,
+                    step=0.01,
+                    key=f"{category}_price_{i}",
+                    value=previous_prijs_per if not np.isnan(previous_prijs_per) else 0.0,
+                )
+            else:
+                aantal_category = st.number_input(
+                    f"Hoeveel {category} gebruikt u per jaar?",
+                    min_value=0,
+                    step=100,
+                    key=f"{category}_amount_{i}",
+                )
+                prijs_per_category = st.number_input(
+                    f"Wat is de prijs per {category}?",
+                    min_value=0.0,
+                    step=0.01,
+                    key=f"{category}_price_{i}",
+                )
+
+            responses[f"aantal_{category}"] = aantal_category
+            responses[f"prijs_per_{category}"] = prijs_per_category
         else:
             responses[f"product_category_{category}"] = "n.v.t. (product uit assortiment gehaald)"
             responses[f"aantal_{category}"] = np.nan
@@ -122,7 +122,7 @@ def form_page(current_user_email):
             st.markdown("</div>", unsafe_allow_html=True)
 
     submit_button = st.button("Verzenden")
-    
+
     # Form submission handling
     if submit_button:
         # Process the responses
