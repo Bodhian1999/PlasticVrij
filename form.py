@@ -6,6 +6,15 @@ import utils
 from decimal import Decimal
 from utils import get_recent_form_response
 
+def get_previous_product_category_index(category, previous_response_df):
+    previous_category_value = previous_response_df.at[0, f"product_category_{category}"]
+    categories = (
+        "Multi-Use Non-Plastics",
+        "Single-Use Non-Plastics",
+        "Multi-Use plastics",
+        "Single-Use Plastics",
+    )
+    return categories.index(previous_category_value)
 
 def form_page(current_user_email):
     st.title("Duurzaamheidsformulier")
