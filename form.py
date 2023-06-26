@@ -18,7 +18,9 @@ def form_page(current_user_email):
     
     previous_response = get_recent_form_response(current_user_email)
     # Convert dictionary to DataFrame
-    #previous_response_df = pd.DataFrame.from_dict(previous_response)
+    previous_response_df = pd.DataFrame.from_dict(previous_response)
+    
+    st.dataframe(previous_response_df)
 
     # Form inputs
     inputs = [
