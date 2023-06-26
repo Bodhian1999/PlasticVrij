@@ -6,9 +6,8 @@ import plotly.graph_objects as go
 from utils import get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 def personal_dashboard_page(current_user_email):
-
-    st.header("Jouw Dashboard")
-    st.write(f"Huidige gebruiker: {current_user_email}")
+    st.header("Overzicht van uw Duurzaamheidsinspanningen")
+    st.write(f"Huidige gebruiker: {current_user_email}"
 
     form_responses_df = get_all_form_responses(current_user_email)
     
@@ -26,7 +25,6 @@ def personal_dashboard_page(current_user_email):
             row_df = pd.DataFrame(row).transpose()  # Convert the Series to DataFrame
             sustainability_percentage = calculate_sustainability_percentage(row_df[row_df.columns[22:41]])
             form_responses_df.at[_, 'Sustainability Percentage'] = sustainability_percentage
-        
         
         st.dataframe(form_responses_df)
         
@@ -64,8 +62,9 @@ def personal_dashboard_page(current_user_email):
             showlegend=False
         )
         
+        # Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën
         st.subheader("Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën")
-        st.write("Hieronder wordt weergegeven hoeveel van de cattegorien die we behandelen door jou worden gebruikt.")
+        st.write("Hieronder ziet u hoeveel categorieën u momenteel gebruikt en welke u nog kunt verbeteren. Laten we samen kijken naar uw duurzaamheidsprofiel.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -120,8 +119,10 @@ def personal_dashboard_page(current_user_email):
             showlegend=False
         )
 
+        # Verdeling van opties voor verpakking
         st.subheader("Verdeling van opties voor verpakking")
-        st.write("Hieronder wordt het aantal reacties per optie weergegeven.")
+        st.write("Deze grafiek toont de verdeling van de verpakkingsopties die u momenteel kiest. Het helpt om de meest gebruikte verpakkingstypes te identificeren en te focussen op duurzamere alternatieven.")
+
 
         # Display the chart
         st.plotly_chart(fig)
@@ -144,15 +145,13 @@ def personal_dashboard_page(current_user_email):
             showlegend=True
         )
 
+       # Percentage Duurzame Opties
         st.subheader("Percentage Duurzame Opties")
-        st.write("Hieronder wordt het percentage duurzame opties weergegeven.")
+        st.write("Hier ziet u het percentage duurzame opties dat u al heeft gekozen. Een hoger percentage betekent een grotere bijdrage aan een duurzamere wereld.")
 
         # Display the chart
         st.plotly_chart(fig)
-        
-        
-        
-      
+             
         # Calculate average sustainability percentage
         avg_sustainability_percentage = calculate_avg_sustainability_percentage(recent_form_responses_df)
         
@@ -168,8 +167,9 @@ def personal_dashboard_page(current_user_email):
                           yaxis_title='Percentage',
                           barmode='group')
 
+        # Vergelijking Duurzaamheidspercentage
         st.subheader("Vergelijking Duurzaamheidspercentage")
-        st.write("Hieronder wordt jouw duurzaamheidspercentage vergeleken met het gemiddelde percentage.")
+        st.write("We vergelijken uw duurzaamheidspercentage met het gemiddelde percentage van andere gebruikers. Dit geeft u inzicht in uw vooruitgang en moedigt u aan om uw duurzaamheidsinspanningen voort te zetten.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -182,7 +182,11 @@ def personal_dashboard_page(current_user_email):
             xaxis_title='Datum',
             yaxis_title='Duurzaamheidspercentage'
         )
+        
+        # Duurzaamheidspercentage over tijd
         st.subheader("Duurzaamheidspercentage over tijd")
+        st.write("Deze lijngrafiek laat zien hoe uw duurzaamheidspercentage zich in de loop van de tijd heeft ontwikkeld. Het is inspirerend om te zien hoe uw inzet voor duurzaamheid groeit.")
+             
         st.plotly_chart(fig)
 
         
