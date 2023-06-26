@@ -64,6 +64,7 @@ def form_page(current_user_email):
                     "Single-Use Plastics",
                 ),
                 key=f"{category}_alternative_{i}",
+                index=get_previous_product_category_index(category, previous_response_df) if previous_response_df is not None else 0,
             )
             responses[f"product_category_{category}"] = product_category
             
