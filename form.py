@@ -17,7 +17,7 @@ def form_page(current_user_email):
     st.write("je kunt het formulier zo vaak invullen als je wilt. Je eerdere reacties zijn beschikbaar in jouw persoonlijke dashboard.")
 
     
-    previous_response = get_recent_form_response(current_user_email)
+    previous_response_df = get_recent_form_response(current_user_email)
     
     st.dataframe(previous_response)
 
