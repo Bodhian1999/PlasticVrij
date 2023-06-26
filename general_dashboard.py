@@ -174,6 +174,11 @@ def general_dashboard_page(current_user_email):
             popup=f'<b>{name}</b><br><span style="{score_style}">Score: {formatted_score}</span>',
             icon=icon
         ).add_to(m)
+        
+     # Second Visual: Interactive map with user locations
+    st.write("---")
+    st.write("### Interactieve kaart met restaurantlocaties en duurzaamheidsscores")
+    st.write("Deze visualisatie is een interactieve kaart waarop alle gebruikers en hun bedrijfslocaties worden weergegeven. Op de kaart worden de markers gekleurd op basis van de duurzaamheidsscore van elke gebruiker. Dit geeft u een visueel beeld van de locaties waar gebruikers actief zijn en de bijdragen die zij leveren aan het verminderen van plastic op terrassen.")
 
     # Display the map
     st.markdown('**Kaart**')
