@@ -26,7 +26,7 @@ from utils import (
 def general_dashboard_page(current_user_email):
     
     # Introduction
-    st.header("General Dashboard")
+    st.header("Algemeen dashboard voor alle ondernemers")
     st.write("Op deze pagina bieden wij u een overzicht van uw prestaties en voortgang bij het verwijderen van plastic van uw terrassen. Hier vindt u twee visuals die u inzicht geven in uw inspanningen.")
     
     st.write(f"Huidige gebruiker: {current_user_email}")
@@ -66,11 +66,6 @@ def general_dashboard_page(current_user_email):
 
         # Create DataFrame from the list of rows
         avg_sus_score_df = get_avg_sustainability_scores()
-        
-        # First Visual: Average sustainability score over time
-        st.write("---")
-        st.write("### Gemiddelde duurzaamheidsscore over tijd")
-        st.write("Deze visualisatie toont de gemiddelde duurzaamheidsscore in de loop van de tijd. Deze score wordt berekend door de duurzaamheidsscores van alle gebruikers op te tellen en te delen door het totale aantal gebruikers (N). Dit geeft u een idee van de algemene trends en verbeteringen in de duurzaamheid van de terrassen.")
 
         # Create a line chart to visualize the sustainability percentages over time
         fig = go.Figure(data=[
@@ -80,7 +75,12 @@ def general_dashboard_page(current_user_email):
             xaxis_title='Datum',
             yaxis_title='Duurzaamheidspercentage'
         )
-        st.subheader("Duurzaamheidspercentage over tijd")
+        
+          # First Visual: Average sustainability score over time
+        st.write("---")
+        st.write("### Lijngrafiek van het gemiddelde duurzaamheidspercentage over de tijd")
+        st.write("Deze visualisatie toont de gemiddelde duurzaamheidspercentage in de loop van de tijd. Deze score wordt berekend door de duurzaamheidsscores van alle gebruikers op te tellen en te delen door het totale aantal gebruikers (N). Dit geeft u een idee van de algemene trends en verbeteringen in de duurzaamheid van de terrassen.")
+        
         st.plotly_chart(fig)
         
     else:
