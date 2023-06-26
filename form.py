@@ -7,10 +7,12 @@ from decimal import Decimal
 from utils import get_recent_form_response
 
 def form_page(current_user_email):
-    st.header("Formulier Pagina")
+    st.title("Duurzaamheidsformulier")
 
     # Display the active user's email
     st.write(f"Huidige gebruiker: {current_user_email}")
+
+    st.write("Vul het onderstaande formulier in om uw duurzaamheidsgegevens in te voeren:")
     
     previous_response = get_recent_form_response(current_user_email)
     # Convert dictionary to DataFrame
