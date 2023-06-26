@@ -145,7 +145,6 @@ def personal_dashboard_page(current_user_email):
 
         # Customize the layout
         fig.update_layout(
-            title='Percentage Duurzame Opties',
             showlegend=True
         )
 
