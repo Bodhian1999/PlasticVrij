@@ -52,7 +52,7 @@ def form_page(current_user_email):
 
         # Check if previous response exists and set placeholder value accordingly
         if previous_response is not None and category in previous_response:
-            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response[category]))
+            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response.at[0, category]))
         else:
             uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=0)
 
@@ -81,7 +81,7 @@ def form_page(current_user_email):
                         "Single-Use Plastics",
                     ),
                     key=f"{category}_alternative_{i}",
-                    index=int(previous_response[f"product_category_{category}"]),
+                    index=int(previous_response.at[0, f"product_category_{category}"]),
                 )
             else:
                 product_category = st.selectbox(
@@ -97,6 +97,9 @@ def form_page(current_user_email):
                 )
 
             responses[f"product_category_{category}"] = product_category
+
+            # Rest of the code...
+
             
             aantal_category = st.number_input(
                 f"Hoeveel {category} gebruikt u per jaar?",
