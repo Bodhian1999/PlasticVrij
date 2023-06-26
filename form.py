@@ -51,9 +51,9 @@ def form_page(current_user_email):
     for i, (category, question) in enumerate(inputs):
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
 
-        # Check if previous response exists and set placeholder value accordingly
         if previous_response is not None and category in previous_response.columns:
-            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response.at[0, category]))
+            # Check if previous response exists and set placeholder value accordingly
+            uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response[category].iloc[0]))
         else:
             uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=0)
 
@@ -71,8 +71,8 @@ def form_page(current_user_email):
                 key=f"{category}_alternative_{i}",
             )
 
-            # Check if previous response exists and set placeholder value accordingly
             if previous_response is not None and f"product_category_{category}" in previous_response.columns:
+                # Check if previous response exists and set placeholder value accordingly
                 product_category = st.selectbox(
                     "Onder welke categorie valt dit product?",
                     (
@@ -82,7 +82,7 @@ def form_page(current_user_email):
                         "Single-Use Plastics",
                     ),
                     key=f"{category}_alternative_{i}",
-                    index=int(previous_response.at[0, f"product_category_{category}"]),
+                    index=int(previous_response[f"product_category_{category}"].iloc[0]),
                 )
             else:
                 product_category = st.selectbox(
@@ -99,7 +99,7 @@ def form_page(current_user_email):
 
             responses[f"product_category_{category}"] = product_category
 
-            # Rest of the code..
+            # Rest of the code...
 
             
             aantal_category = st.number_input(
