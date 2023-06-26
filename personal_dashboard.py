@@ -35,6 +35,8 @@ def personal_dashboard_page(current_user_email):
         created_at_values = form_responses_df['created_at'].unique()
 
         # Select the row based on the user's choice of 'created_at'
+        st.write("---")
+        st.subheader("Formulierreactieselectie")
         selected_created_at = st.selectbox('Selecteer welk formulier je voor het dashboard wil gebruiken:', created_at_values)
 
         # Filter the DataFrame to get the selected row
