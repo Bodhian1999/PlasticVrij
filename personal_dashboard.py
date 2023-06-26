@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from utils import get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 def personal_dashboard_page(current_user_email):
-    st.header("Overzicht van uw Duurzaamheidsinspanningen")
+    st.header("Overzicht van jouw Duurzaamheidsinspanningen")
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
@@ -17,7 +17,7 @@ def personal_dashboard_page(current_user_email):
     if form_responses_df is not None:
         st.write("---")
         st.subheader("Ingezonden formulierreacties") 
-        st.write("Hieronder vindt je de door u ingezonden formulierreacties.")
+        st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
         
         # Create a new column to store the sustainability percentages
         form_responses_df['Sustainability Percentage'] = None
@@ -60,7 +60,6 @@ def personal_dashboard_page(current_user_email):
 
         # Customize the layout
         fig.update_layout(
-            title='Totaal Aantal Ja vs Nee voor Alle Categorieën (Geselecteerde Rij)',
             xaxis_title='Antwoord',
             yaxis_title='Aantal',
             showlegend=False
@@ -69,7 +68,7 @@ def personal_dashboard_page(current_user_email):
         # Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën
         st.write("---")
         st.subheader("Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën")
-        st.write("Hieronder ziet u hoeveel categorieën u momenteel gebruikt en welke u nog kunt verbeteren. Laten we samen kijken naar uw duurzaamheidsprofiel.")
+        st.write("Hieronder zie je hoeveel categorieën je momenteel gebruikt en welke je nog kunt verbeteren. Laten we samen kijken naar jouw duurzaamheidsprofiel.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -118,7 +117,6 @@ def personal_dashboard_page(current_user_email):
 
         # Customize the layout
         fig.update_layout(
-            title='Aantal Categorieën voor Geselecteerde Rij',
             xaxis_title='Categorie',
             yaxis_title='Aantal',
             showlegend=False
@@ -127,7 +125,7 @@ def personal_dashboard_page(current_user_email):
         # Verdeling van opties voor verpakking
         st.write("---")
         st.subheader("Verdeling van opties voor verpakking")
-        st.write("Deze grafiek toont de verdeling van de verpakkingsopties die u momenteel kiest. Het helpt om de meest gebruikte verpakkingstypes te identificeren en te focussen op duurzamere alternatieven.")
+        st.write("Deze grafiek toont de verdeling van de verpakkingsopties die je momenteel kiest. Het helpt om de meest gebruikte verpakkingstypes te identificeren en te focussen op duurzamere alternatieven.")
 
 
         # Display the chart
@@ -154,7 +152,7 @@ def personal_dashboard_page(current_user_email):
        # Percentage Duurzame Opties
         st.write("---")
         st.subheader("Percentage Duurzame Opties")
-        st.write("Hier ziet u het percentage duurzame opties dat u al heeft gekozen. Een hoger percentage betekent een grotere bijdrage aan een duurzamere wereld.")
+        st.write("Hier zie je het percentage duurzame opties dat je al hebt gekozen. Een hoger percentage betekent een grotere bijdrage aan een duurzamere wereld.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -169,15 +167,14 @@ def personal_dashboard_page(current_user_email):
         ])
 
         # Customize the layout
-        fig.update_layout(title='Vergelijking Duurzaamheidspercentage',
-                          xaxis_title='Categorie',
+        fig.update_layout(xaxis_title='Categorie',
                           yaxis_title='Percentage',
                           barmode='group')
 
         # Vergelijking Duurzaamheidspercentage
         st.write("---")
         st.subheader("Vergelijking Duurzaamheidspercentage")
-        st.write("We vergelijken uw duurzaamheidspercentage met het gemiddelde percentage van andere gebruikers. Dit geeft u inzicht in uw vooruitgang en moedigt u aan om uw duurzaamheidsinspanningen voort te zetten.")
+        st.write("We vergelijken jouw duurzaamheidspercentage met het gemiddelde percentage van andere gebruikers. Dit geeft je inzicht in jouw vooruitgang.")
 
         # Display the chart
         st.plotly_chart(fig)
@@ -194,7 +191,7 @@ def personal_dashboard_page(current_user_email):
         # Duurzaamheidspercentage over tijd
         st.write("---")
         st.subheader("Duurzaamheidspercentage over tijd")
-        st.write("Deze lijngrafiek laat zien hoe uw duurzaamheidspercentage zich in de loop van de tijd heeft ontwikkeld. Het is inspirerend om te zien hoe uw inzet voor duurzaamheid groeit.")
+        st.write("Deze lijngrafiek laat zien hoe jouw duurzaamheidspercentage zich in de loop van de tijd heeft ontwikkeld.")
              
         st.plotly_chart(fig)
 
