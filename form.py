@@ -18,8 +18,8 @@ def form_page(current_user_email):
 
     
     previous_response = get_recent_form_response(current_user_email)
-    # Convert dictionary to DataFrame
-    #previous_response_df = pd.DataFrame.from_dict(previous_response)
+    
+    st.dataframe(previous_response)
 
     # Form inputs
     inputs = [
@@ -68,12 +68,15 @@ def form_page(current_user_email):
                 min_value=0,
                 step=100,
                 key=f"{category}_amount_{i}",
+                value=previous_response_df[f"aantal_{category}"].values[0] if previous_response_df is not None else 0,
             )
+
             prijs_per_category = st.number_input(
                 f"Wat is de prijs per {category}?",
                 min_value=0.0,
                 step=0.01,
                 key=f"{category}_price_{i}",
+                value=previous_response_df[f"prijs_per_{category}"].values[0] if previous_response_df is not None else 0.0,
             )
             responses[f"aantal_{category}"] = aantal_category
             responses[f"prijs_per_{category}"] = prijs_per_category
