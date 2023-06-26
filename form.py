@@ -47,12 +47,7 @@ def form_page(current_user_email):
     responses = {"Email": current_user_email}  # Add current user's email to responses
     
     for i, (category, question) in enumerate(inputs):
-        uses_category = st.selectbox(
-            question,
-            ("Nee", "Ja"),
-            key=f"{category}_selectbox_{i}",
-            index=1 if previous_response_df is not None and previous_response_df.at[0, category] == "Ja" else 0,
-        )
+        uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
         responses[category] = uses_category
 
         if uses_category == "Ja":
@@ -67,36 +62,19 @@ def form_page(current_user_email):
                 key=f"{category}_alternative_{i}",
             )
             responses[f"product_category_{category}"] = product_category
-
-            if previous_response_df is not None and previous_response_df.at[0, category] == "Ja":
-                aantal_category = st.number_input(
-                    f"Hoeveel {category} gebruikt u per jaar?",
-                    min_value=0,
-                    step=100,
-                    key=f"{category}_amount_{i}",
-                    value=previous_response_df.at[0, f"aantal_{category}"],
-                )
-                prijs_per_category = st.number_input(
-                    f"Wat is de prijs per {category}?",
-                    min_value=0.0,
-                    step=0.01,
-                    key=f"{category}_price_{i}",
-                    value=previous_response_df.at[0, f"prijs_per_{category}"],
-                )
-            else:
-                aantal_category = st.number_input(
-                    f"Hoeveel {category} gebruikt u per jaar?",
-                    min_value=0,
-                    step=100,
-                    key=f"{category}_amount_{i}",
-                )
-                prijs_per_category = st.number_input(
-                    f"Wat is de prijs per {category}?",
-                    min_value=0.0,
-                    step=0.01,
-                    key=f"{category}_price_{i}",
-                )
-
+            
+            aantal_category = st.number_input(
+                f"Hoeveel {category} gebruikt u per jaar?",
+                min_value=0,
+                step=100,
+                key=f"{category}_amount_{i}",
+            )
+            prijs_per_category = st.number_input(
+                f"Wat is de prijs per {category}?",
+                min_value=0.0,
+                step=0.01,
+                key=f"{category}_price_{i}",
+            )
             responses[f"aantal_{category}"] = aantal_category
             responses[f"prijs_per_{category}"] = prijs_per_category
         else:
@@ -108,7 +86,6 @@ def form_page(current_user_email):
             st.markdown("</div>", unsafe_allow_html=True)
 
     submit_button = st.button("Verzenden")
-
 
     # Form submission handling
     if submit_button:
