@@ -23,7 +23,7 @@ def main():
     # Add sidebar to all pages except the login page
     if is_logged_in:
         # Add the image to the sidebar
-        st.sidebar.image("plasticvrij.png", use_column_width=True)
+        st.sidebar.image("img/plasticvrij.png", use_column_width=True)
 
         page = st.sidebar.selectbox("Selecteer Pagina", ("Home","Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard"))
 
