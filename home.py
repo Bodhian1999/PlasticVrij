@@ -11,6 +11,9 @@ def home_page(current_user_email):
 
     # Introduction
     st.write("Welkom bij ons plasticvrije terras-initiatief! Hier kun je jouw bijdrage aan het verminderen van plastic op terrassen volgen en delen. Ontdek je duurzaamheidsscore, vergelijk deze met andere ondernemers en zie de voortgang die we samen boeken!")
+    
+    # Add a hyperlink to the project's main website
+    st.markdown("[Lees meer over het project en krijg tips voor plasticvrije terrassen](https://plasticvrijterras.com/)")
 
     # Add an image related to plastic-free terraces
     #st.image("path_to_image/plastic_free_terraces.jpg", use_column_width=True)
@@ -19,7 +22,6 @@ def home_page(current_user_email):
     st.write("Wat kun je doen op deze app?")
     st.write("- Vul het formulier in om jouw gebruik van plastic op het terras te registreren.")
     st.write("- Volg jouw duurzaamheidsscore en zie hoe deze zich verhoudt tot andere ondernemers.")
-    st.write("- Ontdek tips en advies om plasticverbruik te verminderen en duurzame alternatieven te implementeren.")
     st.write("- Bekijk de interactieve kaart en zie waar andere ondernemers zich bevinden.")
     st.write("- Blijf op de hoogte van de laatste ontwikkelingen op het gebied van plasticvrije terrassen.")
 
