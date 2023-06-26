@@ -52,7 +52,7 @@ def form_page(current_user_email):
         uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}")
 
         # Check if previous response exists and set placeholder value accordingly
-        if previous_response is not None and category in previous_response:
+        if previous_response is not None and category in previous_response.columns:
             uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=int(previous_response.at[0, category]))
         else:
             uses_category = st.selectbox(question, ("Nee", "Ja"), key=f"{category}_selectbox_{i}", index=0)
@@ -72,7 +72,7 @@ def form_page(current_user_email):
             )
 
             # Check if previous response exists and set placeholder value accordingly
-            if previous_response is not None and f"product_category_{category}" in previous_response:
+            if previous_response is not None and f"product_category_{category}" in previous_response.columns:
                 product_category = st.selectbox(
                     "Onder welke categorie valt dit product?",
                     (
@@ -99,7 +99,7 @@ def form_page(current_user_email):
 
             responses[f"product_category_{category}"] = product_category
 
-            # Rest of the code...
+            # Rest of the code..
 
             
             aantal_category = st.number_input(
