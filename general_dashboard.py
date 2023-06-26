@@ -27,7 +27,7 @@ def general_dashboard_page(current_user_email):
     
     # Introduction
     st.header("Algemeen dashboard voor alle ondernemers")
-    st.write("Op deze pagina bieden wij u een overzicht van uw prestaties en voortgang bij het verwijderen van plastic van uw terrassen. Hier vindt u twee visuals die u inzicht geven in uw inspanningen.")
+    st.write("Op deze pagina bieden wij je een overzicht van jouw prestaties en voortgang bij het verwijderen van plastic van je terrassen. Hier vindt je twee visuals die inzicht geven in jouw inspanningen.")
     
     st.write(f"Huidige gebruiker: {current_user_email}")
     recent_form_responses_df = get_recent_form_responses()
@@ -79,7 +79,7 @@ def general_dashboard_page(current_user_email):
           # First Visual: Average sustainability score over time
         st.write("---")
         st.write("### Lijngrafiek van het gemiddelde duurzaamheidspercentage over de tijd")
-        st.write("Deze visualisatie toont de gemiddelde duurzaamheidspercentage in de loop van de tijd. Deze score wordt berekend door de duurzaamheidsscores van alle gebruikers op te tellen en te delen door het totale aantal gebruikers (N). Dit geeft u een idee van de algemene trends en verbeteringen in de duurzaamheid van de terrassen.")
+        st.write("Deze visualisatie toont de gemiddelde duurzaamheidspercentage in de loop van de tijd. Deze score wordt berekend door de duurzaamheidsscores van alle gebruikers op te tellen en te delen door het totale aantal gebruikers (N). Dit geeft je een idee van de algemene trends en verbeteringen in de duurzaamheid van de terrassen.")
         
         st.plotly_chart(fig)
         
@@ -178,7 +178,7 @@ def general_dashboard_page(current_user_email):
      # Second Visual: Interactive map with user locations
     st.write("---")
     st.write("### Interactieve kaart met restaurantlocaties en duurzaamheidsscores")
-    st.write("Deze visualisatie is een interactieve kaart waarop alle gebruikers en hun bedrijfslocaties worden weergegeven. Op de kaart worden de markers gekleurd op basis van de duurzaamheidsscore van elke gebruiker. Dit geeft u een visueel beeld van de locaties waar gebruikers actief zijn en de bijdragen die zij leveren aan het verminderen van plastic op terrassen.")
+    st.write("Deze visualisatie is een interactieve kaart waarop alle gebruikers en hun bedrijfslocaties worden weergegeven. Op de kaart worden de markers gekleurd op basis van de duurzaamheidsscore van elke gebruiker. Dit geeft je een visueel beeld van de locaties waar gebruikers actief zijn en de bijdragen die zij leveren aan het verminderen van plastic op terrassen.")
 
     # Display the map
     st.markdown('**Kaart**')
