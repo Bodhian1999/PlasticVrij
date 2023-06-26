@@ -18,7 +18,7 @@ def form_page(current_user_email):
 
     
     previous_response_df = get_recent_form_response(current_user_email)
-    # st.dataframe(previous_response_df)
+    st.dataframe(previous_response_df)
 
     # Form inputs
     inputs = [
