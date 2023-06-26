@@ -15,6 +15,8 @@ def personal_dashboard_page(current_user_email):
     
     
     if form_responses_df is not None:
+        st.write("---")
+        st.subheader("Ingezonden formulierreacties") 
         st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
         
         # Create a new column to store the sustainability percentages
@@ -63,6 +65,7 @@ def personal_dashboard_page(current_user_email):
         )
         
         # Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën
+        st.write("---")
         st.subheader("Totaal Aantal gebruikt vs weggelaten voor Alle Categorieën")
         st.write("Hieronder ziet u hoeveel categorieën u momenteel gebruikt en welke u nog kunt verbeteren. Laten we samen kijken naar uw duurzaamheidsprofiel.")
 
@@ -120,6 +123,7 @@ def personal_dashboard_page(current_user_email):
         )
 
         # Verdeling van opties voor verpakking
+        st.write("---")
         st.subheader("Verdeling van opties voor verpakking")
         st.write("Deze grafiek toont de verdeling van de verpakkingsopties die u momenteel kiest. Het helpt om de meest gebruikte verpakkingstypes te identificeren en te focussen op duurzamere alternatieven.")
 
@@ -146,6 +150,7 @@ def personal_dashboard_page(current_user_email):
         )
 
        # Percentage Duurzame Opties
+        st.write("---")
         st.subheader("Percentage Duurzame Opties")
         st.write("Hier ziet u het percentage duurzame opties dat u al heeft gekozen. Een hoger percentage betekent een grotere bijdrage aan een duurzamere wereld.")
 
@@ -168,6 +173,7 @@ def personal_dashboard_page(current_user_email):
                           barmode='group')
 
         # Vergelijking Duurzaamheidspercentage
+        st.write("---")
         st.subheader("Vergelijking Duurzaamheidspercentage")
         st.write("We vergelijken uw duurzaamheidspercentage met het gemiddelde percentage van andere gebruikers. Dit geeft u inzicht in uw vooruitgang en moedigt u aan om uw duurzaamheidsinspanningen voort te zetten.")
 
@@ -184,6 +190,7 @@ def personal_dashboard_page(current_user_email):
         )
         
         # Duurzaamheidspercentage over tijd
+        st.write("---")
         st.subheader("Duurzaamheidspercentage over tijd")
         st.write("Deze lijngrafiek laat zien hoe uw duurzaamheidspercentage zich in de loop van de tijd heeft ontwikkeld. Het is inspirerend om te zien hoe uw inzet voor duurzaamheid groeit.")
              
