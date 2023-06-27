@@ -25,7 +25,7 @@ def main():
         # Add the image to the sidebar
         st.sidebar.image("plasticvrij.png", use_column_width=True)
 
-        page = st.sidebar.selectbox("Selecteer Pagina", ("Home","Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard"))
+        page = st.sidebar.selectbox("Selecteer Pagina", ("Home","Formulier Pagina", "Persoonlijk Dashboard", "Algemeen Dashboard", "doorontwikkeling"))
 
         if page == "Home":
             home_page(current_user_email)
@@ -35,6 +35,8 @@ def main():
             general_dashboard_page(current_user_email)
         elif page == "Formulier Pagina":
             form_page(current_user_email)
+        elif page == "doorontwikkeling":
+            dev(current_user_email)
 
         # Logout button in the sidebar
         logout_button = st.sidebar.button("Uitloggen")
