@@ -29,20 +29,26 @@ def dev(current_user_email):
 
         selected_category = st.selectbox("Select Category", categories)
 
-        sample_data = pd.DataFrame({
-            'Category': categories,
-            'Multi-Use Non-Plastics': np.random.uniform(50, 150, len(categories)),
-            'Single-Use Non-Plastics': np.random.uniform(30, 100, len(categories)),
-            'Multi-Use Plastics': np.random.uniform(20, 80, len(categories)),
-            'Single-Use Plastics': np.random.uniform(10, 60, len(categories))
-        })
+        # Generate sample data for cost comparison
+        years = np.arange(1, 11)  # Years 1 to 10
+        single_use_plastic_cost = 1000  # Cost of single-use plastics per year
+        multi_use_non_plastic_investment = 3000  # Initial investment for multi-use non-plastics
 
-        # Filter the data based on the selected category
-        selected_data = sample_data[sample_data['Category'] == selected_category]
+        # Calculate cost savings over time
+        single_use_plastic_cost_over_time = single_use_plastic_cost * years
+        multi_use_non_plastic_cost_over_time = multi_use_non_plastic_investment + (single_use_plastic_cost * years)
 
         # Create the cost savings comparison line plot
-        fig = px.line(selected_data, x='Category', y=['Multi-Use Non-Plastics', 'Single-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Plastics'], title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
-        fig.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': categories}, xaxis_title='Category', yaxis_title='Cost')
+        data = pd.DataFrame({
+            'Years': years,
+            'Single-Use Plastics': single_use_plastic_cost_over_time,
+            'Multi-Use Non-Plastics': multi_use_non_plastic_cost_over_time
+        })
+
+        selected_data = data[['Years', 'Single-Use Plastics', 'Multi-Use Non-Plastics']]
+
+        fig = px.line(selected_data, x='Years', y=['Single-Use Plastics', 'Multi-Use Non-Plastics'], title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
+        fig.update_layout(xaxis_title='Years', yaxis_title='Cost (€)')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
     else:
