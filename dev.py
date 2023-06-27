@@ -159,6 +159,23 @@ def dev(current_user_email):
         st.write("3. Gebruik de `go.Bar` trace om de gegevens weer te geven in een staafgrafiek.")
         st.write("4. Voeg elke trace toe aan de `Figure` en stel de gewenste instellingen in voor de layout.")
         st.write("5. Gebruik `st.plotly_chart` om de grafiek in Streamlit weer te geven.")
+        
+        st.write("---")
+        
+        st.subheader("Gebruik van Data Science in het project")
+
+        st.markdown("Hier zijn enkele suggesties over hoe Data Science-technieken nuttig kunnen zijn in jouw project om plasticvrije terrassen te bevorderen:")
+
+        st.markdown("1. **Data-analyse en patroonherkenning:** Gebruik data science-technieken om patronen en inzichten te ontdekken in de gegevens die je hebt verzameld.")
+        st.markdown("2. **Voorspellende modellering:** Bouw voorspellende modellen om het toekomstige gebruik van plasticproducten op terrassen te voorspellen.")
+        st.markdown("3. **Segmentatie van klanten:** Gebruik clusteringtechnieken om klantsegmenten te identificeren op basis van hun voorkeuren, gedrag en feedback.")
+        st.markdown("4. **Sentimentanalyse:** Analyseer gebruikersfeedback, online recensies of social media-berichten om het sentiment ten opzichte van plasticvrije terrassen te begrijpen.")
+        st.markdown("5. **Optimalisatie en simulatie:** Maak gebruik van optimalisatietechnieken en simulatiemodellen om de impact van verschillende interventies te evalueren.")
+
+        st.markdown("Zorg ervoor dat je voldoende gegevens verzamelt en zorgt voor gegevenskwaliteit voordat je deze technieken toepast.")
+        st.markdown("Experimenteer met verschillende modellen en technieken om de beste resultaten te verkrijgen.")
+        st.markdown("Vergeet niet om de resultaten te visualiseren en te communiceren met belanghebbenden.")
+
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
