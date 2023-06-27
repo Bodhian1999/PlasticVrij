@@ -10,6 +10,7 @@ def dev(current_user_email):
     st.write(f"Doel van deze pagina: Het verkennen van mogelijke duurzaamheidsinspanningen voor verdere ontwikkeling van het project.")
     st.write("---")
     st.write("**Disclaimer:**")
+    st.write("---")
     st.write("De gegevens op deze pagina zijn slechts een ruwe schatting en mogen niet als feitelijk worden beschouwd.")
 
     st.subheader("Kostenbesparingen Vergelijking: Plastic vs. Duurzame Alternatieven")
