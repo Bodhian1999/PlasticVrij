@@ -57,22 +57,20 @@ def dev(current_user_email):
         plt.title('Comparison of Cost Savings: Plastic vs. Sustainable Alternatives')
         plt.xticks(rotation=90)
         plt.tight_layout()
-        plt.show()
+        st.pyplot()  # Display the plot using Streamlit's `st.pyplot` function
 
         # Create the environmental impact comparison stacked bar chart
-        plt.figure(figsize=(10, 6))
-        plt.bar(sample_data['Product Category'], sample_data['Carbon Footprint'], label='Carbon Footprint')
-        plt.bar(sample_data['Product Category'], sample_data['Water Usage'], bottom=sample_data['Carbon Footprint'],
-                label='Water Usage')
-        plt.bar(sample_data['Product Category'], sample_data['Waste Generation'],
-                bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage'], label='Waste Generation')
-        plt.xlabel('Product Category')
-        plt.ylabel('Environmental Impact (%)')
-        plt.title('Environmental Impact Comparison: Plastic vs. Sustainable Materials')
-        plt.xticks(rotation=90)
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
+        fig = go.Figure()
+        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Carbon Footprint'], name='Carbon Footprint'))
+        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Water Usage'], name='Water Usage', 
+                             bottom=sample_data['Carbon Footprint']))
+        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Waste Generation'], name='Waste Generation', 
+                             bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage']))
+        fig.update_layout(barmode='stack', xaxis_tickangle=-90,
+                          title='Environmental Impact Comparison: Plastic vs. Sustainable Materials',
+                          xaxis=dict(title='Product Category'),
+                          yaxis=dict(title='Environmental Impact (%)'))
+        st.plotly_chart(fig)  # Display the plotly chart using Streamlit's `st.plotly_chart` function
         
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
