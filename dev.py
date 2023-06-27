@@ -14,20 +14,12 @@ def dev(current_user_email):
 
     st.subheader("Kostenbesparingen Vergelijking: Plastic vs. Duurzame Alternatieven")
     st.write("Deze plot toont een vergelijking van de kostenbesparingen tussen verschillende typen producten. Het stelt je in staat om de mogelijke kostenbesparingen te evalueren bij het gebruik van duurzame alternatieven in vergelijking met plastic producten.")
-    st.write("Hier is een uitleg over hoe de plot kan worden geïmplementeerd met echte gegevens:")
-
-    st.write("1. Verzamel echte gegevens over de kosten van verschillende producttypen, zoals de prijs van plastic en duurzame alternatieven, inclusief het initiële investeringsbedrag en eventuele vervangingskosten.")
-    st.write("2. Organiseer de gegevens in een tabel met jaren en kostenkolommen voor elk producttype.")
-    st.write("3. Gebruik de 'px.line' functie van Plotly Express om een lijngrafiek te maken met de jaren op de x-as en de kosten op de y-as.")
-    st.write("4. Pas de grafiek aan met de juiste labels voor de x- en y-assen, evenals een titel die het onderwerp van de kostenbesparingen beschrijft.")
-    st.write("5. Gebruik de 'st.plotly_chart' functie van Streamlit om de grafiek weer te geven op de pagina.")
-
+    
     form_responses_df = get_all_form_responses(current_user_email)
 
     recent_form_responses_df = get_recent_form_responses()
 
     if form_responses_df is not None:
-        st.write("---")
 
         # Generate sample data for cost savings comparison
         years = np.arange(1, 11)  # Years 1 to 10
@@ -111,7 +103,15 @@ def dev(current_user_email):
                       title=f'Kostenbesparingen Vergelijking: {selected_category} - Plastic vs. Duurzame Alternatieven')
         fig.update_layout(xaxis_title='Jaren', yaxis_title='Kosten')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
-
+        
+        st.write("Hier is een uitleg over hoe de plot kan worden geïmplementeerd met echte gegevens:")
+        st.write("1. Verzamel echte gegevens over de kosten van verschillende producttypen, zoals de prijs van plastic en duurzame alternatieven, inclusief het initiële investeringsbedrag en eventuele vervangingskosten.")
+        st.write("2. Organiseer de gegevens in een tabel met jaren en kostenkolommen voor elk producttype.")
+        st.write("3. Gebruik de 'px.line' functie van Plotly Express om een lijngrafiek te maken met de jaren op de x-as en de kosten op de y-as.")
+        st.write("4. Pas de grafiek aan met de juiste labels voor de x- en y-assen, evenals een titel die het onderwerp van de kostenbesparingen beschrijft.")
+        st.write("5. Gebruik de 'st.plotly_chart' functie van Streamlit om de grafiek weer te geven op de pagina.")
+        
+        st.write("---")
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
