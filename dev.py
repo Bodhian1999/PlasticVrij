@@ -55,4 +55,4 @@ def dev(current_user_email):
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
     else:
-        st.write("Er zijn nog geen formulierreacties gev
+        st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
