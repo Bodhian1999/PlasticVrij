@@ -35,6 +35,8 @@ def dev(current_user_email):
         # Replacement intervals for reusable options
         multi_use_non_plastics_replace_interval = 5  # Replace every 5 years
         multi_use_plastics_replace_interval = 3  # Replace every 3 years
+        single_use_non_plastics_replace_interval = 1  # Replace every year
+        single_use_plastics_replace_interval = 1  # Replace every year
 
         selected_category = st.selectbox("Select Category", categories)
 
@@ -47,13 +49,15 @@ def dev(current_user_email):
             cost_single_use_plastics = single_use_plastics_cost[category_index]
             replace_interval_multi_use_non_plastics = multi_use_non_plastics_replace_interval
             replace_interval_multi_use_plastics = multi_use_plastics_replace_interval
+            replace_interval_single_use_non_plastics = single_use_non_plastics_replace_interval
+            replace_interval_single_use_plastics = single_use_plastics_replace_interval
 
             # Generate sample data for cost comparison
             years = np.arange(1, 11)  # Years 1 to 10
 
             # Cost of single-use plastics per year
             single_use_plastic_cost = np.full(len(years), cost_single_use_plastics)
-            
+
             # Cost of reusable options per year
             multi_use_non_plastic_cost = np.full(len(years), cost_multi_use_non_plastics)
             multi_use_plastic_cost = np.full(len(years), cost_multi_use_plastics)
@@ -65,8 +69,12 @@ def dev(current_user_email):
                     multi_use_non_plastic_cost[i] += cost_multi_use_non_plastics
                 if (i + 1) % replace_interval_multi_use_plastics == 0:
                     multi_use_plastic_cost[i] += cost_multi_use_plastics
+                if (i + 1) % replace_interval_single_use_non_plastics == 0:
+                    single_use_non_plastic_cost[i] += cost_single_use_non_plastics
+                if (i + 1) % replace_interval_single_use_plastics == 0:
+                    single_use_plastic_cost[i] += cost_single_use_plastics
 
-            # Create the cost savings comparison line plot
+            # Create the cost comparison line plot
             data = pd.DataFrame({
                 'Years': years,
                 'Single-Use Plastics': np.cumsum(single_use_plastic_cost),
