@@ -88,21 +88,26 @@ def dev(current_user_email):
         categories = ['Straws', 'Honey']
         selected_category = st.selectbox("Select Category", categories)
 
-        if selected_category == 'Straws':
+        
+        # Create the cost savings comparison line plot
+        categories = ['Rietjes', 'Honing']  # Productcategorieën
+        selected_category = st.selectbox("Selecteer Categorie", categories)
+
+        if selected_category == 'Rietjes':
             data = pd.DataFrame({
-                'Years': years,
-                'Multi-Use Non-Plastic Straws': multi_use_non_plastic_straws_cost,
-                'Multi-Use Plastic Straws': multi_use_plastic_straws_cost,
-                'Single-Use Non-Plastic Straws': single_use_non_plastic_straws_cost,
-                'Single-Use Plastic Straws': single_use_plastic_straws_cost
+                'Jaren': years,
+                'Kosten Herbruikbare Niet-Plastic Rietjes': multi_use_non_plastic_straws_cost,
+                'Kosten Herbruikbare Plastic Rietjes': multi_use_plastic_straws_cost,
+                'Kosten Wegwerp Niet-Plastic Rietjes': single_use_non_plastic_straws_cost,
+                'Kosten Wegwerp Plastic Rietjes': single_use_plastic_straws_cost
             })
-        elif selected_category == 'Honey':
+        elif selected_category == 'Honing':
             data = pd.DataFrame({
-                'Years': years,
-                'Multi-Use Non-Plastic Honey': multi_use_non_plastic_honey_cost,
-                'Multi-Use Plastic Honey': multi_use_plastic_honey_cost,
-                'Single-Use Non-Plastic Honey': single_use_non_plastic_honey_cost,
-                'Single-Use Plastic Honey': single_use_plastic_honey_cost
+                'Jaren': years,
+                'Kosten Herbruikbare Niet-Plastic Honing': multi_use_non_plastic_honey_cost,
+                'Kosten Herbruikbare Plastic Honing': multi_use_plastic_honey_cost,
+                'Kosten Wegwerp Niet-Plastic Honing': single_use_non_plastic_honey_cost,
+                'Kosten Wegwerp Plastic Honing': single_use_plastic_honey_cost
             })
 
         selected_data = data[['Years', f'Multi-Use Non-Plastic {selected_category}', f'Multi-Use Plastic {selected_category}', 
