@@ -22,7 +22,7 @@ def dev(current_user_email):
 
         # Calculate the cost of multi-use non-plastic straws
         multi_use_non_plastic_cost = np.full(len(years), 100)  # Cost of 200 reusable non-plastic straws
-        replace_interval_multi_use_non_plastic = 3  # Number of years before replacement
+        replace_interval_multi_use_non_plastic = 5  # Number of years before replacement
         replacement_cost_multi_use_non_plastic = 100  # Cost of replacement
         for i in range(replace_interval_multi_use_non_plastic, len(years), replace_interval_multi_use_non_plastic):
             multi_use_non_plastic_cost[i:] += replacement_cost_multi_use_non_plastic
