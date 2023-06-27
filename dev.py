@@ -134,33 +134,31 @@ def dev(current_user_email):
                 'Materiaalgebruik (kg)': [100, 40]
             })
 
-        fig = sp.make_subplots(rows=1, cols=1, subplot_titles=[f'Milieueffecten van Verpakkingsopties - {selected_category}'])
+        fig = go.Figure()
 
-        for index, row in environmental_impact_data.iterrows():
-            fig.add_trace(go.Scatterpolar(
-                r=row.values[1:],
-                theta=row.keys()[1:],
-                fill='toself',
-                name=row['Verpakkingsopties']
-            ), row=1, col=1)
+        for column in environmental_impact_data.columns[1:]:
+            fig.add_trace(go.Bar(
+                x=environmental_impact_data['Verpakkingsopties'],
+                y=environmental_impact_data[column],
+                name=column
+            ))
 
         fig.update_layout(
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                    range=[0, environmental_impact_data.iloc[:, 1:].max().max()],  # Calculate the maximum value correctly
-                )),
+            barmode='group',
+            xaxis_title="Verpakkingsopties",
+            yaxis_title="Milieueffect",
+            title=f"Milieueffecten van Verpakkingsopties - {selected_category}",
             showlegend=True
         )
 
         st.plotly_chart(fig)
 
-        st.write("Hier is een uitleg over hoe de milieueffect plot kan worden geïmplementeerd met echte gegevens:")
+        st.write("Hier is een uitleg over hoe de gegroepeerde staafgrafiek kan worden geïmplementeerd met echte gegevens:")
         st.write("1. Verzamel echte gegevens over het milieueffect van verschillende verpakkingsopties, zoals CO2-uitstoot, afvalproductie en materiaalgebruik.")
         st.write("2. Organiseer de gegevens in een tabel met de verpakkingsopties en de bijbehorende effecten.")
-        st.write("3. Gebruik de `go.Scatterpolar` trace om de gegevens weer te geven in een radarplot.")
-        st.write("4. Pas de layout van de plot aan met behulp van `update_layout` om de labels en de zichtbaarheid van de radialen aan te passen.")
-        st.write("5. Gebruik `st.plotly_chart` om de plot in Streamlit weer te geven.")
+        st.write("3. Gebruik de `go.Bar` trace om de gegevens weer te geven in een staafgrafiek.")
+        st.write("4. Voeg elke trace toe aan de `Figure` en stel de gewenste instellingen in voor de layout.")
+        st.write("5. Gebruik `st.plotly_chart` om de grafiek in Streamlit weer te geven.")
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
