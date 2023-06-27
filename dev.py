@@ -82,10 +82,6 @@ def dev(current_user_email):
         for i in range(replace_interval_single_use_plastic_honey, len(years), replace_interval_single_use_plastic_honey):
             single_use_plastic_honey_cost[i:] += replacement_cost_single_use_plastic_honey
 
-        # Create the cost savings comparison line plot
-        categories = ['Straws', 'Honey']
-        selected_category = st.selectbox("Select Category", categories)
-
         
         # Create the cost savings comparison line plot
         categories = ['Rietjes', 'Honing']  # Productcategorieën
