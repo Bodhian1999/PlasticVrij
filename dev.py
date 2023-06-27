@@ -38,22 +38,22 @@ def dev(current_user_email):
         years = np.arange(1, 11)  # Years 1 to 10
 
         # Cost of single-use plastics per year
-        single_use_plastic_cost = np.full(len(years), single_use_plastics_cost[categories.index(selected_category)])
+        single_use_plastic_cost = np.array(single_use_plastics_cost[categories.index(selected_category)]) * years
 
-        # Cost of reusable options per year
-        multi_use_non_plastic_cost = np.full(len(years), multi_use_non_plastics_cost[categories.index(selected_category)])
-        multi_use_plastic_cost = np.full(len(years), multi_use_plastics_cost[categories.index(selected_category)])
-
-        # Replacement intervals for reusable options
-        multi_use_non_plastics_replace_interval = 5
-        multi_use_plastics_replace_interval = 3
-
-        # Increase the cost of reusable options based on the replacement intervals
+        # Cost of multi-use non-plastics per year
+        multi_use_non_plastic_cost = np.zeros_like(years)
         for i in range(len(years)):
-            if years[i] % multi_use_non_plastics_replace_interval == 0:
+            if years[i] % 5 == 0:
                 multi_use_non_plastic_cost[i:] += multi_use_non_plastics_cost[categories.index(selected_category)]
-            if years[i] % multi_use_plastics_replace_interval == 0:
+
+        # Cost of multi-use plastics per year
+        multi_use_plastic_cost = np.zeros_like(years)
+        for i in range(len(years)):
+            if years[i] % 3 == 0:
                 multi_use_plastic_cost[i:] += multi_use_plastics_cost[categories.index(selected_category)]
+
+        # Cost of single-use non-plastics per year
+        single_use_non_plastics_cost = np.array(single_use_non_plastics_cost[categories.index(selected_category)]) * years
 
         # Create the cost savings comparison line plot
         data = pd.DataFrame({
