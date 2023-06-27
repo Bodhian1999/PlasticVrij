@@ -17,8 +17,8 @@ def home_page(current_user_email):
     st.markdown("[Lees meer over het project en krijg tips voor plasticvrije terrassen](https://plasticvrijterras.com/)")
 
     # Add an image related to plastic-free terraces
-    st.image("mathew-schwartz-GjzJFMnJZYg-unsplash.png", use_column_width=True)
-
+    st.image("jon-tyson-uEXc4WGAI2c-unsplash.png", use_column_width=True)
+    
     # Explanation of the app
     st.write("Wat kun je doen op deze app?")
     st.write("- Vul het formulier in om jouw gebruik van plastic op het terras te registreren.")
@@ -27,7 +27,7 @@ def home_page(current_user_email):
     st.write("- Blijf op de hoogte van de laatste ontwikkelingen op het gebied van plasticvrije terrassen.")
 
     # Add more visuals or images to illustrate the features and benefits of the app
-    st.image("jon-tyson-uEXc4WGAI2c-unsplash.png", use_column_width=True)
+    st.image("mathew-schwartz-GjzJFMnJZYg-unsplash.png", use_column_width=True)
     
     # Call-to-action
     st.write("Doe mee en maak jouw terras plasticvrij!")
