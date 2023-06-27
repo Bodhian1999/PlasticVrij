@@ -34,27 +34,27 @@ def dev(current_user_email):
     years = np.arange(1, 11)  # Years 1 to 10
 
     # Calculate cost per year for each category
-    single_use_plastic_cost = np.array(single_use_plastics_cost[categories.index(selected_category)])
-    multi_use_non_plastic_cost = np.array(multi_use_non_plastics_cost[categories.index(selected_category)])
-    multi_use_plastic_cost = np.array(multi_use_plastics_cost[categories.index(selected_category)])
-    single_use_non_plastics_cost = np.array(single_use_non_plastics_cost[categories.index(selected_category)])
+    single_use_plastic_cost = single_use_plastics_cost[categories.index(selected_category)]
+    multi_use_non_plastic_cost = multi_use_non_plastics_cost[categories.index(selected_category)]
+    multi_use_plastic_cost = multi_use_plastics_cost[categories.index(selected_category)]
+    single_use_non_plastics_cost = single_use_non_plastics_cost[categories.index(selected_category)]
 
     single_use_plastic_cost_per_year = np.where(
         np.mod(years, single_use_plastics_replace_interval) == 0,
-        np.cumsum(single_use_plastic_cost),
-        single_use_plastic_cost
+        single_use_plastics_cost * np.ceil(years / single_use_plastics_replace_interval),
+        single_use_plastics_cost
     )
 
     multi_use_non_plastic_cost_per_year = np.where(
         np.mod(years, multi_use_non_plastics_replace_interval) == 0,
-        np.cumsum(multi_use_non_plastic_cost),
-        multi_use_non_plastic_cost
+        multi_use_non_plastics_cost * np.ceil(years / multi_use_non_plastics_replace_interval),
+        multi_use_non_plastics_cost
     )
 
     multi_use_plastic_cost_per_year = np.where(
         np.mod(years, multi_use_plastics_replace_interval) == 0,
-        np.cumsum(multi_use_plastic_cost),
-        multi_use_plastic_cost
+        multi_use_plastics_cost * np.ceil(years / multi_use_plastics_replace_interval),
+        multi_use_plastics_cost
     )
 
     single_use_non_plastics_cost_per_year = np.repeat(single_use_non_plastics_cost, len(years))
@@ -76,3 +76,4 @@ def dev(current_user_email):
                   title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
     fig.update_layout(xaxis_title='Years', yaxis_title='Cost ($)')
     st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
+
