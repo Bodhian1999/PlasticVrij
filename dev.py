@@ -28,8 +28,6 @@ def dev(current_user_email):
 
     if form_responses_df is not None:
         st.write("---")
-        st.subheader("Ingezonden formulierreacties")
-        st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
 
         # Generate sample data for cost savings comparison
         years = np.arange(1, 11)  # Years 1 to 10
@@ -110,14 +108,14 @@ def dev(current_user_email):
                 'Kosten Wegwerp Plastic Honing': single_use_plastic_honey_cost
             })
 
-        selected_data = data[['Years', f'Multi-Use Non-Plastic {selected_category}', f'Multi-Use Plastic {selected_category}', 
-                              f'Single-Use Non-Plastic {selected_category}', f'Single-Use Plastic {selected_category}']]
+        selected_data = data[['Jaren', f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Kosten Herbruikbare Plastic {selected_category}', f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}']]
 
-        fig = px.line(selected_data, x='Years', y=[f'Multi-Use Non-Plastic {selected_category}', f'Multi-Use Plastic {selected_category}', 
-                                                    f'Single-Use Non-Plastic {selected_category}', f'Single-Use Plastic {selected_category}'], 
-                      title=f'Cost Savings Comparison: {selected_category} - Plastic vs. Sustainable Alternatives')
-        fig.update_layout(xaxis_title='Years', yaxis_title='Cost ($)')
+        fig = px.line(selected_data, x='Jaren', y=[f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Kosten Herbruikbare Plastic {selected_category}',
+                                                    f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}'],
+                      title=f'Kostenbesparingen Vergelijking: {selected_category} - Plastic vs. Duurzame Alternatieven')
+        fig.update_layout(xaxis_title='Jaren', yaxis_title='Kosten ($)')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
+
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
