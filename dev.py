@@ -5,7 +5,7 @@ import plotly.express as px
 from utils import get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 def dev(current_user_email):
-     st.header("Mogelijkheden bij Voortzetting van het Project")
+    st.header("Mogelijkheden bij Voortzetting van het Project")
     st.subheader("Overzicht van Duurzaamheidsinspanningen")
     st.write(f"Doel van deze pagina: Het verkennen van mogelijke duurzaamheidsinspanningen voor verdere ontwikkeling van het project.")
     st.write("---")
