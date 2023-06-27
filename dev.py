@@ -118,6 +118,7 @@ def dev(current_user_email):
         
         st.subheader("Milieueffect Vergelijking: Plastic vs. Duurzame Verpakkingen")
         st.write("Deze plot toont een vergelijking van het milieueffect tussen verschillende verpakkingsopties voor honing en rietjes. Het helpt je om de mogelijke milieu-impact van verschillende materialen en gebruiksscenario's te begrijpen.")
+        
         if selected_category == 'Rietjes':
             environmental_impact_data = pd.DataFrame({
                 'Verpakkingsopties': ['Plastic', 'Duurzaam'],
@@ -133,7 +134,7 @@ def dev(current_user_email):
                 'Materiaalgebruik (kg)': [100, 40]
             })
 
-        fig = go.Figure()
+        fig = sp.make_subplots(rows=1, cols=1, subplot_titles=[f'Milieueffecten van Verpakkingsopties - {selected_category}'])
 
         for index, row in environmental_impact_data.iterrows():
             fig.add_trace(go.Scatterpolar(
@@ -141,27 +142,25 @@ def dev(current_user_email):
                 theta=row.keys()[1:],
                 fill='toself',
                 name=row['Verpakkingsopties']
-            ))
+            ), row=1, col=1)
 
         fig.update_layout(
             polar=dict(
                 radialaxis=dict(
                     visible=True,
-                    range=[0, max(environmental_impact_data.values[:, 1:].max())],
+                    range=[0, environmental_impact_data.iloc[:, 1:].max().max()],  # Calculate the maximum value correctly
                 )),
-            showlegend=True,
-            title=f'Milieueffecten van Verpakkingsopties - {selected_category}'
+            showlegend=True
         )
-
 
         st.plotly_chart(fig)
 
         st.write("Hier is een uitleg over hoe de milieueffect plot kan worden geïmplementeerd met echte gegevens:")
         st.write("1. Verzamel echte gegevens over het milieueffect van verschillende verpakkingsopties, zoals CO2-uitstoot, afvalproductie en materiaalgebruik.")
-        st.write("2. Organiseer de gegevens in een tabel met de verpakkingsopties en bijbehorende milieueffecten.")
-        st.write("3. Gebruik de 'go.Scatterpolar' functie van Plotly om een radarchart te maken.")
-        st.write("4. Pas de grafiek aan met de gewenste lay-out, labels en titels.")
-        st.write("5. Visualiseer de grafiek met behulp van 'st.plotly_chart' in Streamlit.")
+        st.write("2. Organiseer de gegevens in een tabel met de verpakkingsopties en de bijbehorende effecten.")
+        st.write("3. Gebruik de `go.Scatterpolar` trace om de gegevens weer te geven in een radarplot.")
+        st.write("4. Pas de layout van de plot aan met behulp van `update_layout` om de labels en de zichtbaarheid van de radialen aan te passen.")
+        st.write("5. Gebruik `st.plotly_chart` om de plot in Streamlit weer te geven.")
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
