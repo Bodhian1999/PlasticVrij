@@ -50,27 +50,29 @@ def dev(current_user_email):
             ) * 100
 
         # Create the cost savings comparison bar chart
-        plt.figure(figsize=(10, 6))
-        plt.bar(sample_data['Product Category'], sample_data['Cost Savings (%)'])
-        plt.xlabel('Product Category')
-        plt.ylabel('Cost Savings (%)')
-        plt.title('Comparison of Cost Savings: Plastic vs. Sustainable Alternatives')
-        plt.xticks(rotation=90)
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.bar(sample_data['Product Category'], sample_data['Cost Savings (%)'])
+        ax.set_xlabel('Product Category')
+        ax.set_ylabel('Cost Savings (%)')
+        ax.set_title('Comparison of Cost Savings: Plastic vs. Sustainable Alternatives')
+        ax.set_xticklabels(sample_data['Product Category'], rotation=90)
         plt.tight_layout()
-        st.pyplot()  # Display the plot using Streamlit's `st.pyplot` function
+        st.pyplot(fig)  # Display the plot using Streamlit's `st.pyplot` function
 
         # Create the environmental impact comparison stacked bar chart
-        fig = go.Figure()
-        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Carbon Footprint'], name='Carbon Footprint'))
-        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Water Usage'], name='Water Usage', 
-                             bottom=sample_data['Carbon Footprint']))
-        fig.add_trace(go.Bar(x=sample_data['Product Category'], y=sample_data['Waste Generation'], name='Waste Generation', 
-                             bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage']))
-        fig.update_layout(barmode='stack', xaxis_tickangle=-90,
-                          title='Environmental Impact Comparison: Plastic vs. Sustainable Materials',
-                          xaxis=dict(title='Product Category'),
-                          yaxis=dict(title='Environmental Impact (%)'))
-        st.plotly_chart(fig)  # Display the plotly chart using Streamlit's `st.plotly_chart` function
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.bar(sample_data['Product Category'], sample_data['Carbon Footprint'], label='Carbon Footprint')
+        ax.bar(sample_data['Product Category'], sample_data['Water Usage'], bottom=sample_data['Carbon Footprint'],
+               label='Water Usage')
+        ax.bar(sample_data['Product Category'], sample_data['Waste Generation'],
+               bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage'], label='Waste Generation')
+        ax.set_xlabel('Product Category')
+        ax.set_ylabel('Environmental Impact (%)')
+        ax.set_title('Environmental Impact Comparison: Plastic vs. Sustainable Materials')
+        ax.set_xticklabels(sample_data['Product Category'], rotation=90)
+        ax.legend()
+        plt.tight_layout()
+        st.pyplot(fig)  # Display the plot using Streamlit's `st.pyplot` function
         
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
