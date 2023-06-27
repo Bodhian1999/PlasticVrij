@@ -28,51 +28,28 @@ def dev(current_user_email):
             'stampers', 'wegwerpbekers_feesten_partijen', 'ijsjes_plastic_verpakking',
             'natte_doekjes_garnalen_spareribs'
         ]
-        
-        st.write(categories)
 
         sample_data = pd.DataFrame({
-            'Product Category': categories,
-            'Cost Savings (%)': np.random.uniform(5, 30, len(categories))
+            'Category': categories,
+            'Multi-Use Non-Plastics': np.random.uniform(50, 150, len(categories)),
+            'Single-Use Non-Plastics': np.random.uniform(30, 100, len(categories)),
+            'Multi-Use Plastics': np.random.uniform(20, 80, len(categories)),
+            'Single-Use Plastics': np.random.uniform(10, 60, len(categories))
         })
 
-        # Generate sample data for environmental impact comparison
-        metrics = ['Carbon Footprint', 'Water Usage', 'Waste Generation']
-
-        sample_data['Carbon Footprint'] = np.random.uniform(100, 1000, len(categories))
-        sample_data['Water Usage'] = np.random.uniform(1000, 10000, len(categories))
-        sample_data['Waste Generation'] = np.random.uniform(10, 100, len(categories))
-
+        # Create the cost savings comparison line plot
+        fig = px.line(sample_data, x='Category', y=['Multi-Use Non-Plastics', 
+                                                    'Single-Use Non-Plastics', 
+                                                    'Multi-Use Plastics', 
+                                                    'Single-Use Plastics'], 
+                      title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
+        fig.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': categories}, xaxis_title='Category', yaxis_title='Cost')
+        st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
         # Normalize the environmental impact metrics to percentages
         for metric in metrics:
             sample_data[metric] = (sample_data[metric] - sample_data[metric].min()) / (
                 sample_data[metric].max() - sample_data[metric].min()
             ) * 100
-
-        # Create the cost savings comparison bar chart
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.bar(sample_data['Product Category'], sample_data['Cost Savings (%)'])
-        ax.set_xlabel('Product Category')
-        ax.set_ylabel('Cost Savings (%)')
-        ax.set_title('Comparison of Cost Savings: Plastic vs. Sustainable Alternatives')
-        ax.set_xticklabels(sample_data['Product Category'], rotation=90)
-        plt.tight_layout()
-        st.pyplot(fig)  # Display the plot using Streamlit's `st.pyplot` function
-
-        # Create the environmental impact comparison stacked bar chart
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.bar(sample_data['Product Category'], sample_data['Carbon Footprint'], label='Carbon Footprint')
-        ax.bar(sample_data['Product Category'], sample_data['Water Usage'], bottom=sample_data['Carbon Footprint'],
-               label='Water Usage')
-        ax.bar(sample_data['Product Category'], sample_data['Waste Generation'],
-               bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage'], label='Waste Generation')
-        ax.set_xlabel('Product Category')
-        ax.set_ylabel('Environmental Impact (%)')
-        ax.set_title('Environmental Impact Comparison: Plastic vs. Sustainable Materials')
-        ax.set_xticklabels(sample_data['Product Category'], rotation=90)
-        ax.legend()
-        plt.tight_layout()
-        st.pyplot(fig)  # Display the plot using Streamlit's `st.pyplot` function
         
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
