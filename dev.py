@@ -90,21 +90,21 @@ def dev(current_user_email):
         if selected_category == 'Rietjes':
             data = pd.DataFrame({
                 'Jaren': years,
-                'Kosten Herbruikbare Niet-Plastic Rietjes': multi_use_non_plastic_straws_cost,
-                'Kosten Herbruikbare Plastic Rietjes': multi_use_plastic_straws_cost,
-                'Kosten Wegwerp Niet-Plastic Rietjes': single_use_non_plastic_straws_cost,
-                'Kosten Wegwerp Plastic Rietjes': single_use_plastic_straws_cost
+                'Herbruikbare Niet-Plastic Rietjes': multi_use_non_plastic_straws_cost,
+                'Herbruikbare Plastic Rietjes': multi_use_plastic_straws_cost,
+                'Wegwerp Niet-Plastic Rietjes': single_use_non_plastic_straws_cost,
+                'Wegwerp Plastic Rietjes': single_use_plastic_straws_cost
             })
         elif selected_category == 'Honing':
             data = pd.DataFrame({
                 'Jaren': years,
-                'Kosten Herbruikbare Niet-Plastic Honing': multi_use_non_plastic_honey_cost,
-                'Kosten Herbruikbare Plastic Honing': multi_use_plastic_honey_cost,
-                'Kosten Wegwerp Niet-Plastic Honing': single_use_non_plastic_honey_cost,
-                'Kosten Wegwerp Plastic Honing': single_use_plastic_honey_cost
+                'Herbruikbare Niet-Plastic Honing': multi_use_non_plastic_honey_cost,
+                'Herbruikbare Plastic Honing': multi_use_plastic_honey_cost,
+                'Wegwerp Niet-Plastic Honing': single_use_non_plastic_honey_cost,
+                'Wegwerp Plastic Honing': single_use_plastic_honey_cost
             })
 
-        selected_data = data[['Jaren', f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Herbruikbare Plastic {selected_category}', f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}']]
+        selected_data = data[['Jaren', f'Herbruikbare Niet-Plastic {selected_category}', f'Herbruikbare Plastic {selected_category}', f'Wegwerp Niet-Plastic {selected_category}', f'Wegwerp Plastic {selected_category}']]
 
         fig = px.line(selected_data, x='Jaren', y=[f'Herbruikbare Niet-Plastic {selected_category}', f'Herbruikbare Plastic {selected_category}',
                                                     f'Wegwerp Niet-Plastic {selected_category}', f'Wegwerp Plastic {selected_category}'],
