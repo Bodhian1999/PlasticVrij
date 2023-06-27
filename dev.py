@@ -104,12 +104,12 @@ def dev(current_user_email):
                 'Kosten Wegwerp Plastic Honing': single_use_plastic_honey_cost
             })
 
-        selected_data = data[['Jaren', f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Kosten Herbruikbare Plastic {selected_category}', f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}']]
+        selected_data = data[['Jaren', f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Herbruikbare Plastic {selected_category}', f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}']]
 
-        fig = px.line(selected_data, x='Jaren', y=[f'Kosten Herbruikbare Niet-Plastic {selected_category}', f'Kosten Herbruikbare Plastic {selected_category}',
-                                                    f'Kosten Wegwerp Niet-Plastic {selected_category}', f'Kosten Wegwerp Plastic {selected_category}'],
+        fig = px.line(selected_data, x='Jaren', y=[f'Herbruikbare Niet-Plastic {selected_category}', f'Herbruikbare Plastic {selected_category}',
+                                                    f'Wegwerp Niet-Plastic {selected_category}', f'Wegwerp Plastic {selected_category}'],
                       title=f'Kostenbesparingen Vergelijking: {selected_category} - Plastic vs. Duurzame Alternatieven')
-        fig.update_layout(xaxis_title='Jaren', yaxis_title='Kosten ($)')
+        fig.update_layout(xaxis_title='Jaren', yaxis_title='Kosten')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
 
