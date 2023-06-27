@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-import plotly.graph_objects as go
+import plotly.express as px
 from utils import get_recent_form_response, get_all_form_responses, calculate_sustainability_percentage, get_recent_form_responses, calculate_avg_sustainability_percentage, calculate_sustainability_score
 
 def dev(current_user_email):
@@ -10,15 +9,14 @@ def dev(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     form_responses_df = get_all_form_responses(current_user_email)
-    
+
     recent_form_responses_df = get_recent_form_responses()
-    
+
     if form_responses_df is not None:
         st.write("---")
-        st.subheader("Ingezonden formulierreacties") 
+        st.subheader("Ingezonden formulierreacties")
         st.write("Hieronder vindt je de door jou ingezonden formulierreacties.")
-        
-        
+
         # Generate sample data for cost savings comparison
         categories = [
             'rietjes', 'honingstaafjes', 'melkcupjes', 'suikerzakjes', 'koekjeswrappers',
@@ -29,6 +27,8 @@ def dev(current_user_email):
             'natte_doekjes_garnalen_spareribs'
         ]
 
+        st.write(categories)
+
         sample_data = pd.DataFrame({
             'Category': categories,
             'Multi-Use Non-Plastics': np.random.uniform(50, 150, len(categories)),
@@ -38,18 +38,9 @@ def dev(current_user_email):
         })
 
         # Create the cost savings comparison line plot
-        fig = px.line(sample_data, x='Category', y=['Multi-Use Non-Plastics', 
-                                                    'Single-Use Non-Plastics', 
-                                                    'Multi-Use Plastics', 
-                                                    'Single-Use Plastics'], 
-                      title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
+        fig = px.line(sample_data, x='Category', y=['Multi-Use Non-Plastics', 'Single-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Plastics'], title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
         fig.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': categories}, xaxis_title='Category', yaxis_title='Cost')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
-        # Normalize the environmental impact metrics to percentages
-        for metric in metrics:
-            sample_data[metric] = (sample_data[metric] - sample_data[metric].min()) / (
-                sample_data[metric].max() - sample_data[metric].min()
-            ) * 100
-        
+
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
