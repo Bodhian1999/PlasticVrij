@@ -37,7 +37,7 @@ def dev(current_user_email):
 
         # Increase the cost of multi-use non-plastics every 5 years
         replace_interval = 5  # Number of years before replacement
-        replacement_cost = 500  # Cost of replacement
+        replacement_cost = 3000  # Cost of replacement
         for i in range(0, len(years), replace_interval):
             multi_use_non_plastic_cost[i:] += replacement_cost
 
