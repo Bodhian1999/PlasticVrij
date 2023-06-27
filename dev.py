@@ -20,47 +20,83 @@ def dev(current_user_email):
         # Generate sample data for cost savings comparison
         years = np.arange(1, 11)  # Years 1 to 10
 
-        # Calculate the cost of multi-use non-plastic straws
-        multi_use_non_plastic_cost = np.full(len(years), 100)  # Cost of 200 reusable non-plastic straws
-        replace_interval_multi_use_non_plastic = 5  # Number of years before replacement
-        replacement_cost_multi_use_non_plastic = 100  # Cost of replacement
-        for i in range(replace_interval_multi_use_non_plastic, len(years), replace_interval_multi_use_non_plastic):
-            multi_use_non_plastic_cost[i:] += replacement_cost_multi_use_non_plastic
+        # Calculate the cost of straws
+        multi_use_non_plastic_straws_cost = np.full(len(years), 100)  # Cost of 200 reusable non-plastic straws
+        replace_interval_multi_use_non_plastic_straws = 5  # Number of years before replacement
+        replacement_cost_multi_use_non_plastic_straws = 100  # Cost of replacement
+        for i in range(replace_interval_multi_use_non_plastic_straws, len(years), replace_interval_multi_use_non_plastic_straws):
+            multi_use_non_plastic_straws_cost[i:] += replacement_cost_multi_use_non_plastic_straws
 
-        # Calculate the cost of multi-use plastic straws
-        multi_use_plastic_cost = np.full(len(years), 60)  # Cost of 200 reusable plastic straws
-        replace_interval_multi_use_plastic = 3  # Number of years before replacement
-        replacement_cost_multi_use_plastic = 60  # Cost of replacement
-        for i in range(replace_interval_multi_use_plastic, len(years), replace_interval_multi_use_plastic):
-            multi_use_plastic_cost[i:] += replacement_cost_multi_use_plastic
+        multi_use_plastic_straws_cost = np.full(len(years), 60)  # Cost of 200 reusable plastic straws
+        replace_interval_multi_use_plastic_straws = 2  # Number of years before replacement
+        replacement_cost_multi_use_plastic_straws = 60  # Cost of replacement
+        for i in range(replace_interval_multi_use_plastic_straws, len(years), replace_interval_multi_use_plastic_straws):
+            multi_use_plastic_straws_cost[i:] += replacement_cost_multi_use_plastic_straws
 
-        # Calculate the cost of single-use non-plastic straws
-        single_use_non_plastic_cost = np.full(len(years), 60)  # Cost of 1000 single-use non-plastic straws
-        replace_interval_single_use_non_plastic = 1  # Number of years before replacement
-        replacement_cost_single_use_non_plastic = 60  # Cost of replacement
-        for i in range(replace_interval_single_use_non_plastic, len(years), replace_interval_single_use_non_plastic):
-            single_use_non_plastic_cost[i:] += replacement_cost_single_use_non_plastic
+        single_use_non_plastic_straws_cost = np.full(len(years), 60)  # Cost of 1000 single-use non-plastic straws
+        replace_interval_single_use_non_plastic_straws = 1  # Number of years before replacement
+        replacement_cost_single_use_non_plastic_straws = 60  # Cost of replacement
+        for i in range(replace_interval_single_use_non_plastic_straws, len(years), replace_interval_single_use_non_plastic_straws):
+            single_use_non_plastic_straws_cost[i:] += replacement_cost_single_use_non_plastic_straws
 
-        # Calculate the cost of single-use plastic straws
-        single_use_plastic_cost = np.full(len(years), 20)  # Cost of 1000 single-use plastic straws
-        replace_interval_single_use_plastic = 1  # Number of years before replacement
-        replacement_cost_single_use_plastic = 20  # Cost of replacement
-        for i in range(replace_interval_single_use_plastic, len(years), replace_interval_single_use_plastic):
-            single_use_plastic_cost[i:] += replacement_cost_single_use_plastic
+        single_use_plastic_straws_cost = np.full(len(years), 20)  # Cost of 1000 single-use plastic straws
+        replace_interval_single_use_plastic_straws = 1  # Number of years before replacement
+        replacement_cost_single_use_plastic_straws = 20  # Cost of replacement
+        for i in range(replace_interval_single_use_plastic_straws, len(years), replace_interval_single_use_plastic_straws):
+            single_use_plastic_straws_cost[i:] += replacement_cost_single_use_plastic_straws
+
+        # Calculate the cost of honey
+        multi_use_non_plastic_honey_cost = np.full(len(years), 300)  # Cost of packaged honey (multi-use non-plastic)
+        replace_interval_multi_use_non_plastic_honey = 5  # Number of years before replacement
+        replacement_cost_multi_use_non_plastic_honey = 300  # Cost of replacement
+        for i in range(replace_interval_multi_use_non_plastic_honey, len(years), replace_interval_multi_use_non_plastic_honey):
+            multi_use_non_plastic_honey_cost[i:] += replacement_cost_multi_use_non_plastic_honey
+
+        multi_use_plastic_honey_cost = np.full(len(years), 450)  # Cost of packaged honey (multi-use plastic)
+        replace_interval_multi_use_plastic_honey = 2  # Number of years before replacement
+        replacement_cost_multi_use_plastic_honey = 450  # Cost of replacement
+        for i in range(replace_interval_multi_use_plastic_honey, len(years), replace_interval_multi_use_plastic_honey):
+            multi_use_plastic_honey_cost[i:] += replacement_cost_multi_use_plastic_honey
+
+        single_use_non_plastic_honey_cost = np.full(len(years), 2100)  # Cost of packaged honey (single-use non-plastic)
+        replace_interval_single_use_non_plastic_honey = 1  # Number of years before replacement
+        replacement_cost_single_use_non_plastic_honey = 2100  # Cost of replacement
+        for i in range(replace_interval_single_use_non_plastic_honey, len(years), replace_interval_single_use_non_plastic_honey):
+            single_use_non_plastic_honey_cost[i:] += replacement_cost_single_use_non_plastic_honey
+
+        single_use_plastic_honey_cost = np.full(len(years), 1850)  # Cost of packaged honey (single-use plastic)
+        replace_interval_single_use_plastic_honey = 1  # Number of years before replacement
+        replacement_cost_single_use_plastic_honey = 1850  # Cost of replacement
+        for i in range(replace_interval_single_use_plastic_honey, len(years), replace_interval_single_use_plastic_honey):
+            single_use_plastic_honey_cost[i:] += replacement_cost_single_use_plastic_honey
 
         # Create the cost savings comparison line plot
-        data = pd.DataFrame({
-            'Years': years,
-            'Multi-Use Non-Plastic': multi_use_non_plastic_cost,
-            'Multi-Use Plastic': multi_use_plastic_cost,
-            'Single-Use Non-Plastic': single_use_non_plastic_cost,
-            'Single-Use Plastic': single_use_plastic_cost
-        })
+        categories = ['Straws', 'Honey']
+        selected_category = st.selectbox("Select Category", categories)
 
-        selected_data = data[['Years', 'Multi-Use Non-Plastic', 'Multi-Use Plastic', 'Single-Use Non-Plastic', 'Single-Use Plastic']]
+        if selected_category == 'Straws':
+            data = pd.DataFrame({
+                'Years': years,
+                'Multi-Use Non-Plastic Straws': multi_use_non_plastic_straws_cost,
+                'Multi-Use Plastic Straws': multi_use_plastic_straws_cost,
+                'Single-Use Non-Plastic Straws': single_use_non_plastic_straws_cost,
+                'Single-Use Plastic Straws': single_use_plastic_straws_cost
+            })
+        elif selected_category == 'Honey':
+            data = pd.DataFrame({
+                'Years': years,
+                'Multi-Use Non-Plastic Honey': multi_use_non_plastic_honey_cost,
+                'Multi-Use Plastic Honey': multi_use_plastic_honey_cost,
+                'Single-Use Non-Plastic Honey': single_use_non_plastic_honey_cost,
+                'Single-Use Plastic Honey': single_use_plastic_honey_cost
+            })
 
-        fig = px.line(selected_data, x='Years', y=['Multi-Use Non-Plastic', 'Multi-Use Plastic', 'Single-Use Non-Plastic', 'Single-Use Plastic'], 
-                      title='Cost Savings Comparison: Straws - Plastic vs. Sustainable Alternatives')
+        selected_data = data[['Years', f'Multi-Use Non-Plastic {selected_category}', f'Multi-Use Plastic {selected_category}', 
+                              f'Single-Use Non-Plastic {selected_category}', f'Single-Use Plastic {selected_category}']]
+
+        fig = px.line(selected_data, x='Years', y=[f'Multi-Use Non-Plastic {selected_category}', f'Multi-Use Plastic {selected_category}', 
+                                                    f'Single-Use Non-Plastic {selected_category}', f'Single-Use Plastic {selected_category}'], 
+                      title=f'Cost Savings Comparison: {selected_category} - Plastic vs. Sustainable Alternatives')
         fig.update_layout(xaxis_title='Years', yaxis_title='Cost ($)')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
