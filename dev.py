@@ -37,12 +37,12 @@ def dev(current_user_email):
         # Calculate the cost of single-use non-plastic straws
         single_use_non_plastic_cost = np.full(len(years), 60)  # Cost of 1000 single-use non-plastic straws
         replace_interval_single_use_non_plastic = 1  # Number of years before replacement
-        replacement_cost_single_use_non_plastic = 60  # Cost of replacement
+        replacement_cost_single_use_non_plastic = 600  # Cost of replacement
         for i in range(replace_interval_single_use_non_plastic, len(years), replace_interval_single_use_non_plastic):
             single_use_non_plastic_cost[i:] += replacement_cost_single_use_non_plastic
 
         # Calculate the cost of single-use plastic straws
-        single_use_plastic_cost = np.full(len(years), 20)  # Cost of 1000 single-use plastic straws
+        single_use_plastic_cost = np.full(len(years), 200)  # Cost of 1000 single-use plastic straws
         replace_interval_single_use_plastic = 1  # Number of years before replacement
         replacement_cost_single_use_plastic = 20  # Cost of replacement
         for i in range(replace_interval_single_use_plastic, len(years), replace_interval_single_use_plastic):
