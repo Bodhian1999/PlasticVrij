@@ -40,11 +40,10 @@ def dev(current_user_email):
     single_use_non_plastics_cost = single_use_non_plastics_cost[categories.index(selected_category)]
 
     single_use_plastic_cost_per_year = [
-        single_use_plastics_cost * np.ceil(year / single_use_plastics_replace_interval)
-        if year % single_use_plastics_replace_interval == 0
-        else single_use_plastics_cost
+        single_use_plastics_cost if year % single_use_plastics_replace_interval == 0 else 0
         for year in years
     ]
+
 
     multi_use_non_plastic_cost_per_year = [
         multi_use_non_plastics_cost * np.ceil(year / multi_use_non_plastics_replace_interval)
