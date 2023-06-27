@@ -26,7 +26,7 @@ def form_page(current_user_email):
     st.write(f"Huidige gebruiker: {current_user_email}")
 
     st.write("Vul het onderstaande formulier in om je duurzaamheidsgegevens in te voeren.")
-    st.write("Indien je het formulier al eerder hebt ingevuld worden de waarden die je toen hebt opgegeven in het formulier getoond.")
+    st.write("Indien je het formulier al eerder hebt ingevuld worden de waarden die je toen hebt opgegeven in het formulier getoond zodat je enkel de waarden die je wil bijwerken hoeft aan te passen.")
     st.write("Je kunt het formulier zo vaak invullen als je wil. Je eerdere reacties zijn beschikbaar in jouw persoonlijke dashboard.")
     
     previous_response_df = get_recent_form_response(current_user_email)
