@@ -117,14 +117,14 @@ def dev(current_user_email):
         
         st.subheader("Milieueffect Vergelijking: Plastic vs. Duurzame Verpakkingen")
         st.write("Deze plot toont een vergelijking van het milieueffect tussen verschillende verpakkingsopties voor honing en rietjes. Het helpt je om de mogelijke milieu-impact van verschillende materialen en gebruiksscenario's te begrijpen.")
-
+        
         if selected_category == 'Rietjes':
-            environmental_impact_data = pd.DataFrame({
-                'Verpakkingsopties': ['Plastic', 'Duurzaam'],
-                'CO2-uitstoot (ton)': [10, 5],
-                'Afvalproductie (kg)': [100, 50],
-                'Materiaalgebruik (kg)': [200, 100]
-            })
+        environmental_impact_data = pd.DataFrame({
+            'Verpakkingsopties': ['Plastic', 'Duurzaam'],
+            'CO2-uitstoot (ton)': [10, 5],
+            'Afvalproductie (kg)': [100, 50],
+            'Materiaalgebruik (kg)': [200, 100]
+        })
         elif selected_category == 'Honing':
             environmental_impact_data = pd.DataFrame({
                 'Verpakkingsopties': ['Plastic', 'Duurzaam'],
@@ -133,18 +133,35 @@ def dev(current_user_email):
                 'Materiaalgebruik (kg)': [100, 40]
             })
 
-        fig_impact = px.bar(environmental_impact_data, x='Verpakkingsopties', y=['CO2-uitstoot (ton)', 'Afvalproductie (kg)', 'Materiaalgebruik (kg)'],
-                            title=f'Milieueffecten van Verpakkingsopties - {selected_category}')
-        fig_impact.update_layout(xaxis_title='Verpakkingsopties', yaxis_title='Milieueffect')
-        st.plotly_chart(fig_impact)
+        fig = go.Figure()
+
+        for index, row in environmental_impact_data.iterrows():
+            fig.add_trace(go.Scatterpolar(
+                r=row.values[1:],
+                theta=row.keys()[1:],
+                fill='toself',
+                name=row['Verpakkingsopties']
+            ))
+
+        fig.update_layout(
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, max(environmental_impact_data.values[:, 1:].max())],
+                )),
+            showlegend=True,
+            title=f'Milieueffecten van Verpakkingsopties - {selected_category}'
+        )
+
+
+        st.plotly_chart(fig)
 
         st.write("Hier is een uitleg over hoe de milieueffect plot kan worden geïmplementeerd met echte gegevens:")
         st.write("1. Verzamel echte gegevens over het milieueffect van verschillende verpakkingsopties, zoals CO2-uitstoot, afvalproductie en materiaalgebruik.")
         st.write("2. Organiseer de gegevens in een tabel met de verpakkingsopties en bijbehorende milieueffecten.")
-        st.write("3. Gebruik de 'px.bar' functie van Plotly Express om een staafdiagram te maken met de verpakkingsopties op de x-as en het milieueffect op de y-as.")
-        st.write("4. Pas de grafiek aan met de juiste labels voor de x- en y-assen, evenals een titel die het onderwerp van de milieueffecten beschrijft.")
-        st.write("5. Gebruik de 'st.plotly_chart' functie van Streamlit om de grafiek weer te geven op de pagina.")
+        st.write("3. Gebruik de 'go.Scatterpolar' functie van Plotly om een radarchart te maken.")
+        st.write("4. Pas de grafiek aan met de gewenste lay-out, labels en titels.")
+        st.write("5. Visualiseer de grafiek met behulp van 'st.plotly_chart' in Streamlit.")
 
-        st.write("---")
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
