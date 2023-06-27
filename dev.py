@@ -58,13 +58,13 @@ def dev(current_user_email):
         for i in range(replace_interval_multi_use_plastic_honey, len(years), replace_interval_multi_use_plastic_honey):
             multi_use_plastic_honey_cost[i:] += replacement_cost_multi_use_plastic_honey
 
-        single_use_non_plastic_honey_cost = np.full(len(years), 2100)  # Cost of packaged honey (single-use non-plastic)
+        single_use_non_plastic_honey_cost = np.full(len(years), 210)  # Cost of packaged honey (single-use non-plastic)
         replace_interval_single_use_non_plastic_honey = 1  # Number of years before replacement
         replacement_cost_single_use_non_plastic_honey = 2100  # Cost of replacement
         for i in range(replace_interval_single_use_non_plastic_honey, len(years), replace_interval_single_use_non_plastic_honey):
             single_use_non_plastic_honey_cost[i:] += replacement_cost_single_use_non_plastic_honey
 
-        single_use_plastic_honey_cost = np.full(len(years), 1850)  # Cost of packaged honey (single-use plastic)
+        single_use_plastic_honey_cost = np.full(len(years), 185)  # Cost of packaged honey (single-use plastic)
         replace_interval_single_use_plastic_honey = 1  # Number of years before replacement
         replacement_cost_single_use_plastic_honey = 1850  # Cost of replacement
         for i in range(replace_interval_single_use_plastic_honey, len(years), replace_interval_single_use_plastic_honey):
