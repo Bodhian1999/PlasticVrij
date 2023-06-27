@@ -118,9 +118,6 @@ def dev(current_user_email):
         st.subheader("Milieueffect Vergelijking: Plastic vs. Duurzame Verpakkingen")
         st.write("Deze plot toont een vergelijking van het milieueffect tussen verschillende verpakkingsopties voor honing en rietjes. Het helpt je om de mogelijke milieu-impact van verschillende materialen en gebruiksscenario's te begrijpen.")
 
-        categories = ['Rietjes', 'Honing']  # Productcategorieën
-        selected_category = st.selectbox("Selecteer Categorie", categories)
-
         if selected_category == 'Rietjes':
             environmental_impact_data = pd.DataFrame({
                 'Verpakkingsopties': ['Plastic', 'Duurzaam'],
