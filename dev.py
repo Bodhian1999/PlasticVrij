@@ -35,6 +35,12 @@ def dev(current_user_email):
         multi_use_non_plastic_investment = 3000  # Initial investment for multi-use non-plastics
         multi_use_non_plastic_cost = np.full(len(years), multi_use_non_plastic_investment)  # Cost of multi-use non-plastics
 
+        # Increase the cost of multi-use non-plastics every 5 years
+        replace_interval = 5  # Number of years before replacement
+        replacement_cost = 500  # Cost of replacement
+        for i in range(0, len(years), replace_interval):
+            multi_use_non_plastic_cost[i:] += replacement_cost
+
         # Create the cost savings comparison line plot
         data = pd.DataFrame({
             'Years': years,
@@ -49,4 +55,4 @@ def dev(current_user_email):
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
     else:
-        st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
+        st.write("Er zijn nog geen formulierreacties gev
