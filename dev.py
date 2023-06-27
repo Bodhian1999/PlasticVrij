@@ -39,23 +39,26 @@ def dev(current_user_email):
     multi_use_plastic_cost = multi_use_plastics_cost[categories.index(selected_category)]
     single_use_non_plastics_cost = single_use_non_plastics_cost[categories.index(selected_category)]
 
-    single_use_plastic_cost_per_year = np.where(
-        np.mod(years, single_use_plastics_replace_interval) == 0,
-        single_use_plastics_cost * np.ceil(years / single_use_plastics_replace_interval),
-        single_use_plastics_cost
-    )
+    single_use_plastic_cost_per_year = [
+        single_use_plastics_cost * np.ceil(year / single_use_plastics_replace_interval)
+        if year % single_use_plastics_replace_interval == 0
+        else single_use_plastics_cost
+        for year in years
+    ]
 
-    multi_use_non_plastic_cost_per_year = np.where(
-        np.mod(years, multi_use_non_plastics_replace_interval) == 0,
-        multi_use_non_plastics_cost * np.ceil(years / multi_use_non_plastics_replace_interval),
-        multi_use_non_plastics_cost
-    )
+    multi_use_non_plastic_cost_per_year = [
+        multi_use_non_plastics_cost * np.ceil(year / multi_use_non_plastics_replace_interval)
+        if year % multi_use_non_plastics_replace_interval == 0
+        else multi_use_non_plastics_cost
+        for year in years
+    ]
 
-    multi_use_plastic_cost_per_year = np.where(
-        np.mod(years, multi_use_plastics_replace_interval) == 0,
-        multi_use_plastics_cost * np.ceil(years / multi_use_plastics_replace_interval),
-        multi_use_plastics_cost
-    )
+    multi_use_plastic_cost_per_year = [
+        multi_use_plastics_cost * np.ceil(year / multi_use_plastics_replace_interval)
+        if year % multi_use_plastics_replace_interval == 0
+        else multi_use_plastics_cost
+        for year in years
+    ]
 
     single_use_non_plastics_cost_per_year = np.repeat(single_use_non_plastics_cost, len(years))
 
@@ -69,11 +72,11 @@ def dev(current_user_email):
     })
 
     selected_data = data[
-        ['Years', 'Single-Use Plastics', 'Multi-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Non-Plastics']]
+        ['Years', 'Single-Use Plastics', 'Multi-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Non-Plastics']
+    ]
 
     fig = px.line(selected_data, x='Years',
                   y=['Single-Use Plastics', 'Multi-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Non-Plastics'],
                   title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
     fig.update_layout(xaxis_title='Years', yaxis_title='Cost ($)')
     st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
-
