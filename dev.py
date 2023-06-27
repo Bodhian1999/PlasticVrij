@@ -27,7 +27,7 @@ def dev(current_user_email):
             'natte_doekjes_garnalen_spareribs'
         ]
 
-        st.write(categories)
+        selected_category = st.selectbox("Select Category", categories)
 
         sample_data = pd.DataFrame({
             'Category': categories,
@@ -37,8 +37,11 @@ def dev(current_user_email):
             'Single-Use Plastics': np.random.uniform(10, 60, len(categories))
         })
 
+        # Filter the data based on the selected category
+        selected_data = sample_data[sample_data['Category'] == selected_category]
+
         # Create the cost savings comparison line plot
-        fig = px.line(sample_data, x='Category', y=['Multi-Use Non-Plastics', 'Single-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Plastics'], title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
+        fig = px.line(selected_data, x='Category', y=['Multi-Use Non-Plastics', 'Single-Use Non-Plastics', 'Multi-Use Plastics', 'Single-Use Plastics'], title='Cost Savings Comparison: Plastic vs. Sustainable Alternatives')
         fig.update_layout(xaxis={'categoryorder': 'array', 'categoryarray': categories}, xaxis_title='Category', yaxis_title='Cost')
         st.plotly_chart(fig)  # Display the plot using Streamlit's `st.plotly_chart` function
 
