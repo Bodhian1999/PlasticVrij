@@ -5,6 +5,7 @@ from form import form_page
 from personal_dashboard import personal_dashboard_page
 from general_dashboard import general_dashboard_page
 from home import home_page
+from dev import dev
 
 def main():
     # Store login state and current user
