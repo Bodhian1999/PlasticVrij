@@ -31,18 +31,15 @@ def dev(current_user_email):
 
         # Generate sample data for cost comparison
         years = np.arange(1, 11)  # Years 1 to 10
-        single_use_plastic_cost = 1000  # Cost of single-use plastics per year
+        single_use_plastic_cost = np.full(len(years), 1000)  # Cost of single-use plastics per year
         multi_use_non_plastic_investment = 3000  # Initial investment for multi-use non-plastics
-
-        # Calculate cost savings over time
-        single_use_plastic_cost_over_time = single_use_plastic_cost * years
-        multi_use_non_plastic_cost_over_time = multi_use_non_plastic_investment + (single_use_plastic_cost * years)
+        multi_use_non_plastic_cost = np.full(len(years), multi_use_non_plastic_investment)  # Cost of multi-use non-plastics
 
         # Create the cost savings comparison line plot
         data = pd.DataFrame({
             'Years': years,
-            'Single-Use Plastics': single_use_plastic_cost_over_time,
-            'Multi-Use Non-Plastics': multi_use_non_plastic_cost_over_time
+            'Single-Use Plastics': np.cumsum(single_use_plastic_cost),
+            'Multi-Use Non-Plastics': multi_use_non_plastic_cost
         })
 
         selected_data = data[['Years', 'Single-Use Plastics', 'Multi-Use Non-Plastics']]
