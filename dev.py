@@ -144,7 +144,6 @@ def dev(current_user_email):
             ))
 
         fig.update_layout(
-            barmode='group',
             xaxis_title="Verpakkingsopties",
             yaxis_title="Milieueffect",
             title=f"Milieueffecten van Verpakkingsopties - {selected_category}",
@@ -153,12 +152,13 @@ def dev(current_user_email):
 
         st.plotly_chart(fig)
 
-        st.write("Hier is een uitleg over hoe de gegroepeerde staafgrafiek kan worden geïmplementeerd met echte gegevens:")
+        st.write("Hier is een uitleg over hoe de grafiek kan worden geïmplementeerd met echte gegevens:")
         st.write("1. Verzamel echte gegevens over het milieueffect van verschillende verpakkingsopties, zoals CO2-uitstoot, afvalproductie en materiaalgebruik.")
         st.write("2. Organiseer de gegevens in een tabel met de verpakkingsopties en de bijbehorende effecten.")
         st.write("3. Gebruik de `go.Bar` trace om de gegevens weer te geven in een staafgrafiek.")
         st.write("4. Voeg elke trace toe aan de `Figure` en stel de gewenste instellingen in voor de layout.")
         st.write("5. Gebruik `st.plotly_chart` om de grafiek in Streamlit weer te geven.")
+
 
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
