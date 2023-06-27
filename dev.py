@@ -194,5 +194,58 @@ def dev(current_user_email):
              
         st.plotly_chart(fig)
         
+        # Generate sample data for cost savings comparison
+        categories = [
+            'rietjes', 'honingstaafjes', 'melkcupjes', 'suikerzakjes', 'koekjeswrappers',
+            'theezakjes_verpakking', 'ontbijt_boter', 'ontbijt_jam_pindakaas_chocoladepasta',
+            'saus_mayonaise', 'saus_ketchup', 'saus_mosterd', 'saus_soya_saus',
+            'pepermuntverpakking', 'snoepjes_rekening', 'tandenstokerverpakking',
+            'stampers', 'wegwerpbekers_feesten_partijen', 'ijsjes_plastic_verpakking',
+            'natte_doekjes_garnalen_spareribs'
+        ]
+
+        sample_data = pd.DataFrame({
+            'Product Category': categories,
+            'Cost Savings (%)': np.random.uniform(5, 30, len(categories))
+        })
+
+        # Generate sample data for environmental impact comparison
+        metrics = ['Carbon Footprint', 'Water Usage', 'Waste Generation']
+
+        sample_data['Carbon Footprint'] = np.random.uniform(100, 1000, len(categories))
+        sample_data['Water Usage'] = np.random.uniform(1000, 10000, len(categories))
+        sample_data['Waste Generation'] = np.random.uniform(10, 100, len(categories))
+
+        # Normalize the environmental impact metrics to percentages
+        for metric in metrics:
+            sample_data[metric] = (sample_data[metric] - sample_data[metric].min()) / (
+                sample_data[metric].max() - sample_data[metric].min()
+            ) * 100
+
+        # Create the cost savings comparison bar chart
+        plt.figure(figsize=(10, 6))
+        plt.bar(sample_data['Product Category'], sample_data['Cost Savings (%)'])
+        plt.xlabel('Product Category')
+        plt.ylabel('Cost Savings (%)')
+        plt.title('Comparison of Cost Savings: Plastic vs. Sustainable Alternatives')
+        plt.xticks(rotation=90)
+        plt.tight_layout()
+        plt.show()
+
+        # Create the environmental impact comparison stacked bar chart
+        plt.figure(figsize=(10, 6))
+        plt.bar(sample_data['Product Category'], sample_data['Carbon Footprint'], label='Carbon Footprint')
+        plt.bar(sample_data['Product Category'], sample_data['Water Usage'], bottom=sample_data['Carbon Footprint'],
+                label='Water Usage')
+        plt.bar(sample_data['Product Category'], sample_data['Waste Generation'],
+                bottom=sample_data['Carbon Footprint'] + sample_data['Water Usage'], label='Waste Generation')
+        plt.xlabel('Product Category')
+        plt.ylabel('Environmental Impact (%)')
+        plt.title('Environmental Impact Comparison: Plastic vs. Sustainable Materials')
+        plt.xticks(rotation=90)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+        
     else:
         st.write("Er zijn nog geen formulierreacties gevonden voor de huidige gebruiker.")
